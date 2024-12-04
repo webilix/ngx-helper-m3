@@ -1,0 +1,25 @@
+content {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 1rem;
+    padding-top: 1rem;
+
+    .content {
+        flex: 1;
+
+        .description {
+            font-size: 12px;
+            margin-top: 0.5rem;
+            text-align: justify;
+        }
+
+        .data {
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+
+            font-size: 12px;
+            margin-top: 1rem;
+        }
+    }
+}

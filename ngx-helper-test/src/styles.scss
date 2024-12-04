@@ -5,6 +5,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use './theme/material/theme-m3';
+@use './theme/material/override';
 
 // Global Styles
 html,
@@ -29,4 +30,8 @@ body {
     font-size: 20px;
     width: auto !important;
     height: auto !important;
+}
+
+.mat-bottom-sheet-container {
+    max-width: 500px !important;
 }

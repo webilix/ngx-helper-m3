@@ -1,0 +1,30 @@
+<mat-dialog-content>
+    <content>
+        <!-- ICON -->
+        @if (confirm.icon) {
+        <div class="icon">
+            <mat-icon>{{ confirm.icon }}</mat-icon>
+        </div>
+        }
+
+        <!-- CONTENT -->
+        <div class="content">
+            <div class="question">{{ confirm.question }}</div>
+            <!-- DESCRIPTION -->
+            @if (confirm.description) {
+            <div class="description">{{ confirm.description }}</div>
+            }
+            <!-- DATA -->
+            @if (confirm.data) {
+            <div class="data">
+                <div class="title">{{ confirm.data.title }}:</div>
+                <div class="value">{{ confirm.data.value }}</div>
+            </div>
+            }
+        </div>
+    </content>
+</mat-dialog-content>
+<mat-dialog-actions [align]="'end'">
+    <button mat-button type="button" mat-dialog-close>خیر</button>
+    <button mat-button type="button" [mat-dialog-close]="true" [class.error]="confirm.color === 'error'">بلی</button>
+</mat-dialog-actions>

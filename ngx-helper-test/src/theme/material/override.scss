@@ -1,0 +1,13 @@
+@use '@angular/material' as mat;
+
+:root .error {
+    @include mat.button-overrides(
+        (
+            text-label-text-color: var(--error),
+            outlined-label-text-color: var(--error),
+            outlined-outline-color: var(--error),
+            filled-container-color: var(--tertiary),
+            filled-label-text-color: var(--on-tertiary),
+        )
+    );
+}

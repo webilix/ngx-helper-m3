@@ -1,0 +1,14 @@
+<section>
+    <header class="en">
+        <div class="title">NgxHelperConfirmService</div>
+        <button mat-button (click)="confirmType = confirmType === 'DIALOG' ? 'BOTTOMSHEET' : 'DIALOG'">
+            {{ confirmType === 'DIALOG' ? 'BOTTOMSHEET' : 'DIALOG' }}
+        </button>
+    </header>
+    <div class="buttons">
+        <button mat-flat-button type="button" (click)="confirm('VERIFY')">تایید</button>
+        <button mat-flat-button type="button" class="error" (click)="confirm('DELETE')">حذف</button>
+        <button mat-flat-button type="button" (click)="confirm('ACTIVE')">فعال</button>
+        <button mat-flat-button type="button" class="error" (click)="confirm('DEACTIVE')">غیرفعال</button>
+    </div>
+</section>

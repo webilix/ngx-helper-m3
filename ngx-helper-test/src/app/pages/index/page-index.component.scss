@@ -1,0 +1,41 @@
+section {
+    display: flex;
+    flex-direction: column;
+
+    border-radius: 4px;
+    border: 1px solid var(--outline-variant);
+    box-shadow: 0 1px 2px 0 var(--outline);
+
+    header {
+        display: flex;
+        align-items: center;
+        border-radius: 4px 4px 0 0;
+        background-color: var(--surface-container-highest);
+
+        .title {
+            flex: 1;
+
+            font-size: 14px;
+            font-weight: 500;
+            padding: 0.75rem 1rem;
+        }
+
+        button {
+            font-size: 12px;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: wrap;
+        row-gap: 0.75rem;
+        column-gap: 0.75rem;
+
+        padding: 0.75rem 1rem;
+
+        button {
+            flex-grow: 1;
+        }
+    }
+}
