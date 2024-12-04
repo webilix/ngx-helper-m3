@@ -9,6 +9,7 @@
         "noPropertyAccessFromIndexSignature": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
+        "paths": { "@webilix/ngx-helper-m3": ["./ngx-helper-m3/src/public-api"] },
         "skipLibCheck": true,
         "isolatedModules": true,
         "esModuleInterop": true,
