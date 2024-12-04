@@ -13,7 +13,7 @@ interface IConfirmData {
     readonly value?: string;
 }
 
-class NgxHelperConfirm {
+class NgxHelperConfirmCalss {
     constructor(
         private readonly matBottomSheet: MatBottomSheet,
         private readonly matDialog: MatDialog,
@@ -72,13 +72,13 @@ class NgxHelperConfirm {
 export class NgxHelperConfirmService {
     constructor(private readonly matBottomSheet: MatBottomSheet, private readonly matDialog: MatDialog) {}
 
-    verify(confirm: INgxHelperConfirm): NgxHelperConfirm {
-        return new NgxHelperConfirm(this.matBottomSheet, this.matDialog, confirm);
+    verify(confirm: INgxHelperConfirm): NgxHelperConfirmCalss {
+        return new NgxHelperConfirmCalss(this.matBottomSheet, this.matDialog, confirm);
     }
 
-    active(data: IConfirmData): NgxHelperConfirm;
-    active(data: IConfirmData, description: string): NgxHelperConfirm;
-    active(data: IConfirmData, description?: string): NgxHelperConfirm {
+    active(data: IConfirmData): NgxHelperConfirmCalss;
+    active(data: IConfirmData, description: string): NgxHelperConfirmCalss;
+    active(data: IConfirmData, description?: string): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را فعال کنید؟`,
             description,
@@ -88,9 +88,9 @@ export class NgxHelperConfirmService {
         });
     }
 
-    deactive(data: IConfirmData): NgxHelperConfirm;
-    deactive(data: IConfirmData, description: string): NgxHelperConfirm;
-    deactive(data: IConfirmData, description?: string): NgxHelperConfirm {
+    deactive(data: IConfirmData): NgxHelperConfirmCalss;
+    deactive(data: IConfirmData, description: string): NgxHelperConfirmCalss;
+    deactive(data: IConfirmData, description?: string): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را غیرفعال کنید؟`,
             description,
@@ -100,9 +100,9 @@ export class NgxHelperConfirmService {
         });
     }
 
-    delete(data: IConfirmData): NgxHelperConfirm;
-    delete(data: IConfirmData, description: string): NgxHelperConfirm;
-    delete(data: IConfirmData, description?: string): NgxHelperConfirm {
+    delete(data: IConfirmData): NgxHelperConfirmCalss;
+    delete(data: IConfirmData, description: string): NgxHelperConfirmCalss;
+    delete(data: IConfirmData, description?: string): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را حذف کنید؟`,
             description,

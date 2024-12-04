@@ -1,0 +1,15 @@
+header {
+    display: block;
+    padding: 0 1rem;
+    border-bottom: 1px solid var(--outline-variant);
+
+    height: 50px;
+    line-height: 50px;
+}
+
+content {
+    display: block;
+
+    max-height: calc(80vh - 50px);
+    overflow: auto;
+}

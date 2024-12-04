@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
-import { NgxHelperConfirmService } from '@webilix/ngx-helper-m3';
+import { NgxHelperConfirmService, NgxHelperContainerService } from '@webilix/ngx-helper-m3';
+import { ContainerComponent } from '../../components';
 
 @Component({
     host: { selector: 'page-index' },
@@ -11,7 +12,10 @@ import { NgxHelperConfirmService } from '@webilix/ngx-helper-m3';
     styleUrl: './page-index.component.scss',
 })
 export class PageIndexComponent {
-    constructor(private readonly ngxHelperConfirmService: NgxHelperConfirmService) {}
+    constructor(
+        private readonly ngxHelperConfirmService: NgxHelperConfirmService,
+        private readonly ngxHelperContainerService: NgxHelperContainerService,
+    ) {}
 
     public confirmType: 'DIALOG' | 'BOTTOMSHEET' = 'DIALOG';
     confirm(type: 'VERIFY' | 'DELETE' | 'ACTIVE' | 'DEACTIVE'): void {
@@ -45,6 +49,20 @@ export class PageIndexComponent {
                     () => console.log('CONFIRMED'),
                     () => console.log('DENIED'),
                 );
+                break;
+        }
+    }
+
+    container(type: 'DIALOG' | 'BOTTOMSHEET', component: '1' | '2'): void {
+        const title: string = `${type === 'DIALOG' ? 'دیالوگ' : 'باتم‌شیت'} ${component}`;
+        const container = this.ngxHelperContainerService.init(ContainerComponent, title, { data: { component } });
+
+        switch (type) {
+            case 'DIALOG':
+                container.dialog<any>((response) => console.log('CLOSED', response));
+                break;
+            case 'BOTTOMSHEET':
+                container.bottomSheet<any>((response) => console.log('CLOSED', response));
                 break;
         }
     }

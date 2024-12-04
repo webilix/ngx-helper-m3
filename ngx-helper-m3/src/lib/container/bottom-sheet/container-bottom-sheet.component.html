@@ -1,0 +1,6 @@
+<header>{{ container.title }}</header>
+<content>
+    <div [style.padding]="container.config.padding || '1rem'">
+        <span *ngComponentOutlet="container.component; injector: injector"></span>
+    </div>
+</content>

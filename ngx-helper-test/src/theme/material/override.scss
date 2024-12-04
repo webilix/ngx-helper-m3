@@ -11,3 +11,21 @@
         )
     );
 }
+
+:root,
+body.dark {
+    @include mat.dialog-overrides(
+        (
+            container-max-width: 400px,
+            container-small-max-width: 400px,
+        )
+    );
+}
+
+body.dark {
+    @include mat.dialog-overrides(
+        (
+            container-color: var(--surface-container),
+        )
+    );
+}

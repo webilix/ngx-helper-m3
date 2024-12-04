@@ -1,0 +1,13 @@
+شروع متن
+
+<!-- LINES -->
+@for (item of lines; track $index) {
+<div><br /></div>
+}
+<!-- LINES -->
+
+پایان متن
+
+<!-- CLOSE -->
+<br /><br />
+<button mat-flat-button [style.width]="'100%'" (click)="close({ onClick: true, type })">بستن</button>
