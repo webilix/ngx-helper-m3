@@ -3,13 +3,16 @@ content {
     align-items: flex-start;
     column-gap: 1rem;
     padding-top: 1rem;
-    font-size: 14px;
 
     .content {
         flex: 1;
 
+        .question {
+            text-align: justify;
+        }
+
         .description {
-            font-size: 12px;
+            font-size: 90%;
             margin-top: 0.5rem;
             text-align: justify;
         }
@@ -19,7 +22,7 @@ content {
             align-items: center;
             column-gap: 0.5rem;
 
-            font-size: 12px;
+            font-size: 90%;
             margin-top: 1rem;
         }
     }
