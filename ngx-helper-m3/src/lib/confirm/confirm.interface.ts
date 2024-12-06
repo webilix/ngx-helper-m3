@@ -6,5 +6,6 @@ export interface INgxHelperConfirm {
         readonly value: string;
     };
     readonly icon?: string;
-    readonly color?: 'primary' | 'error';
+    readonly confirmClass?: string;
+    readonly denyClass?: string;
 }

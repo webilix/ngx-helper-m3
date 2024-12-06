@@ -24,6 +24,6 @@
 </content>
 
 <div class="buttons">
-    <button mat-button type="button" (click)="close()">خیر</button>
-    <button mat-button type="button" (click)="close(true)" [class.error]="confirm.color === 'error'">بلی</button>
+    <button mat-button type="button" (click)="close()" [ngClass]="confirm.denyClass">خیر</button>
+    <button mat-button type="button" (click)="close(true)" [ngClass]="confirm.confirmClass">بلی</button>
 </div>

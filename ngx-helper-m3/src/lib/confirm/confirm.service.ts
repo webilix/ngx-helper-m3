@@ -13,6 +13,12 @@ interface IConfirmData {
     readonly value?: string;
 }
 
+interface IConfirmConfig {
+    readonly description: string;
+    readonly confirmClass: string;
+    readonly denyClass: string;
+}
+
 class NgxHelperConfirmCalss {
     constructor(
         private readonly matBottomSheet: MatBottomSheet,
@@ -77,38 +83,41 @@ export class NgxHelperConfirmService {
     }
 
     active(data: IConfirmData): NgxHelperConfirmCalss;
-    active(data: IConfirmData, description: string): NgxHelperConfirmCalss;
-    active(data: IConfirmData, description?: string): NgxHelperConfirmCalss {
+    active(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
+    active(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را فعال کنید؟`,
-            description,
+            description: config?.description,
             data: data.value ? { title: data.title, value: data.value } : undefined,
             icon: 'check_box',
-            color: 'primary',
+            confirmClass: config?.confirmClass,
+            denyClass: config?.denyClass,
         });
     }
 
     deactive(data: IConfirmData): NgxHelperConfirmCalss;
-    deactive(data: IConfirmData, description: string): NgxHelperConfirmCalss;
-    deactive(data: IConfirmData, description?: string): NgxHelperConfirmCalss {
+    deactive(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
+    deactive(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را غیرفعال کنید؟`,
-            description,
+            description: config?.description,
             data: data.value ? { title: data.title, value: data.value } : undefined,
             icon: 'disabled_by_default',
-            color: 'error',
+            confirmClass: config?.confirmClass || 'error',
+            denyClass: config?.denyClass,
         });
     }
 
     delete(data: IConfirmData): NgxHelperConfirmCalss;
-    delete(data: IConfirmData, description: string): NgxHelperConfirmCalss;
-    delete(data: IConfirmData, description?: string): NgxHelperConfirmCalss {
+    delete(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
+    delete(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را حذف کنید؟`,
-            description,
+            description: config?.description,
             data: data.value ? { title: data.title, value: data.value } : undefined,
             icon: 'delete',
-            color: 'error',
+            confirmClass: config?.confirmClass || 'error',
+            denyClass: config?.denyClass,
         });
     }
 }

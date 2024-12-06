@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { MatButtonModule } from '@angular/material/button';
@@ -8,7 +9,7 @@ import { INgxHelperConfirm } from '../confirm.interface';
 
 @Component({
     host: { selector: 'confirm-bottom-sheet' },
-    imports: [MatButtonModule, MatIconModule],
+    imports: [NgClass, MatButtonModule, MatIconModule],
     templateUrl: './confirm-bottom-sheet.component.html',
     styleUrl: './confirm-bottom-sheet.component.scss',
 })
