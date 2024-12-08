@@ -1,0 +1,44 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    .card {
+        border-radius: 8px;
+        background-color: var(--surface-container-high);
+
+        .pipe {
+            display: flex;
+            align-items: flex-start;
+            column-gap: 1rem;
+            padding: 1rem;
+            border-top: 1px solid var(--outline-variant);
+
+            .title {
+                flex: 1;
+                font-weight: 500;
+
+                .type {
+                    font-size: 12px;
+                    opacity: 0.5;
+                }
+            }
+
+            .value,
+            .value-en {
+                flex: 1;
+                direction: rtl;
+                text-align: justify;
+            }
+
+            .value.en {
+                direction: ltr;
+                text-align: right;
+            }
+        }
+
+        .pipe:first-of-type {
+            border-top-width: 0;
+        }
+    }
+}

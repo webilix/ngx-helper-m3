@@ -20,8 +20,20 @@ header {
         max-width: calc(100vw - 2rem);
 
         .library {
-            font-size: 20px;
             text-transform: uppercase;
+
+            .library-title {
+                font-size: 20px;
+            }
+
+            .hasHeader {
+                font-size: 10px;
+            }
+
+            .library-header {
+                font-size: 14px;
+                font-weight: 500;
+            }
         }
 
         .icon {
@@ -61,4 +73,9 @@ body.dark {
             }
         }
     }
+}
+
+::ng-deep .menu-content {
+    max-height: 50vh;
+    overflow: auto;
 }

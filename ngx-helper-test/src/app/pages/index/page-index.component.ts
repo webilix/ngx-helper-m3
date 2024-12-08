@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
 import { NgxHelperConfirmService, NgxHelperContainerService } from '@webilix/ngx-helper-m3';
+
 import { ContainerComponent } from '../../components';
+import { AppService } from '../../app.service';
 
 @Component({
     host: { selector: 'page-index' },
@@ -11,11 +13,16 @@ import { ContainerComponent } from '../../components';
     templateUrl: './page-index.component.html',
     styleUrl: './page-index.component.scss',
 })
-export class PageIndexComponent {
+export class PageIndexComponent implements OnInit {
     constructor(
         private readonly ngxHelperConfirmService: NgxHelperConfirmService,
         private readonly ngxHelperContainerService: NgxHelperContainerService,
+        private readonly appService: AppService,
     ) {}
+
+    ngOnInit(): void {
+        this.appService.setHeader();
+    }
 
     public confirmType: 'DIALOG' | 'BOTTOMSHEET' = 'DIALOG';
     confirm(type: 'VERIFY' | 'DELETE' | 'ACTIVE' | 'DEACTIVE'): void {

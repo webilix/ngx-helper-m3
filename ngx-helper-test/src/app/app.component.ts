@@ -1,29 +1,53 @@
-import { Component, OnInit, RendererFactory2 } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit, RendererFactory2 } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { Subscription } from 'rxjs';
 
+import { MatIconButton } from '@angular/material/button';
+import { MatDivider } from '@angular/material/divider';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+
+import { AppService } from './app.service';
 
 type ColorMode = 'LIGHT' | 'DARK';
 
 @Component({
     selector: 'app-root',
     host: { '(window:keydown)': 'onKeydown($event)' },
-    imports: [RouterOutlet, MatIcon],
+    imports: [RouterLink, RouterOutlet, MatDivider, MatIconButton, MatIcon, MatMenuModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     public colorMode!: ColorMode;
+    public header?: string;
+    private onHeaderChanged!: Subscription;
 
-    constructor(private readonly rendererFactory: RendererFactory2) {}
+    constructor(
+        private readonly changeDetectorRef: ChangeDetectorRef,
+        private readonly rendererFactory: RendererFactory2,
+        private readonly appService: AppService,
+    ) {}
 
     ngOnInit(): void {
+        this.header = this.appService.header;
+        this.onHeaderChanged = this.appService.onHeaderChanged.subscribe({
+            next: (header?: string) => {
+                this.header = header;
+                this.changeDetectorRef.detectChanges();
+            },
+        });
+
         let colorMode: ColorMode = 'LIGHT';
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) colorMode = 'DARK';
         const mode = localStorage.getItem('ColorMode');
         if (mode === 'DARK') colorMode = 'DARK';
         if (mode === 'LIGHT') colorMode = 'LIGHT';
         this.toggleMode(colorMode);
+    }
+
+    ngOnDestroy(): void {
+        this.onHeaderChanged.unsubscribe();
     }
 
     onKeydown(event: any): void {

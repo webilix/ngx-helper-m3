@@ -39,3 +39,12 @@ body {
 body.dark .cdk-overlay-backdrop {
     background-color: rgba(255, 255, 255, 0.25);
 }
+
+.mat-mdc-menu-content {
+    padding: 0 !important;
+
+    .mat-mdc-menu-item {
+        direction: rtl;
+        text-align: right;
+    }
+}

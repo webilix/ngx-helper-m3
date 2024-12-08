@@ -1,6 +1,22 @@
 <header>
     <div class="header">
-        <div class="library en">ngx-helper-m3</div>
+        <button mat-icon-button type="button" [matMenuTriggerFor]="pageMenu">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #pageMenu="matMenu" [dir]="'rtl'">
+            <div class="menu-content">
+                <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
+            </div>
+            <mat-divider></mat-divider>
+            <button mat-menu-item [routerLink]="['/']" [disabled]="!header">صفحه اصلی</button>
+        </mat-menu>
+
+        <div class="library en">
+            <div class="library-title" [class.hasHeader]="!!header">ngx-helper-m3</div>
+            @if (header) {
+            <div class="library-header">{{ header }}</div>
+            }
+        </div>
         <div [style.flex]="1"></div>
         <div class="icon">
             <mat-icon>{{ colorMode === 'LIGHT' ? 'dark_mode' : 'light_mode' }}</mat-icon>

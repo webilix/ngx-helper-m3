@@ -1,0 +1,259 @@
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperMultiLine' }}</div>
+        <div class="value" [innerHTML]="multiLine | ngxHelperMultiLine"></div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperMultiLine : { html: true }' }}</div>
+        <div class="value" [innerHTML]="multiLine | ngxHelperMultiLine : { html: true }"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDate' }}
+            <div class="type en">{{ 'number' }}</div>
+        </div>
+        <div class="value">{{ date.getTime() | ngxHelperDate }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDate' }}
+            <div class="type en">{{ 'Date' }}</div>
+        </div>
+        <div class="value">{{ date | ngxHelperDate }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'FULL' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'FULL' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'SHORT' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'SHORT' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'DATE' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'DATE' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'TIME' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'TIME' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'WEEK' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'WEEK' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'MONTH' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'MONTH' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'YEAR' }" }}</div>
+        <div class="value">{{ getRandomDate() | ngxHelperDate : { format: 'YEAR' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'W Y/M/D H:I:S' }" }}</div>
+        <div class="value">{{ date | ngxHelperDate : { format: 'W Y/M/D H:I:S' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDate : { format: 'W Y/M/D H:I:S', timezone: 'America/Araguaina' }" }}</div>
+        <div class="value">
+            {{ date | ngxHelperDate : { format: 'W Y/M/D H:I:S', timezone: 'America/Araguaina' } }}
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDuration' }}
+            <div class="type en">{{ 'number' }}</div>
+        </div>
+        <div class="value">{{ duration.second | ngxHelperDuration }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDuration' }}
+            <div class="type en">{{ 'Date' }}</div>
+        </div>
+        <div class="value">{{ duration.from | ngxHelperDuration }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDuration' }}
+            <div class="type en">{{ '{ from: Date }' }}</div>
+        </div>
+        <div class="value">{{ { from: duration.from } | ngxHelperDuration }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDuration' }}
+            <div class="type en">{{ '{ to: Date }' }}</div>
+        </div>
+        <div class="value">{{ { to: duration.to } | ngxHelperDuration }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDuration' }}
+            <div class="type en">{{ '{ from: Date; to: Date }' }}</div>
+        </div>
+        <div class="value">{{ duration | ngxHelperDuration }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDuration : { format: 'FULL' }" }}</div>
+        <div class="value en">{{ duration.second | ngxHelperDuration : { format: 'FULL' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDuration : { format: 'DAY' }" }}</div>
+        <div class="value">{{ duration.second | ngxHelperDuration : { format: 'DAY' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDuration : { format: 'HOUR' }" }}</div>
+        <div class="value">{{ duration.second | ngxHelperDuration : { format: 'HOUR' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDuration : { format: 'MINUTE' }" }}</div>
+        <div class="value">{{ duration.second | ngxHelperDuration : { format: 'MINUTE' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDuration : { format: 'SECOND' }" }}</div>
+        <div class="value">{{ duration.second | ngxHelperDuration : { format: 'SECOND' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperDuration : { english: true }' }}</div>
+        <div class="value en">{{ duration.second | ngxHelperDuration : { english: true } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperFileSize' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperFileSize }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperFileSize : { english: true }' }}</div>
+        <div class="value en">{{ getRandomNumber() | ngxHelperFileSize : { english: true } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperMobile' }}</div>
+        <div class="value en">{{ mobile | ngxHelperMobile }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperMobile : { join: ' ' }" }}</div>
+        <div class="value en">{{ mobile | ngxHelperMobile : { join: ' ' } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperBankCard' }}</div>
+        <div class="value en">{{ bankCard | ngxHelperBankCard }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperBankCard : { join: ' ' }" }}</div>
+        <div class="value en">{{ bankCard | ngxHelperBankCard : { join: ' ' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperBankCard : { view: 'BANK' }" }}</div>
+        <div class="value">{{ bankCard | ngxHelperBankCard : { view: 'BANK' } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperPeriod' }}
+            <div class="type en">{{ 'Date' }}</div>
+        </div>
+        <div class="value">{{ period.from | ngxHelperPeriod }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperPeriod' }}
+            <div class="type en">{{ '{ from: Date }' }}</div>
+        </div>
+        <div class="value">{{ { from: period.from } | ngxHelperPeriod }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperPeriod' }}
+            <div class="type en">{{ '{ to: Date }' }}</div>
+        </div>
+        <div class="value">{{ { to: period.to } | ngxHelperPeriod }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperPeriod' }}
+            <div class="type en">{{ '{ from: Date; to: Date }' }}</div>
+        </div>
+        <div class="value">{{ period | ngxHelperPeriod }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperPeriod : { timezone: 'America/Araguaina' }" }}</div>
+        <div class="value">{{ period | ngxHelperPeriod : { timezone: 'America/Araguaina' } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperPrice' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperPrice }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperPrice  : { currency: 'تومان' }" }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperPrice : { currency: 'تومان' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperPrice  : { short: true }' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperPrice : { short: true } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperPrice  : { english: true }' }}</div>
+        <div class="value en">{{ getRandomNumber() | ngxHelperPrice : { english: true } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperSafe' }}</div>
+        <div class="value en" [innerHTML]="safeHTML | ngxHelperSafe"></div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperSafe : { type: 'STYLE' }" }}</div>
+        <div class="value en" [style]="safeStyle | ngxHelperSafe : { type: 'STYLE' }">STYLE</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperVolume' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperVolume }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperVolume  : { short: true }' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperVolume : { short: true } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperVolume  : { english: true }' }}</div>
+        <div class="value en">{{ getRandomNumber() | ngxHelperVolume : { english: true } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperWeight' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperWeight }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperWeight  : { short: true }' }}</div>
+        <div class="value">{{ getRandomNumber() | ngxHelperWeight : { short: true } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperWeight  : { english: true }' }}</div>
+        <div class="value en">{{ getRandomNumber() | ngxHelperWeight : { english: true } }}</div>
+    </div>
+</div>

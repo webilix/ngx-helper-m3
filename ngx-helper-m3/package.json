@@ -22,7 +22,9 @@
     "peerDependencies": {
         "@angular/common": ">=19.0.0",
         "@angular/core": ">=19.0.0",
-        "@angular/material": ">=19.0.1"
+        "@angular/material": ">=19.0.1",
+        "@webilix/helper-library": ">=6.0.2",
+        "@webilix/jalali-date-time": ">=2.0.5"
     },
     "dependencies": {
         "tslib": "^2.3.0"
