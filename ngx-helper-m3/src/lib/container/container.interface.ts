@@ -3,6 +3,7 @@ import { InjectionToken } from '@angular/core';
 export interface INgxHelperContainerConfig {
     data?: any;
     padding?: string;
+    hideClose?: boolean;
 }
 
 export type NgxHelperContainer = 'DIALOG' | 'BOTTOMSHEET';

@@ -1,11 +1,17 @@
 header {
-    display: block;
-    padding: 0 1rem;
-    border-bottom: 1px solid var(--outline-variant);
+    display: flex;
+    align-items: center;
 
     height: 50px;
     line-height: 50px;
     font-size: 110%;
+    padding: 0 0.5rem;
+    border-bottom: 1px solid var(--outline-variant);
+
+    .title {
+        flex: 1;
+        padding-right: 0.5rem;
+    }
 }
 
 content {

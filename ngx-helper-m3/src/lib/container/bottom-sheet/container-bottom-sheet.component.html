@@ -1,4 +1,9 @@
-<header>{{ container.title }}</header>
+<header>
+    <div class="title">{{ container.title }}</div>
+    @if (!container.config.hideClose) {
+    <button mat-icon-button type="button" (click)="close()"><mat-icon>close</mat-icon></button>
+    }
+</header>
 <content>
     <div [style.padding]="container.config.padding || '1rem'">
         <span *ngComponentOutlet="container.component; injector: injector"></span>

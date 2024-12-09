@@ -1,8 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, inject, Injector, OnInit } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
+import { MatIconButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 import {
     INgxHelperContainerConfig,
@@ -13,7 +15,7 @@ import {
 
 @Component({
     host: { selector: 'container-bottom-sheet' },
-    imports: [CommonModule],
+    imports: [NgComponentOutlet, MatIconButton, MatIcon],
     templateUrl: './container-bottom-sheet.component.html',
     styleUrl: './container-bottom-sheet.component.scss',
 })
@@ -39,5 +41,9 @@ export class ContainerBottomSheetComponent implements OnInit {
                 },
             ],
         });
+    }
+
+    close(): void {
+        this.matBottomSheetRef.dismiss();
     }
 }

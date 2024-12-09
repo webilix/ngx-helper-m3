@@ -1,8 +1,10 @@
-import { CommonModule } from '@angular/common';
+import { NgComponentOutlet } from '@angular/common';
 import { Component, inject, Injector, OnInit } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
+import { MatIconButton } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatIcon } from '@angular/material/icon';
 
 import {
     INgxHelperContainerConfig,
@@ -13,7 +15,7 @@ import {
 
 @Component({
     host: { selector: 'container-dialog' },
-    imports: [CommonModule],
+    imports: [NgComponentOutlet, MatIconButton, MatIcon],
     templateUrl: './container-dialog.component.html',
     styleUrl: './container-dialog.component.scss',
 })
@@ -39,5 +41,9 @@ export class ContainerDialogComponent implements OnInit {
                 },
             ],
         });
+    }
+
+    close(): void {
+        this.matDialogRef.close();
     }
 }
