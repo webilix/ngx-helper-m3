@@ -23,12 +23,14 @@ class NgxHelperContainerCalss {
     ) {}
 
     dialog<T>(): void;
-    dialog<T>(callback: (result: T) => void): void;
-    dialog<T>(config: MatDialogConfig): void;
-    dialog<T>(callback: (result: T) => void, config: MatDialogConfig): void;
-    dialog<T>(arg1?: any, arg2?: any): void {
-        const callback: ((result: T) => void) | undefined = typeof arg1 === 'function' ? arg1 : undefined;
-        const config: MatDialogConfig = arg2 || (typeof arg1 !== 'function' ? arg1 : {});
+    dialog<T>(onResponse: (response: T) => void): void;
+    dialog<T>(onResponse: (response: T) => void, onDismiss: () => void): void;
+    dialog<T>(onResponse: (response: T) => void, config: MatDialogConfig): void;
+    dialog<T>(onResponse: (response: T) => void, onDismiss: () => void, config: MatDialogConfig): void;
+    dialog<T>(arg1?: any, arg2?: any, arg3?: any): void {
+        const onResponse: ((response: T) => void) | undefined = typeof arg1 === 'function' ? arg1 : undefined;
+        const onDismiss: (() => void) | undefined = typeof arg2 === 'function' ? arg2 : undefined;
+        const config: MatDialogConfig = arg3 || (typeof arg2 !== 'function' ? arg2 : {});
 
         this.matDialog
             .open(ContainerDialogComponent, {
@@ -44,16 +46,23 @@ class NgxHelperContainerCalss {
                 data: this.container,
             })
             .afterClosed()
-            .subscribe({ next: (result?: T) => !!result && callback && callback(result) });
+            .subscribe({
+                next: (response?: T) => {
+                    if (onResponse && !!response) onResponse(response);
+                    if (onDismiss && !response) onDismiss();
+                },
+            });
     }
 
     bottomSheet<T>(): void;
-    bottomSheet<T>(callback: (result: T) => void): void;
-    bottomSheet<T>(config: MatBottomSheetConfig): void;
-    bottomSheet<T>(callback: (result: T) => void, config: MatBottomSheetConfig): void;
-    bottomSheet<T>(arg1?: any, arg2?: any): void {
-        const callback: ((result: T) => void) | undefined = typeof arg1 === 'function' ? arg1 : undefined;
-        const config: MatBottomSheetConfig = arg2 || (typeof arg1 !== 'function' ? arg1 : {});
+    bottomSheet<T>(onResponse: (result: T) => void): void;
+    bottomSheet<T>(onResponse: (result: T) => void, onDismiss: () => void): void;
+    bottomSheet<T>(onResponse: (result: T) => void, config: MatBottomSheetConfig): void;
+    bottomSheet<T>(onResponse: (result: T) => void, onDismiss: () => void, config: MatBottomSheetConfig): void;
+    bottomSheet<T>(arg1?: any, arg2?: any, arg3?: any): void {
+        const onResponse: ((result: T) => void) | undefined = typeof arg1 === 'function' ? arg1 : undefined;
+        const onDismiss: (() => void) | undefined = typeof arg2 === 'function' ? arg2 : undefined;
+        const config: MatBottomSheetConfig = arg3 || (typeof arg2 !== 'function' ? arg2 : {});
 
         this.matBottomSheet
             .open<any, any, T>(ContainerBottomSheetComponent, {
@@ -67,7 +76,12 @@ class NgxHelperContainerCalss {
                 data: this.container,
             })
             .afterDismissed()
-            .subscribe({ next: (result?: T) => !!result && callback && callback(result) });
+            .subscribe({
+                next: (response?: T) => {
+                    if (onResponse && !!response) onResponse(response);
+                    if (onDismiss && !response) onDismiss();
+                },
+            });
     }
 }
 

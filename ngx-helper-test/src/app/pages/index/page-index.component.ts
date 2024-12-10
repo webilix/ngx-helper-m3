@@ -75,10 +75,16 @@ export class PageIndexComponent implements OnInit {
 
         switch (type) {
             case 'DIALOG':
-                container.dialog<any>((response) => console.log('CLOSED', response));
+                container.dialog<any>(
+                    (response) => console.log('RESPONSE', response),
+                    () => console.log('DISMISS'),
+                );
                 break;
             case 'BOTTOMSHEET':
-                container.bottomSheet<any>((response) => console.log('CLOSED', response));
+                container.bottomSheet<any>(
+                    (response) => console.log('RESPONSE', response),
+                    () => console.log('DISMISS'),
+                );
                 break;
         }
     }
