@@ -15,6 +15,7 @@ export * from './lib/pipes/duration.pipe';
 export * from './lib/pipes/file-size.pipe';
 export * from './lib/pipes/mobile.pipe';
 export * from './lib/pipes/multi-line.pipe';
+export * from './lib/pipes/number.pipe';
 export * from './lib/pipes/period.pipe';
 export * from './lib/pipes/price.pipe';
 export * from './lib/pipes/safe.pipe';

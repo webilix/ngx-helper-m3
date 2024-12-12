@@ -1,16 +1,5 @@
 <div class="card">
     <div class="pipe">
-        <div class="title en">{{ 'ngxHelperMultiLine' }}</div>
-        <div class="value" [innerHTML]="multiLine | ngxHelperMultiLine"></div>
-    </div>
-    <div class="pipe">
-        <div class="title en">{{ 'ngxHelperMultiLine : { html: true }' }}</div>
-        <div class="value" [innerHTML]="multiLine | ngxHelperMultiLine : { html: true }"></div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="pipe">
         <div class="title en">
             {{ 'ngxHelperDate' }}
             <div class="type en">{{ 'number' }}</div>
@@ -145,6 +134,36 @@
     <div class="pipe">
         <div class="title en">{{ "ngxHelperMobile : { join: ' ' }" }}</div>
         <div class="value en">{{ mobile | ngxHelperMobile : { join: ' ' } }}</div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperMultiLine' }}</div>
+        <div class="value" [innerHTML]="multiLine | ngxHelperMultiLine"></div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperMultiLine : { html: true }' }}</div>
+        <div class="value" [innerHTML]="multiLine | ngxHelperMultiLine : { html: true }"></div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperNumber' }}</div>
+        <div class="value" [innerHTML]="123456789 | ngxHelperNumber"></div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperNumber : { english: true }' }}</div>
+        <div class="value" [innerHTML]="123456789 | ngxHelperNumber : { english: true }"></div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperNumber' }}</div>
+        <div class="value" [innerHTML]="123.456789 | ngxHelperNumber"></div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperNumber : { fractionDigits: 3 }' }}</div>
+        <div class="value" [innerHTML]="123.456789 | ngxHelperNumber : { fractionDigits: 3 }"></div>
     </div>
 </div>
 
