@@ -108,6 +108,12 @@ export class NgxHelperConfirmService {
         });
     }
 
+    status(active: boolean, data: IConfirmData): NgxHelperConfirmCalss;
+    status(active: boolean, data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
+    status(active: boolean, data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
+        return active ? this.active(data, config || {}) : this.deactive(data, config || {});
+    }
+
     delete(data: IConfirmData): NgxHelperConfirmCalss;
     delete(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
     delete(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {

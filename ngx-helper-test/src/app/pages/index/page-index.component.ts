@@ -38,14 +38,16 @@ export class PageIndexComponent implements OnInit {
                       },
                   )
                 : type === 'ACTIVE'
-                ? this.ngxHelperConfirmService.active(
+                ? this.ngxHelperConfirmService.status(
+                      true,
                       { title: 'گزینه', value: 'مقدار' },
                       {
                           description:
                               'در صورت تایید، اطلاعات در سیستم فعال می‌شود و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
                       },
                   )
-                : this.ngxHelperConfirmService.deactive(
+                : this.ngxHelperConfirmService.status(
+                      false,
                       { title: 'گزینه', value: 'مقدار' },
                       {
                           description:
