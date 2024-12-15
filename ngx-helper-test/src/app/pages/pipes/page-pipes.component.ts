@@ -37,8 +37,6 @@ import { AppService } from '../../app.service';
     styleUrl: './page-pipes.component.scss',
 })
 export class PagePipesComponent implements OnInit {
-    constructor(private readonly appService: AppService) {}
-
     public bankCard: string = '5022291000000008';
     public date: Date = new Date();
     public duration: { from: Date; to: Date; second: number } = {
@@ -59,6 +57,8 @@ export class PagePipesComponent implements OnInit {
     };
     public safeHTML: string = '<a href="/" >LINK</a>';
     public safeStyle: string = 'font-size: 15px; color: red; padding: 0 1rem; text-shadow: 0 1px 0 #000;';
+
+    constructor(private readonly appService: AppService) {}
 
     ngOnInit(): void {
         this.appService.setHeader('PIPES');

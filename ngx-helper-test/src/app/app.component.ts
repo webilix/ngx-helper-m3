@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnDestroy, OnInit, RendererFactory2 } from '@angular/core';
+import { ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit, RendererFactory2 } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -13,13 +13,17 @@ type ColorMode = 'LIGHT' | 'DARK';
 
 @Component({
     selector: 'app-root',
-    host: { '(window:keydown)': 'onKeydown($event)' },
+    host: { '(window:keydown)': 'onKeydown($event)', '(window:resize)': 'onResize($event)' },
     imports: [RouterLink, RouterOutlet, MatDivider, MatIconButton, MatIcon, MatMenuModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {
+    @HostBinding('style.--header-height') headerHeight: string = '95px';
+
+    public isMobile!: boolean;
     public colorMode!: ColorMode;
+
     public header?: string;
     private onHeaderChanged!: Subscription;
 
@@ -44,6 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
         if (mode === 'DARK') colorMode = 'DARK';
         if (mode === 'LIGHT') colorMode = 'LIGHT';
         this.toggleMode(colorMode);
+
+        this.onResize();
     }
 
     ngOnDestroy(): void {
@@ -58,6 +64,11 @@ export class AppComponent implements OnInit, OnDestroy {
             event.preventDefault();
             this.toggleMode();
         }
+    }
+
+    onResize(): void {
+        this.isMobile = window.innerWidth <= 600;
+        this.headerHeight = this.isMobile ? '55px' : '95px';
     }
 
     toggleMode(colorMode?: ColorMode): void {

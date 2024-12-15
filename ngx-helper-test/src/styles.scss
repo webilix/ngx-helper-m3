@@ -8,19 +8,24 @@
 @use './theme/material/override';
 
 // Global Styles
+
+* {
+    font-family: Yekan;
+}
+
 html,
 body {
-    color: var(--on-surface);
-    background-color: var(--surface-container-low);
+    color: var(--on-background);
+    background-color: var(--background);
     box-sizing: border-box;
 }
 
 body {
     margin: 0;
-    font-family: Yekan;
 }
 
 .en {
+    font-size: 13px;
     font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 

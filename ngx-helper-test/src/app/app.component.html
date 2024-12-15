@@ -7,12 +7,17 @@
             <div class="menu-content">
                 <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
             </div>
+            <div class="menu-content">
+                <button mat-menu-item [routerLink]="['/page-group']" [disabled]="header === 'PAGE-GROUP'">
+                    گروه صفحه‌ها
+                </button>
+            </div>
             <mat-divider></mat-divider>
             <button mat-menu-item [routerLink]="['/']" [disabled]="!header">صفحه اصلی</button>
         </mat-menu>
 
         <div class="library en">
-            <div class="library-title" [class.hasHeader]="!!header">ngx-helper-m3</div>
+            <div class="library-title" [class.has-header]="!!header">ngx-helper-m3</div>
             @if (header) {
             <div class="library-header">{{ header }}</div>
             }
@@ -26,5 +31,10 @@
 </header>
 
 <content>
-    <div class="content"><router-outlet /></div>
+    <div class="seperator"></div>
+    <div class="content" [class.mobile]="isMobile"><router-outlet /></div>
 </content>
+
+@if (isMobile) {
+<footer></footer>
+}

@@ -4,8 +4,9 @@ import { MatButton } from '@angular/material/button';
 
 import { NgxHelperConfirmService, NgxHelperContainerService } from '@webilix/ngx-helper-m3';
 
-import { ContainerComponent } from '../../components';
 import { AppService } from '../../app.service';
+
+import { PageIndexContainerComponent } from './container/page-index-container.component';
 
 @Component({
     host: { selector: 'page-index' },
@@ -73,7 +74,7 @@ export class PageIndexComponent implements OnInit {
 
     container(type: 'DIALOG' | 'BOTTOMSHEET', component: '1' | '2'): void {
         const title: string = `${type === 'DIALOG' ? 'دیالوگ' : 'باتم‌شیت'} ${component}`;
-        const container = this.ngxHelperContainerService.init(ContainerComponent, title, { data: { component } });
+        const container = this.ngxHelperContainerService.init(PageIndexContainerComponent, title, { data: { component } });
 
         switch (type) {
             case 'DIALOG':

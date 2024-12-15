@@ -1,0 +1,13 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 200px;
+    }
+}

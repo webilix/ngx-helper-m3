@@ -1,0 +1,92 @@
+<content [class.mobile]="isMobile">
+    <!-- DESKTOP VIEW -->
+    @if (!isMobile) {
+    <section
+        class="desktop-pages"
+        [style.width]="sidebarWidth"
+        [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+        [style.top]="componentConfig.stickyView?.top?.desktopView || undefined"
+    >
+        @for (item of pageGroup.pages; track $index) {
+        <div
+            class="page"
+            [style.color]="pageIndex === $index ? componentConfig.highlightText : ''"
+            [style.border-color]="pageIndex === $index ? componentConfig.highlightText : componentConfig.border"
+            [style.background-color]="pageIndex === $index ? componentConfig.highlightBackground : ''"
+            [style.cursor]="pageIndex === $index ? 'default' : 'pointer'"
+            (click)="setPage($index)"
+        >
+            <!-- ICON -->
+            @if (item.icon) { <mat-icon>{{ item.icon }}</mat-icon> }
+            <div class="title">{{ item.title }}</div>
+            <!-- CURRENT PAGE -->
+            @if (pageIndex === $index) { <mat-icon>keyboard_double_arrow_left</mat-icon> }
+        </div>
+        }
+    </section>
+    }
+
+    <!-- MOBILE VIEW -->
+    @if (isMobile) {
+    <div
+        class="mobile-pages"
+        [style.background-color]="componentConfig.background"
+        [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+        [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
+        (mousedown)="swipe($event, 'START', header, container)"
+        (mousemove)="swipe($event, 'MOVE', header, container)"
+        (mouseup)="swipe($event, 'END', header, container)"
+        (touchstart)="swipe($event, 'START', header, container)"
+        (touchmove)="swipe($event, 'MOVE', header, container)"
+        (touchend)="swipe($event, 'END', header, container)"
+        #header
+    >
+        <div class="pages" #container>
+            @for (item of pageGroup.pages; track $index) {
+            <div
+                class="page"
+                [style.color]="pageIndex === $index ? componentConfig.highlightText : ''"
+                [style.border-color]="pageIndex === $index ? componentConfig.highlightText : componentConfig.border"
+                [style.background-color]="pageIndex === $index ? componentConfig.highlightBackground : ''"
+                [style.cursor]="pageIndex === $index ? 'default' : 'pointer'"
+                (click)="setPage($index)"
+            >
+                <!-- ICON -->
+                @if (item.icon) { <mat-icon>{{ item.icon }}</mat-icon> }
+                <div class="title">{{ item.title }}</div>
+            </div>
+            }
+        </div>
+    </div>
+
+    <div
+        class="seperator"
+        [style.background-color]="componentConfig.background"
+        [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+        [style.top]="
+            'calc(' + (componentConfig.stickyView?.top?.mobileView || undefined) + ' + var(--mobile-toolbar-height) + 2px)'
+        "
+    ></div>
+    }
+
+    <section class="content">
+        <!-- HEADER -->
+        @if (pageGroup.header) {
+        <div
+            [style.background-color]="componentConfig.background"
+            [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+            [style.top]="
+                (isMobile
+                    ? 'calc(' +
+                      (componentConfig.stickyView?.top?.mobileView || undefined) +
+                      ' + var(--mobile-toolbar-height) + 2px + 1rem)'
+                    : componentConfig.stickyView?.top?.desktopView) || undefined
+            "
+        >
+            <span *ngComponentOutlet="pageGroup.header; injector: injector"></span>
+            <div class="seperator"></div>
+        </div>
+        }
+        <span *ngComponentOutlet="pageGroup.pages[pageIndex].component; injector: injector"></span>
+    </section>
+</content>

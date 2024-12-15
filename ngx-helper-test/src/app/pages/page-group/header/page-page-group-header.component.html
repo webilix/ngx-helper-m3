@@ -1,0 +1,12 @@
+<div class="time">
+    <div>{{ data.date | ngxHelperDate : { format: 'H' } }}</div>
+    <span>:</span>
+    <div>{{ data.date | ngxHelperDate : { format: 'I' } }}</div>
+    <span>:</span>
+    <div>{{ data.date | ngxHelperDate : { format: 'S' } }}</div>
+</div>
+
+<div class="data">
+    <div class="item">صفحه {{ index + 1 }} از ۵</div>
+    <div class="title">{{ title }}</div>
+</div>
