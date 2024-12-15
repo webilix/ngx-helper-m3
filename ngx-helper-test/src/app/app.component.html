@@ -5,12 +5,16 @@
         </button>
         <mat-menu #pageMenu="matMenu" [dir]="'rtl'">
             <div class="menu-content">
-                <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
-            </div>
-            <div class="menu-content">
                 <button mat-menu-item [routerLink]="['/page-group']" [disabled]="header === 'PAGE-GROUP'">
                     گروه صفحه‌ها
                 </button>
+            </div>
+            <div class="menu-content">
+                <button mat-menu-item [routerLink]="['/section']" [disabled]="header === 'SECTION'">صفحه بندی</button>
+            </div>
+            <mat-divider></mat-divider>
+            <div class="menu-content">
+                <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
             </div>
             <mat-divider></mat-divider>
             <button mat-menu-item [routerLink]="['/']" [disabled]="!header">صفحه اصلی</button>

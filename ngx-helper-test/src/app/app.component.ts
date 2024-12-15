@@ -67,7 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     onResize(): void {
-        this.isMobile = window.innerWidth <= 600;
+        this.isMobile = window.innerWidth <= 900;
         this.headerHeight = this.isMobile ? '55px' : '95px';
     }
 

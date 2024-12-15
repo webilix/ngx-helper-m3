@@ -1,0 +1,11 @@
+div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: normal;
+    border: 1px solid var(--outline);
+    background-color: var(--surface-container-high);
+}
