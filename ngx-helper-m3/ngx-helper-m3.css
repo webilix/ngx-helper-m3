@@ -1,7 +1,7 @@
 /* GLOBAL VALUES */
 :root {
     --ngx-helper-m3-font-small: 90%;
-    --ngx-helper-m3-font-large: 115%;
+    --ngx-helper-m3-font-large: 110%;
 
     --ngx-helper-m3-toolbar-height: 40px;
 }
@@ -66,7 +66,7 @@
         font-size: var(--ngx-helper-m3-font-large);
         padding: 0 0.5rem;
         border-bottom: 1px solid var(--outline-variant);
-        background-color: var(--surface-container-high);
+        background-color: var(--surface-container);
 
         .title {
             flex: 1;
@@ -196,5 +196,80 @@
     content {
         flex: none;
         width: 100%;
+    }
+}
+
+/* NGX HELPER CARD */
+.ngx-helper-m3-card {
+    display: block;
+    direction: rtl;
+
+    border-radius: 8px;
+    border: 1px solid var(--outline-variant);
+
+    header {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+
+        height: 50px;
+        line-height: 50px;
+        font-size: var(--ngx-helper-m3-font-large);
+        padding-right: 1rem;
+        border-radius: 8px 8px 0 0;
+        border-bottom: 1px solid var(--outline-variant);
+        background-color: var(--surface-container-high);
+
+        mat-icon {
+            font-size: 120%;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .buttons {
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+            padding-left: 0.5rem;
+
+            button {
+                display: flex;
+                justify-content: center;
+                column-gap: 0.25rem;
+
+                padding: 0 0.75rem;
+                min-width: auto;
+                height: 50px;
+
+                .title {
+                    font-size: var(--ngx-helper-m3-font-small);
+                }
+
+                mat-icon {
+                    padding: 0;
+                    margin: 0;
+                    font-size: 120%;
+                    line-height: 1;
+                }
+            }
+        }
+
+        .buttons.mobile-view {
+            column-gap: 0;
+            padding-left: 0;
+
+            button {
+                padding: 0 0.5rem;
+            }
+        }
+    }
+
+    content {
+        display: block;
+        overflow: hidden;
+        border-radius: 0 0 8px 8px;
+        background-color: var(--surface-container-low);
     }
 }

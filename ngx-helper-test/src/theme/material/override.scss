@@ -12,8 +12,8 @@
     @include mat.button-overrides(
         (
             text-label-text-color: var(--error),
-            filled-container-color: var(--tertiary),
-            filled-label-text-color: var(--on-tertiary),
+            filled-container-color: var(--error),
+            filled-label-text-color: var(--on-error),
         )
     );
 }

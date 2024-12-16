@@ -12,6 +12,9 @@
             <div class="menu-content">
                 <button mat-menu-item [routerLink]="['/section']" [disabled]="header === 'SECTION'">صفحه بندی</button>
             </div>
+            <div class="menu-content">
+                <button mat-menu-item [routerLink]="['/card']" [disabled]="header === 'CARD'">کارت‌ها</button>
+            </div>
             <mat-divider></mat-divider>
             <div class="menu-content">
                 <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
@@ -20,8 +23,8 @@
             <button mat-menu-item [routerLink]="['/']" [disabled]="!header">صفحه اصلی</button>
         </mat-menu>
 
-        <div class="library en">
-            <div class="library-title" [class.has-header]="!!header">ngx-helper-m3</div>
+        <div class="library">
+            <div class="library-title en" [class.has-header]="!!header">ngx-helper-m3</div>
             @if (header) {
             <div class="library-header">{{ header }}</div>
             }

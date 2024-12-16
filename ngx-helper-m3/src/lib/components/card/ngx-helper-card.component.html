@@ -1,0 +1,62 @@
+<header>
+    <!-- ICON -->
+    @if (icon) { <mat-icon>{{ icon }}</mat-icon> }
+
+    <!-- TITLE -->
+    <div class="content">
+        <div class="title">{{ title }}</div>
+        <!-- SUB TITLE -->
+        @if (subTitle) {
+        <div class="sub-title">{{ subTitle }}</div>
+        }
+    </div>
+
+    <!-- BUTTONS -->
+    @if (buttons.length > 0) {
+    <div class="buttons" [ngClass]="isMobile ? 'mobile-view' : ''">
+        @for (item of buttons; track $index) {
+        <!-- TYPE -->
+        @switch (item.type) {
+
+        <!-- BUTTON -->
+        @case('BUTTON') {
+        <button mat-button type="button" [style.color]="item.color" (click)="item.action()">
+            @if (!isMobile) {
+            <div class="title">{{ item.title }}</div>
+            }
+            <!-- ICON -->
+            @if (isMobile || item.showIcon) {
+            <mat-icon>{{ item.icon }}</mat-icon>
+            }
+        </button>
+        }
+
+        <!-- MENU -->
+        @case('MENU') {
+        <button mat-button type="button" [style.color]="item.color" [matMenuTriggerFor]="actionMenu">
+            @if (!isMobile) {
+            <div class="title">{{ item.title }}</div>
+            }
+            <!-- ICON -->
+            @if (isMobile || item.showIcon) {
+            <mat-icon>{{ item.icon }}</mat-icon>
+            }
+        </button>
+        <mat-menu #actionMenu="matMenu" class="ngx-helper-card-action-menu">
+            @for (menu of item.buttons; track $index) {
+            <!-- DIVIDER -->
+            @if (menu === 'DIVIDER') { <mat-divider></mat-divider> }
+            <!-- BUTTON -->
+            @else {
+            <button mat-menu-item type="button" (click)="menu.action()" [style.color]="menu.color">
+                <div class="title">{{ menu.title }}</div>
+                <mat-icon [style.color]="menu.color">{{ menu.icon }}</mat-icon>
+            </button>
+            } }
+        </mat-menu>
+        } } }
+    </div>
+    }
+</header>
+
+<content [style.padding]="padding" [style.background-color]="backgroundColor"><ng-content></ng-content></content>
