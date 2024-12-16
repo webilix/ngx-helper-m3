@@ -3,12 +3,8 @@ import { Injectable } from '@angular/core';
 import { INgxHelperConfig } from '../ngx-helper.config';
 
 export interface IComponentConfig {
-    // COLOR
-    readonly border: string;
-    readonly background: string;
-    readonly highlightText: string;
-    readonly highlightBackground: string;
-    // STICKY
+    readonly mobileWidth: number;
+    readonly pageGroupSidebarWidth: string;
     readonly stickyView?: {
         readonly top?: { readonly desktopView: string; readonly mobileView: string };
         readonly bottom?: { readonly desktopView: string; readonly mobileView: string };
@@ -28,11 +24,8 @@ export class ComponentService {
         };
 
         return {
-            border: config?.colors?.border || 'var(--outline-variant)',
-            background: config?.colors?.background || 'var(--background)',
-            highlightText: config?.colors?.highlightText || 'var(--secondary)',
-            highlightBackground: config?.colors?.highlightBackground || 'var(--secondary-container)',
-
+            mobileWidth: config?.mobileWidth || 600,
+            pageGroupSidebarWidth: config?.pageGroupSidebarWidth || '200px',
             stickyView: config?.stickyView
                 ? {
                       top: config.stickyView.top ? getStickyView(config.stickyView.top) : undefined,

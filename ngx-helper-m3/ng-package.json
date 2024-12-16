@@ -3,5 +3,6 @@
     "dest": "../dist/ngx-helper-m3",
     "lib": {
         "entryFile": "src/public-api.ts"
-    }
+    },
+    "assets": ["./ngx-helper-m3.css"]
 }

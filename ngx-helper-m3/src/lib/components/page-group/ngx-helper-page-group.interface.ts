@@ -3,8 +3,8 @@ import { ComponentType } from '@angular/cdk/portal';
 
 interface IPage {
     readonly title: string;
+    readonly icon: string;
     readonly component: ComponentType<any>;
-    readonly icon?: string;
 }
 
 export interface INgxHelperPageGroup {
@@ -13,7 +13,6 @@ export interface INgxHelperPageGroup {
     readonly pages: IPage[];
 
     // SETTING
-    readonly mobileView?: boolean;
     readonly sidebarWidth?: string;
 }
 

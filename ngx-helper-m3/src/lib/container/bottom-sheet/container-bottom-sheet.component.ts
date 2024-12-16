@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injector, OnInit } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
@@ -20,6 +20,8 @@ import {
     styleUrl: './container-bottom-sheet.component.scss',
 })
 export class ContainerBottomSheetComponent implements OnInit {
+    @HostBinding('className') private className: string = 'ngx-helper-m3-container';
+
     public container: {
         component: ComponentType<any>;
         readonly title: string;

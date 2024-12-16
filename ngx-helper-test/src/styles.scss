@@ -7,8 +7,10 @@
 @use './theme/material/theme-m3';
 @use './theme/material/override';
 
-// Global Styles
+// NGX-HELPER-M3
+@use '../../ngx-helper-m3/ngx-helper-m3.css';
 
+// Global Styles
 * {
     font-family: Yekan;
 }
@@ -52,4 +54,10 @@ body.dark .cdk-overlay-backdrop {
         direction: rtl;
         text-align: right;
     }
+}
+
+.mat-bottom-sheet-container-medium,
+.mat-bottom-sheet-container-large,
+.mat-bottom-sheet-container-xlarge {
+    max-width: 450px !important;
 }

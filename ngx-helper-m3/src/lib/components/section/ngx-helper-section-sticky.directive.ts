@@ -2,7 +2,7 @@ import { Directive, ElementRef, inject, Inject, Input, OnInit, Optional } from '
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../ngx-helper.config';
 
-import { ComponentService } from '../component.service';
+import { ComponentService, IComponentConfig } from '../component.service';
 
 @Directive({
     selector: '[ngxHelperSectionSticky]',
@@ -13,6 +13,7 @@ export class NgxHelperSectionStickyDirective implements OnInit {
     @Input({ required: false }) public ngxHelperSectionZIndex?: number;
 
     private componentService = inject(ComponentService);
+    private componentConfig!: IComponentConfig;
     private isMobile: boolean = false;
 
     constructor(
@@ -21,13 +22,12 @@ export class NgxHelperSectionStickyDirective implements OnInit {
     ) {}
 
     ngOnInit(): void {
+        this.componentConfig = this.componentService.getComponentConfig(this.config);
         this.onResize();
     }
 
     onResize(): void {
-        const mobileWidth: number = this.config?.mobileWidth || 600;
-        this.isMobile = window.innerWidth <= mobileWidth;
-
+        this.isMobile = window.innerWidth <= this.componentConfig.mobileWidth;
         this.setPosition();
     }
 
@@ -35,10 +35,9 @@ export class NgxHelperSectionStickyDirective implements OnInit {
         const element: HTMLElement = this.elementRef.nativeElement;
         if (!element) return;
 
-        const config = this.componentService.getComponentConfig(this.config);
         switch (this.ngxHelperSectionSticky) {
             case 'TOP':
-                const top = config.stickyView?.top;
+                const top = this.componentConfig.stickyView?.top;
                 if (!top) return;
 
                 element.style.position = 'sticky';
@@ -47,7 +46,7 @@ export class NgxHelperSectionStickyDirective implements OnInit {
                 break;
 
             case 'BOTTOM':
-                const bottom = config.stickyView?.bottom;
+                const bottom = this.componentConfig.stickyView?.bottom;
                 if (!bottom) return;
 
                 element.style.position = 'sticky';

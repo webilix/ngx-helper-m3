@@ -38,8 +38,8 @@ import {
     styleUrl: './ngx-helper-page-group.component.scss',
 })
 export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
+    @HostBinding('className') private className: string = 'ngx-helper-m3-page-group';
     @HostBinding('style.display') display: string = 'none';
-    @HostBinding('style.--mobile-toolbar-height') private toolbarHeight: string = '32px';
 
     @Input({ required: true }) pageGroup!: INgxHelperPageGroup;
     @Input({ required: false }) pageIndex: number = 0;
@@ -52,9 +52,6 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     public sidebarWidth!: string;
     public componentConfig!: IComponentConfig;
 
-    private swipeStart?: number;
-    private swipeLeft: number = 0;
-
     constructor(
         private readonly activatedRoute: ActivatedRoute,
         private readonly router: Router,
@@ -63,10 +60,11 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnInit(): void {
-        this.display = this.pageGroup.pages.length === 0 ? 'none' : 'block';
+        this.display = this.pageGroup.pages.length === 0 ? 'none' : 'flex';
+        if (this.pageGroup.pages.length === 0) return;
 
-        this.sidebarWidth = this.pageGroup.sidebarWidth || this.config?.sidebarWidth || '200px';
         this.componentConfig = this.componentService.getComponentConfig(this.config);
+        this.sidebarWidth = this.pageGroup.sidebarWidth || this.componentConfig.pageGroupSidebarWidth;
 
         if (this.pageIndex < 0) this.pageIndex = 0;
         else if (this.pageIndex > this.pageGroup.pages.length - 1) this.pageIndex = this.pageGroup.pages.length - 1;
@@ -89,11 +87,13 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     }
 
     onResize(): void {
-        const mobileWidth: number = this.config?.mobileWidth || 600;
-        this.isMobile = this.pageGroup.mobileView || window.innerWidth <= mobileWidth;
+        this.isMobile = window.innerWidth <= this.componentConfig.mobileWidth;
+        this.className = `ngx-helper-m3-page-group${this.isMobile ? ' mobile-view' : ''}`;
     }
 
     setInjector(): void {
+        if (this.pageGroup.pages.length === 0) return;
+
         this.injector = Injector.create({
             providers: [
                 { provide: NGX_HELPER_PAGE_GROUP_DATA, useValue: this.data },
@@ -104,6 +104,7 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     }
 
     setPage(index: number): void {
+        if (this.pageGroup.pages.length === 0) return;
         if (this.pageIndex === index || index < 0 || index > this.pageGroup.pages.length - 1) return;
 
         this.pageIndex = index;
@@ -114,38 +115,6 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
             const queryParams: { [key: string]: any } = { ...this.activatedRoute.snapshot.queryParams };
             queryParams['ngx-helper-page-group'] = this.pageIndex.toString();
             this.router.navigate(this.pageGroup.route, { queryParams });
-        }
-    }
-
-    swipe(
-        event: MouseEvent | TouchEvent,
-        action: 'START' | 'MOVE' | 'END',
-        header: HTMLElement,
-        container: HTMLElement,
-    ): void {
-        if (header.offsetWidth > container.offsetWidth) return;
-        const clientX: number = event instanceof MouseEvent ? event.clientX : event.changedTouches[0].clientX;
-
-        switch (action) {
-            case 'START':
-                this.swipeStart = clientX - this.swipeLeft;
-                break;
-            case 'END':
-                this.swipeStart = undefined;
-
-                break;
-            case 'MOVE':
-                if (!this.swipeStart) return;
-
-                let left: number = clientX - this.swipeStart;
-
-                if (left <= 0) left = 0;
-                else if (left > container.offsetWidth - header.offsetWidth)
-                    left = container.offsetWidth - header.offsetWidth;
-
-                this.swipeLeft = left;
-                container.style.left = `${left}px`;
-                break;
         }
     }
 }

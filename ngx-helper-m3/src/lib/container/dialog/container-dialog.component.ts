@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, inject, Injector, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injector, OnInit } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { MatIconButton } from '@angular/material/button';
@@ -20,6 +20,8 @@ import {
     styleUrl: './container-dialog.component.scss',
 })
 export class ContainerDialogComponent implements OnInit {
+    @HostBinding('className') private className: string = 'ngx-helper-m3-container';
+
     public container: {
         component: ComponentType<any>;
         readonly title: string;

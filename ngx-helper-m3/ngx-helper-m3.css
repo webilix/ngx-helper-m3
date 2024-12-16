@@ -1,0 +1,200 @@
+/* GLOBAL VALUES */
+:root {
+    --ngx-helper-m3-font-small: 90%;
+    --ngx-helper-m3-font-large: 115%;
+
+    --ngx-helper-m3-toolbar-height: 40px;
+}
+
+/* NGX HELPER CONFIRM */
+.ngx-helper-m3-confirm {
+    display: block;
+    margin: 1.5rem 1.5rem 1rem 1.5rem;
+
+    content {
+        display: flex;
+        align-items: flex-start;
+        column-gap: 1rem;
+
+        mat-icon {
+            font-size: 200%;
+        }
+
+        .confirm {
+            flex: 1;
+
+            .question {
+                text-align: justify;
+            }
+
+            .description {
+                text-align: justify;
+                font-size: var(--ngx-helper-m3-font-small);
+            }
+
+            .data {
+                display: flex;
+                align-items: center;
+                column-gap: 1rem;
+                font-size: var(--ngx-helper-m3-font-small);
+                margin-top: 1rem;
+            }
+        }
+    }
+
+    footer {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        column-gap: 1rem;
+        margin-top: 1rem;
+    }
+}
+
+/* NGX HELPER CONTAINER */
+.ngx-helper-m3-container {
+    display: block;
+    max-height: 80vh;
+    overflow: hidden;
+
+    header {
+        display: flex;
+        align-items: center;
+
+        height: 65px;
+        line-height: 65px;
+        font-size: var(--ngx-helper-m3-font-large);
+        padding: 0 0.5rem;
+        border-bottom: 1px solid var(--outline-variant);
+        background-color: var(--surface-container-high);
+
+        .title {
+            flex: 1;
+            padding-right: 0.5rem;
+        }
+    }
+
+    content {
+        display: block;
+        max-height: calc(80vh - 67px);
+        overflow: auto;
+        box-sizing: border-box;
+    }
+}
+
+/* NGX HELPER PAGE GROUP */
+.ngx-helper-m3-page-group {
+    direction: rtl;
+    display: flex;
+    align-items: flex-start;
+    column-gap: 1rem;
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        row-gap: 1rem;
+
+        box-sizing: border-box;
+        padding: 1rem;
+        background-color: var(--surface-container-high);
+
+        .page {
+            display: flex;
+            align-items: center;
+            column-gap: 0.5rem;
+
+            padding: 0.5rem 0.75rem;
+            transition: all 0.3s ease-in-out;
+
+            .title {
+                flex: 1;
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            mat-icon {
+                font-size: 120%;
+            }
+        }
+
+        .active {
+            border-radius: 4px;
+            color: var(--on-primary);
+            background-color: var(--primary);
+        }
+    }
+
+    content {
+        flex: 1;
+        display: block;
+
+        header {
+            background-color: var(--background);
+
+            .spacer {
+                z-index: 2;
+                height: 1rem;
+                width: 100%;
+            }
+        }
+    }
+}
+
+.ngx-helper-m3-page-group.mobile-view {
+    flex-direction: column;
+    column-gap: 0;
+
+    nav {
+        display: flex;
+        align-items: center;
+
+        box-sizing: border-box;
+        background-color: var(--surface-container-high);
+        height: calc(var(--ngx-helper-m3-toolbar-height));
+        overflow: hidden;
+        width: 100%;
+        z-index: 2;
+
+        .page {
+            display: flex;
+            align-items: center;
+            column-gap: 0.25rem;
+
+            padding: 0 1rem;
+            height: var(--ngx-helper-m3-toolbar-height);
+            transition: all 0.3s ease-in-out;
+
+            .title {
+                flex: 1;
+                font-size: var(--ngx-helper-m3-font-small);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+
+        .active {
+            flex: 1;
+            width: 0;
+            color: var(--on-primary);
+            background-color: var(--primary);
+
+            mat-icon {
+                font-size: 120%;
+            }
+        }
+    }
+
+    .toolbar-spacer {
+        height: 1rem;
+        width: 100%;
+        background-color: var(--background);
+    }
+
+    content {
+        flex: none;
+        width: 100%;
+    }
+}

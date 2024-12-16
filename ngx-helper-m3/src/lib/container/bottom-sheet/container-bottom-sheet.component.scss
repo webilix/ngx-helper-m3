@@ -1,26 +1,3 @@
-header {
-    display: flex;
-    align-items: center;
-
-    height: 50px;
-    line-height: 50px;
-    font-size: 110%;
-    padding: 0 0.5rem;
-    border-bottom: 1px solid var(--outline-variant);
-
-    .title {
-        flex: 1;
-        padding-right: 0.5rem;
-    }
-}
-
-content {
-    display: block;
-
-    max-height: calc(80vh - 51px);
-    overflow: auto;
-}
-
 ::ng-deep .ngx-helper-bottom-sheet .mat-bottom-sheet-container {
     padding: 0;
 }

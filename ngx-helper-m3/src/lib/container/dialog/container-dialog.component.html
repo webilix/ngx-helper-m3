@@ -1,7 +1,9 @@
 <header>
     <div class="title">{{ container.title }}</div>
     @if (!container.config.hideClose) {
-    <button mat-icon-button type="button" (click)="close()"><mat-icon>close</mat-icon></button>
+    <button mat-icon-button type="button" (click)="close()">
+        <mat-icon>close</mat-icon>
+    </button>
     }
 </header>
 <content [style.padding]="container.config.padding || '1rem'">

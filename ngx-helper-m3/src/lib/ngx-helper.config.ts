@@ -2,13 +2,11 @@ import { EnvironmentProviders, InjectionToken, makeEnvironmentProviders, Provide
 
 export interface INgxHelperConfig {
     readonly mobileWidth: number;
-    readonly sidebarWidth: string;
-    readonly colors: {
-        readonly border?: string;
-        readonly background?: string;
-        readonly highlightText?: string;
-        readonly highlightBackground?: string;
-    };
+
+    // PAGE GROUP
+    readonly pageGroupSidebarWidth: string;
+
+    // STICKY
     readonly stickyView: {
         readonly top?: string | { readonly desktopView: string; readonly mobileView: string };
         readonly bottom?: string | { readonly desktopView: string; readonly mobileView: string };

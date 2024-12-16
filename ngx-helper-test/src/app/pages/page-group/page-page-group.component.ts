@@ -36,7 +36,7 @@ export class PagePageGroupComponent implements OnInit {
     ngOnInit(): void {
         this.appService.setHeader('PAGE-GROUP');
 
-        setInterval(() => (this.data = { date: new Date() }), 1000);
+        setInterval(() => (this.data = { date: new Date() }), 5 * 1000);
     }
 
     pageIndexChanged(index: number): void {

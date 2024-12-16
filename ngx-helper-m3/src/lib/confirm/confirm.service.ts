@@ -63,6 +63,7 @@ class NgxHelperConfirmCalss {
             .open<any, any, boolean>(ConfirmBottomSheetComponent, {
                 // DEFAULT CONFIG
                 direction: 'rtl',
+                panelClass: 'ngx-helper-bottom-sheet',
                 // OVERWRITE CONFIG
                 ...config,
                 maxHeight: '80vh',

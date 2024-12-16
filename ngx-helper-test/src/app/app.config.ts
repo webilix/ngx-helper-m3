@@ -15,7 +15,7 @@ export const appConfig: ApplicationConfig = {
         // NGX-HELPER
         provideNgxHelperConfig({
             mobileWidth: 900,
-            sidebarWidth: '250px',
+            pageGroupSidebarWidth: '250px',
             stickyView: {
                 top: { desktopView: 'calc(95px + 1rem)', mobileView: 'calc(55px + 1rem)' },
                 bottom: { desktopView: '1rem', mobileView: 'calc(50px + 1rem)' },

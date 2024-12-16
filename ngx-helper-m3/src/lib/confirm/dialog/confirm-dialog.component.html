@@ -1,30 +1,27 @@
-<mat-dialog-content>
-    <content>
-        <!-- ICON -->
-        @if (confirm.icon) {
-        <div class="icon">
-            <mat-icon>{{ confirm.icon }}</mat-icon>
+<content>
+    <!-- ICON -->
+    @if (confirm.icon) {
+    <mat-icon>{{ confirm.icon }}</mat-icon>
+    }
+
+    <!-- CONTENT -->
+    <div class="confirm">
+        <div class="question">{{ confirm.question }}</div>
+        <!-- DESCRIPTION -->
+        @if (confirm.description) {
+        <div class="description">{{ confirm.description }}</div>
+        }
+        <!-- DATA -->
+        @if (confirm.data) {
+        <div class="data">
+            <div class="title">{{ confirm.data.title }}:</div>
+            <div class="value">{{ confirm.data.value }}</div>
         </div>
         }
+    </div>
+</content>
 
-        <!-- CONTENT -->
-        <div class="content">
-            <div class="question">{{ confirm.question }}</div>
-            <!-- DESCRIPTION -->
-            @if (confirm.description) {
-            <div class="description">{{ confirm.description }}</div>
-            }
-            <!-- DATA -->
-            @if (confirm.data) {
-            <div class="data">
-                <div class="title">{{ confirm.data.title }}:</div>
-                <div class="value">{{ confirm.data.value }}</div>
-            </div>
-            }
-        </div>
-    </content>
-</mat-dialog-content>
-<mat-dialog-actions [align]="'end'">
+<footer>
     <button mat-button type="button" mat-dialog-close [ngClass]="confirm.denyClass">خیر</button>
     <button mat-button type="button" [mat-dialog-close]="true" [ngClass]="confirm.confirmClass">بلی</button>
-</mat-dialog-actions>
+</footer>
