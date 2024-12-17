@@ -3,22 +3,12 @@
         <button mat-icon-button type="button" [matMenuTriggerFor]="pageMenu">
             <mat-icon>menu</mat-icon>
         </button>
-        <mat-menu #pageMenu="matMenu" [dir]="'rtl'">
-            <div class="menu-content">
-                <button mat-menu-item [routerLink]="['/page-group']" [disabled]="header === 'PAGE-GROUP'">
-                    گروه صفحه‌ها
-                </button>
-            </div>
-            <div class="menu-content">
-                <button mat-menu-item [routerLink]="['/section']" [disabled]="header === 'SECTION'">صفحه بندی</button>
-            </div>
-            <div class="menu-content">
-                <button mat-menu-item [routerLink]="['/card']" [disabled]="header === 'CARD'">کارت‌ها</button>
-            </div>
+        <mat-menu #pageMenu="matMenu" [dir]="'rtl'" class="ngx-helper-test-menu">
+            <button mat-menu-item [routerLink]="['/page-group']" [disabled]="header === 'PAGE-GROUP'">گروه صفحه‌ها</button>
+            <button mat-menu-item [routerLink]="['/section']" [disabled]="header === 'SECTION'">صفحه بندی</button>
+            <button mat-menu-item [routerLink]="['/card']" [disabled]="header === 'CARD'">کارت‌ها</button>
             <mat-divider></mat-divider>
-            <div class="menu-content">
-                <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
-            </div>
+            <button mat-menu-item [routerLink]="['/pipes']" [disabled]="header === 'PIPES'">پایپ‌ها</button>
             <mat-divider></mat-divider>
             <button mat-menu-item [routerLink]="['/']" [disabled]="!header">صفحه اصلی</button>
         </mat-menu>

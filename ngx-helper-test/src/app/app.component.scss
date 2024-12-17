@@ -104,3 +104,23 @@ body.dark {
         }
     }
 }
+
+::ng-deep .ngx-helper-test-menu {
+    .mat-mdc-menu-content {
+        padding: 0;
+    }
+
+    .mat-mdc-menu-item {
+        direction: rtl;
+        text-align: right;
+
+        span {
+            font-size: 12px !important;
+        }
+    }
+
+    .mat-divider {
+        margin: 0 !important;
+        border-top-color: var(--outline-variant);
+    }
+}

@@ -1,10 +1,15 @@
-<div class="time">
-    <div>{{ data.date | ngxHelperDate : { format: 'H' } }}</div>
-    <span>:</span>
-    <div>{{ data.date | ngxHelperDate : { format: 'I' } }}</div>
-</div>
+<mat-icon>{{ icon }}</mat-icon>
 
-<div class="data">
-    <div class="item">صفحه {{ index + 1 }} از ۵</div>
-    <div class="title">{{ title }}</div>
-</div>
+<content>
+    <div class="time">
+        <div>{{ data.date | ngxHelperDate : { format: 'H' } }}</div>
+        <span>:</span>
+        <div>{{ data.date | ngxHelperDate : { format: 'I' } }}</div>
+    </div>
+    <div class="data">
+        <div class="item">صفحه {{ index + 1 }} از ۵</div>
+        <div class="title">{{ title }}</div>
+    </div>
+</content>
+
+<mat-icon>{{ icon }}</mat-icon>

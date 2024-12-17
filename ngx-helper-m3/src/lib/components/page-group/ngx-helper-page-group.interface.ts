@@ -19,3 +19,4 @@ export interface INgxHelperPageGroup {
 export const NGX_HELPER_PAGE_GROUP_DATA: InjectionToken<any> = new InjectionToken('NGX-HELPER-PAGE-GROUP-DATA');
 export const NGX_HELPER_PAGE_GROUP_INDEX: InjectionToken<number> = new InjectionToken('NGX-HELPER-PAGE-GROUP-INDEX');
 export const NGX_HELPER_PAGE_GROUP_TITLE: InjectionToken<string> = new InjectionToken('NGX-HELPER-PAGE-GROUP-TITLE');
+export const NGX_HELPER_PAGE_GROUP_ICON: InjectionToken<string> = new InjectionToken('NGX-HELPER-PAGE-GROUP-ICON');

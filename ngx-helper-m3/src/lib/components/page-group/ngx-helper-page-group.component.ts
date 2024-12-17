@@ -25,6 +25,7 @@ import { ComponentService, IComponentConfig } from '../component.service';
 import {
     INgxHelperPageGroup,
     NGX_HELPER_PAGE_GROUP_DATA,
+    NGX_HELPER_PAGE_GROUP_ICON,
     NGX_HELPER_PAGE_GROUP_INDEX,
     NGX_HELPER_PAGE_GROUP_TITLE,
 } from './ngx-helper-page-group.interface';
@@ -99,6 +100,7 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
                 { provide: NGX_HELPER_PAGE_GROUP_DATA, useValue: this.data },
                 { provide: NGX_HELPER_PAGE_GROUP_INDEX, useValue: this.pageIndex },
                 { provide: NGX_HELPER_PAGE_GROUP_TITLE, useValue: this.pageGroup.pages[this.pageIndex].title },
+                { provide: NGX_HELPER_PAGE_GROUP_ICON, useValue: this.pageGroup.pages[this.pageIndex].icon },
             ],
         });
     }

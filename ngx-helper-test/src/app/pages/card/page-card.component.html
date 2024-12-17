@@ -1,22 +1,33 @@
 <ngx-helper-section>
     <ngx-helper-section-column>
-        <ngx-helper-card [title]="'آیکون'" [icon]="icon" [padding]="'5rem'">
+        <ngx-helper-card [title]="'آیکون'" [icon]="icon" [padding]="'3rem'">
             <page-card-content>آیکون</page-card-content>
         </ngx-helper-card>
     </ngx-helper-section-column>
     <ngx-helper-section-column>
-        <ngx-helper-card [title]="'کلید'" [actions]="buttons" [padding]="'5rem'">
+        <ngx-helper-card [title]="'کلید'" [actions]="buttons" [padding]="'3rem'">
             <page-card-content>کلید</page-card-content>
         </ngx-helper-card>
     </ngx-helper-section-column>
     <ngx-helper-section-column>
-        <ngx-helper-card [title]="'منو'" [actions]="menu" [padding]="'5rem'" [backgroundColor]="'var(--primary-fixed)'">
+        <ngx-helper-card [title]="'منو'" [actions]="menu" [padding]="'3rem'" [backgroundColor]="'var(--primary-fixed)'">
             <page-card-content>منو</page-card-content>
         </ngx-helper-card>
     </ngx-helper-section-column>
 </ngx-helper-section>
 
 <br />
-<ngx-helper-card [title]="'همه موارد'" [icon]="icon" [actions]="actions" [padding]="'0'">
-    <page-card-content>همه موارد</page-card-content>
+<ngx-helper-card
+    [title]="'همه موارد'"
+    [subTitle]="'توضیحات (در صورت وجود) در این بخش نمایش داده می‌شوند'"
+    [icon]="icon"
+    [actions]="actions"
+    [padding]="'0'"
+>
+    <page-card-content>
+        <div style="margin: 5rem 2rem; text-align: center">
+            برای موارد فوق مقدار <span class="en">3rem</span> به عنوان <span class="en">padding</span> مشخص شده است.<br />
+            اما این مقدار برای این گزینه درنظر گرفته نشده است.
+        </div>
+    </page-card-content>
 </ngx-helper-card>
