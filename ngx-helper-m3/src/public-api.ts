@@ -7,6 +7,7 @@ export * from './lib/ngx-helper.config';
 // COMPONENTS
 export * from './lib/components/card/ngx-helper-card.component';
 export * from './lib/components/card/ngx-helper-card.interface';
+export * from './lib/components/loader/ngx-helper-loader.component';
 export * from './lib/components/page-group/ngx-helper-page-group.component';
 export * from './lib/components/page-group/ngx-helper-page-group.interface';
 export * from './lib/components/section/ngx-helper-section-sticky.directive';

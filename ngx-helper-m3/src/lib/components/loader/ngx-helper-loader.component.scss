@@ -1,0 +1,54 @@
+.spinner {
+    --size: calc(var(--loader-size) / 7);
+
+    width: var(--loader-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, var(--loader-color) 94%, #0000) top/var(--size) var(--size) no-repeat,
+        conic-gradient(#0000 30%, var(--loader-color));
+    mask: radial-gradient(farthest-side, #0000 calc(100% - var(--size)), #000 0);
+    animation: spinner 1s infinite linear;
+
+    @keyframes spinner {
+        100% {
+            transform: rotate(1turn);
+        }
+    }
+}
+
+.dots-spinner {
+    --dot: no-repeat radial-gradient(farthest-side, var(--loader-color) 92%, #0000);
+    --size: calc(var(--loader-size) / 4);
+
+    width: var(--loader-size);
+    aspect-ratio: 1;
+    background: var(--dot) top, var(--dot) left, var(--dot) right, var(--dot) bottom;
+    background-size: var(--size) var(--size);
+    animation: dots-spinner 1s infinite;
+
+    @keyframes dots-spinner {
+        to {
+            transform: rotate(0.5turn);
+        }
+    }
+}
+
+.wheel-spinner {
+    --size: calc(var(--loader-size) / 9);
+
+    width: var(--loader-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--loader-color);
+    mask: repeating-conic-gradient(#0000 0deg, #000 1deg 70deg, #0000 71deg 90deg),
+        radial-gradient(farthest-side, #0000 calc(100% - var(--size) - 1px), #000 calc(100% - var(--size)));
+    -webkit-mask-composite: destination-in;
+    mask-composite: intersect;
+    animation: wheel-spinner 1s infinite;
+
+    @keyframes wheel-spinner {
+        to {
+            transform: rotate(0.5turn);
+        }
+    }
+}

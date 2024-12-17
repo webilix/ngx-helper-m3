@@ -39,4 +39,20 @@ section {
             flex-grow: 1;
         }
     }
+
+    .loaders {
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+        row-gap: 2rem;
+        flex-wrap: wrap;
+        padding: 2rem;
+
+        ngx-helper-loader {
+            flex-grow: 1;
+
+            display: flex;
+            justify-content: center;
+        }
+    }
 }

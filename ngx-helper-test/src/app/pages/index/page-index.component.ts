@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
-import { NgxHelperConfirmService, NgxHelperContainerService } from '@webilix/ngx-helper-m3';
+import { NgxHelperConfirmService, NgxHelperContainerService, NgxHelperLoaderComponent } from '@webilix/ngx-helper-m3';
 
 import { AppService } from '../../app.service';
 
@@ -10,7 +10,7 @@ import { PageIndexContainerComponent } from './container/page-index-container.co
 
 @Component({
     host: { selector: 'page-index' },
-    imports: [MatButton],
+    imports: [MatButton, NgxHelperLoaderComponent],
     templateUrl: './page-index.component.html',
     styleUrl: './page-index.component.scss',
 })
