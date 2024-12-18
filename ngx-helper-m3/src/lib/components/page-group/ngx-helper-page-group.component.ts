@@ -24,10 +24,10 @@ import { ComponentService, IComponentConfig } from '../component.service';
 
 import {
     INgxHelperPageGroup,
+    INgxHelperPageGroupItem,
     NGX_HELPER_PAGE_GROUP_DATA,
-    NGX_HELPER_PAGE_GROUP_ICON,
-    NGX_HELPER_PAGE_GROUP_INDEX,
-    NGX_HELPER_PAGE_GROUP_TITLE,
+    NGX_HELPER_PAGE_GROUP_DATA_CHANGE,
+    NGX_HELPER_PAGE_GROUP_ITEM,
 } from './ngx-helper-page-group.interface';
 
 @Component({
@@ -46,6 +46,7 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     @Input({ required: false }) pageIndex: number = 0;
     @Input({ required: false }) data?: any;
     @Output() pageIndexChanged: EventEmitter<number> = new EventEmitter<number>();
+    @Output() dataChanged: EventEmitter<any> = new EventEmitter<any>();
 
     public isMobile: boolean = false;
     public injector!: Injector;
@@ -95,12 +96,17 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     setInjector(): void {
         if (this.pageGroup.pages.length === 0) return;
 
+        const item: INgxHelperPageGroupItem = {
+            index: this.pageIndex,
+            title: this.pageGroup.pages[this.pageIndex].title,
+            icon: this.pageGroup.pages[this.pageIndex].icon,
+        };
+
         this.injector = Injector.create({
             providers: [
+                { provide: NGX_HELPER_PAGE_GROUP_ITEM, useValue: item },
                 { provide: NGX_HELPER_PAGE_GROUP_DATA, useValue: this.data },
-                { provide: NGX_HELPER_PAGE_GROUP_INDEX, useValue: this.pageIndex },
-                { provide: NGX_HELPER_PAGE_GROUP_TITLE, useValue: this.pageGroup.pages[this.pageIndex].title },
-                { provide: NGX_HELPER_PAGE_GROUP_ICON, useValue: this.pageGroup.pages[this.pageIndex].icon },
+                { provide: NGX_HELPER_PAGE_GROUP_DATA_CHANGE, useValue: (data: any) => this.dataChanged.next(data) },
             ],
         });
     }

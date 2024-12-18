@@ -1,5 +1,9 @@
-<div [style.background-color]="'var(--outline-variant)'">{{ title }}</div>
-<div [style.background-color]="'var(--primary-container)'">{{ title }}</div>
-<div [style.background-color]="'var(--secondary-container)'">{{ title }}</div>
-<div [style.background-color]="'var(--tertiary-container)'">{{ title }}</div>
-<div [style.background-color]="'var(--surface-container-highest)'">{{ title }}</div>
+<div [style.background-color]="'var(--outline-variant)'">
+    <button type="button" mat-icon-button (click)="dataChanged(5)"><mat-icon>add</mat-icon></button>
+    {{ item.title }}
+    <button type="button" mat-icon-button (click)="dataChanged(-5)"><mat-icon>remove</mat-icon></button>
+</div>
+<div [style.background-color]="'var(--primary-container)'">{{ item.title }}</div>
+<div [style.background-color]="'var(--secondary-container)'">{{ item.title }}</div>
+<div [style.background-color]="'var(--tertiary-container)'">{{ item.title }}</div>
+<div [style.background-color]="'var(--surface-container-highest)'">{{ item.title }}</div>

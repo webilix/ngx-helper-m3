@@ -16,7 +16,16 @@ export interface INgxHelperPageGroup {
     readonly sidebarWidth?: string;
 }
 
+export interface INgxHelperPageGroupItem {
+    readonly index: number;
+    readonly title: string;
+    readonly icon: string;
+}
+
+export const NGX_HELPER_PAGE_GROUP_ITEM: InjectionToken<INgxHelperPageGroupItem> = new InjectionToken(
+    'NGX-HELPER-PAGE-GROUP-ITEM',
+);
 export const NGX_HELPER_PAGE_GROUP_DATA: InjectionToken<any> = new InjectionToken('NGX-HELPER-PAGE-GROUP-DATA');
-export const NGX_HELPER_PAGE_GROUP_INDEX: InjectionToken<number> = new InjectionToken('NGX-HELPER-PAGE-GROUP-INDEX');
-export const NGX_HELPER_PAGE_GROUP_TITLE: InjectionToken<string> = new InjectionToken('NGX-HELPER-PAGE-GROUP-TITLE');
-export const NGX_HELPER_PAGE_GROUP_ICON: InjectionToken<string> = new InjectionToken('NGX-HELPER-PAGE-GROUP-ICON');
+export const NGX_HELPER_PAGE_GROUP_DATA_CHANGE: InjectionToken<(data: any) => void> = new InjectionToken(
+    'NGX-HELPER-PAGE-GROUP-DATA-CHANGE',
+);

@@ -1,4 +1,4 @@
-<mat-icon>{{ icon }}</mat-icon>
+<mat-icon>{{ item.icon }}</mat-icon>
 
 <content>
     <div class="time">
@@ -7,9 +7,10 @@
         <div>{{ data.date | ngxHelperDate : { format: 'I' } }}</div>
     </div>
     <div class="data">
-        <div class="item">صفحه {{ index + 1 }} از ۵</div>
-        <div class="title">{{ title }}</div>
+        <div class="item">صفحه {{ item.index + 1 }} از ۵</div>
+        <div class="title">{{ item.title }}</div>
     </div>
+    <div class="counter">شمارنده: {{ data.counter | ngxHelperNumber }}</div>
 </content>
 
-<mat-icon>{{ icon }}</mat-icon>
+<mat-icon>{{ item.icon }}</mat-icon>

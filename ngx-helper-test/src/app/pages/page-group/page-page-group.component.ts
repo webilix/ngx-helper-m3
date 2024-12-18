@@ -18,7 +18,7 @@ import { PagePageGroupHeaderComponent } from './header/page-page-group-header.co
     styleUrl: './page-page-group.component.scss',
 })
 export class PagePageGroupComponent implements OnInit {
-    public data: { date: Date } = { date: new Date() };
+    public data: { date: Date; counter: number } = { date: new Date(), counter: 0 };
     public pageGroup: INgxHelperPageGroup = {
         route: ['/page-group'],
         header: PagePageGroupHeaderComponent,
@@ -36,10 +36,14 @@ export class PagePageGroupComponent implements OnInit {
     ngOnInit(): void {
         this.appService.setHeader('PAGE-GROUP');
 
-        setInterval(() => (this.data = { date: new Date() }), 5 * 1000);
+        setInterval(() => (this.data = { date: new Date(), counter: this.data.counter }), 5 * 1000);
     }
 
     pageIndexChanged(index: number): void {
         console.log('pageIndexChanged', index);
+    }
+
+    dataChanged(change: number): void {
+        this.data = { ...this.data, counter: this.data.counter + change };
     }
 }
