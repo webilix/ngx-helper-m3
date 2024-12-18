@@ -1,5 +1,5 @@
 @for (item of data; track $index) {
-<div class="box" [class.clear-box]="clearBox" [class.click]="!!item.action">
+<div class="value-box" [class.clear]="clearBox" [class.click]="!!item.action">
     <div class="title" (click)="onClick(item.action)">{{ item.title }}</div>
     <div
         class="value"

@@ -1,5 +1,5 @@
 @for (item of data; track $index) {
-<div class="item" [class.even]="$index % 2 === 0" [class.odd]="$index % 2 === 1">
+<div class="value-list-item" [class.even]="$index % 2 === 0" [class.odd]="$index % 2 === 1">
     <div class="title" [style.width]="titleWidth">{{ item.title }}:</div>
     <div class="value">
         <div

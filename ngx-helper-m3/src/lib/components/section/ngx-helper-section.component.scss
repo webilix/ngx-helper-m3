@@ -2,7 +2,7 @@
     display: block;
     direction: rtl;
 
-    .columns {
+    .section-columns {
         display: flex;
         align-items: flex-start;
         column-gap: var(--section-gap);
@@ -16,7 +16,7 @@
         row-gap: var(--section-gap);
     }
 
-    .mobile {
+    .section-columns-mobile {
         flex-direction: column;
         column-gap: 0;
         row-gap: var(--section-gap);

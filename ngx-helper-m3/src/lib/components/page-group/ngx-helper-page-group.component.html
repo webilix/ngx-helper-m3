@@ -1,7 +1,8 @@
 @if (pageGroup.pages.length > 0) {
 <!-- DESKTOP VIEW -->
 @if (!isMobile) {
-<aside
+<div
+    class="page-group-aside"
     [style.width]="sidebarWidth"
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
     [style.top]="componentConfig.stickyView?.top?.desktopView || undefined"
@@ -20,12 +21,13 @@
         @if (pageIndex === $index) { <mat-icon>keyboard_double_arrow_left</mat-icon> }
     </div>
     }
-</aside>
+</div>
 }
 
 <!-- MOBILE VIEW -->
 @if (isMobile) {
-<nav
+<div
+    class="page-group-nav"
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
     [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
 >
@@ -42,10 +44,10 @@
         }
     </div>
     }
-</nav>
+</div>
 
 <div
-    class="toolbar-spacer"
+    class="page-group-spacer"
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
     [style.top]="
         'calc(' + (componentConfig.stickyView?.top?.mobileView || undefined) + ' + var(--ngx-helper-m3-toolbar-height))'
@@ -53,7 +55,7 @@
 ></div>
 }
 
-<content>
+<div class="page-group-content">
     <!-- HEADER -->
     @if (pageGroup.header) {
     <header
@@ -71,5 +73,5 @@
     </header>
     }
     <span *ngComponentOutlet="pageGroup.pages[pageIndex].component; injector: injector"></span>
-</content>
+</div>
 }

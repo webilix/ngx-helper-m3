@@ -1,4 +1,4 @@
-<content>
+<div class="confirm-content">
     <!-- ICON -->
     @if (confirm.icon) {
     <mat-icon>{{ confirm.icon }}</mat-icon>
@@ -19,9 +19,9 @@
         </div>
         }
     </div>
-</content>
+</div>
 
-<footer>
+<div class="confirm-footer">
     <button mat-button type="button" (click)="close()" [ngClass]="confirm.denyClass">خیر</button>
     <button mat-button type="button" (click)="close(true)" [ngClass]="confirm.confirmClass">بلی</button>
-</footer>
+</div>

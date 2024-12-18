@@ -1,4 +1,4 @@
-<header>
+<div class="card-header" [class.has-sub-title]="subTitle">
     <!-- ICON -->
     @if (icon) { <mat-icon>{{ icon }}</mat-icon> }
 
@@ -57,6 +57,8 @@
         } } }
     </div>
     }
-</header>
+</div>
 
-<content [style.padding]="padding" [style.background-color]="backgroundColor"><ng-content></ng-content></content>
+<div class="card-content" [style.padding]="padding" [style.background-color]="backgroundColor">
+    <ng-content></ng-content>
+</div>
