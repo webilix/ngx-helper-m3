@@ -31,6 +31,7 @@ export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
     @Input({ required: false }) clearBox: boolean = false;
     @Input({ required: false }) emptyText: string = 'نامشخص';
     @Input({ required: false }) gapSize: string = '1rem';
+    @Input({ required: false }) hideShadow: boolean = false;
 
     public data: {
         title: string;
@@ -60,6 +61,8 @@ export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         this.boxGap = this.gapSize;
+        this.className = `ngx-helper-m3-value-box${this.hideShadow ? ' hide-shadow' : ''}`;
+
         this.data = this.values.map((item) => {
             const value = item.value;
             return value === undefined

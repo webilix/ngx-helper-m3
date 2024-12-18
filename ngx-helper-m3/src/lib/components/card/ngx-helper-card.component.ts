@@ -40,6 +40,7 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     @Input({ required: false }) actions: NgxHelperAction[] = [];
     @Input({ required: false }) padding: string = '1rem';
     @Input({ required: false }) backgroundColor?: string;
+    @Input({ required: false }) hasShadow: boolean = false;
 
     public isMobile: boolean = false;
     public buttons: Button[] = [];
@@ -56,6 +57,8 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges): void {
+        this.className = `ngx-helper-m3-card${this.hasShadow ? ' has-shadow' : ''}`;
+
         this.buttons = this.actions.map((action) => {
             return 'buttons' in action ? { type: 'MENU', ...action } : { type: 'BUTTON', ...action };
         });
