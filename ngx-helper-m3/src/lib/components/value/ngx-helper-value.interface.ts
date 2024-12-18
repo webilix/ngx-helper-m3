@@ -22,8 +22,9 @@ export type NgxHelperValue =
     | { type: 'VOLUME'; value?: number; short?: boolean; english?: boolean }
     | { type: 'WEIGHT'; value?: number; short?: boolean; english?: boolean };
 
-export interface INgxHelperValueBox {
+export interface INgxHelperValue {
     readonly title: string;
     readonly value?: string | NgxHelperValue;
     readonly action?: () => string[] | void;
+    readonly copyToClipboard?: boolean;
 }

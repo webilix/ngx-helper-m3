@@ -308,33 +308,55 @@
     .box {
         display: flex;
         flex-direction: column;
-        row-gap: 0.5rem;
         align-items: center;
 
-        padding: 0 1rem;
+        position: relative;
 
         .title {
+            width: 100%;
             font-size: var(--ngx-helper-m3-font-small);
             font-weight: 500;
-            padding-top: 1rem;
+            padding: 1rem 1rem 0.5rem 1rem;
             text-align: center;
+            box-sizing: border-box;
         }
 
         .value {
+            flex: 1;
+
+            display: flex;
+            align-items: center;
+
+            width: 100%;
             font-weight: normal;
-            padding-bottom: 1rem;
+            padding: 0 1rem 1rem 1rem;
             text-align: center;
+            box-sizing: border-box;
         }
 
-        .value.en {
+        .value .en {
             direction: ltr;
             font-family: Roboto, 'Helvetica Neue', sans-serif;
         }
 
-        .value.empty {
+        .value .empty {
             opacity: 0.75;
             font-style: italic;
             font-size: var(--ngx-helper-m3-font-small);
+        }
+
+        button {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            font-size: 100%;
+            line-height: 1;
+
+            mat-icon {
+                font-size: 100%;
+                line-height: 1;
+            }
         }
     }
 
