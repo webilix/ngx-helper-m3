@@ -86,14 +86,14 @@ export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
         const isMobile: boolean = window.innerWidth <= this.componentConfig.mobileWidth;
         const columnSize: number =
             this.column === undefined
-                ? this.values.length - 1
+                ? this.values.length
                 : typeof this.column === 'number'
                 ? this.column
                 : isMobile
-                ? this.column.mobile || this.values.length - 1
-                : this.column.desktop || this.values.length - 1;
+                ? this.column.mobile || this.values.length
+                : this.column.desktop || this.values.length;
 
-        const column: number = columnSize < 0 || columnSize > this.values.length - 1 ? this.values.length - 1 : columnSize;
+        const column: number = columnSize <= 0 || columnSize > this.values.length ? this.values.length : columnSize;
         this.gridTemplateColumns = Array(column).fill('1fr').join(' ');
     }
 
