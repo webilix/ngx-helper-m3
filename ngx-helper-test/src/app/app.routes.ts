@@ -6,6 +6,7 @@ import {
     PagePageGroupComponent,
     PagePipesComponent,
     PageSectionComponent,
+    PageValueComponent,
 } from './pages';
 
 export const routes: Routes = [
@@ -14,6 +15,7 @@ export const routes: Routes = [
     { path: 'card', component: PageCardComponent },
     { path: 'page-group', component: PagePageGroupComponent },
     { path: 'section', component: PageSectionComponent },
+    { path: 'value', component: PageValueComponent },
 
     { path: 'pipes', component: PagePipesComponent },
 

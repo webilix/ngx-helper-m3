@@ -10,10 +10,10 @@ export class NgxHelperSafePipe implements PipeTransform {
     constructor(private readonly domSanitizer: DomSanitizer) {}
 
     transform(
-        value: string,
+        value?: string | null,
         options?: { type?: Types },
     ): string | SafeHtml | SafeStyle | SafeScript | SafeUrl | SafeResourceUrl {
-        if (!Helper.IS.string(value) || value === '') return '';
+        if (value === undefined || value === null || !Helper.IS.string(value) || value === '') return '';
 
         switch (options?.type || 'HTML') {
             case 'STYLE':

@@ -4,10 +4,12 @@ import { Helper } from '@webilix/helper-library';
 
 @Pipe({ name: 'ngxHelperVolume' })
 export class NgxHelperVolumePipe implements PipeTransform {
-    transform(value: number, options?: { short?: boolean; english?: boolean }): string {
-        if (!Helper.IS.number(value) || value < 0) return '';
+    transform(value?: number | null, options?: { short?: boolean; english?: boolean }): string {
+        if (value === undefined || value === null || !Helper.IS.number(value) || value < 0) return '';
 
         const getVolume = (...titles: [string, string][]): string => {
+            if (value === undefined || value === null) return '';
+
             const volume: string = Helper.NUMBER.format(+value.toFixed(2), options?.english ? 'EN' : 'FA');
             const shortIndex: number = options?.short ? 0 : 1;
             const titleIndex: number = options?.english ? 0 : 1;

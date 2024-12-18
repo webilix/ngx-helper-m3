@@ -1,0 +1,16 @@
+<ng-template #emptyTextTemplate>ali</ng-template>
+
+@for (item of values; track $index) {
+<div class="box" [class.clear-box]="clearBox" [class.click]="!!item.action" (click)="onClick(item.action)">
+    <div class="title">{{ item.title }}</div>
+    <div
+        class="value"
+        [style.display]="'inline-block'"
+        [style.direction]="item.ltr ? 'ltr' : '*'"
+        [class.en]="item.english"
+        [class.empty]="!item.value"
+    >
+        {{ item.value || emptyText }}
+    </div>
+</div>
+}

@@ -3,14 +3,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Helper } from '@webilix/helper-library';
 import { JalaliDateTime } from '@webilix/jalali-date-time';
 
-type Formats = string | 'FULL' | 'SHORT' | 'DATE' | 'TIME' | 'WEEK' | 'MONTH' | 'YEAR';
+import { DateFormats } from '../pipe.types';
 
 @Pipe({ name: 'ngxHelperDate' })
 export class NgxHelperDatePipe implements PipeTransform {
-    transform(value: Date, options?: { format?: Formats; timezone?: string }): string;
-    transform(value: number, options?: { format?: Formats; timezone?: string }): string;
-    transform(value: any, options?: { format?: Formats; timezone?: string }): string {
-        if (!value || (!Helper.IS.date(value) && !Helper.IS.number(value))) return '';
+    transform(value?: Date | null, options?: { format?: DateFormats; timezone?: string }): string;
+    transform(value?: number | null, options?: { format?: DateFormats; timezone?: string }): string;
+    transform(value?: any, options?: { format?: DateFormats; timezone?: string }): string {
+        if (value === undefined || value === null || (!Helper.IS.date(value) && !Helper.IS.number(value))) return '';
 
         const date: Date = typeof value === 'number' ? new Date(value) : value;
         const jalali = JalaliDateTime();

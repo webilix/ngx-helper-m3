@@ -5,13 +5,13 @@ import { Helper } from '@webilix/helper-library';
 
 @Pipe({ name: 'ngxHelperMultiLine' })
 export class NgxHelperMultiLinePipe implements PipeTransform {
-    constructor(private readonly sanitizer: DomSanitizer) {}
+    constructor(private readonly domSanitizer: DomSanitizer) {}
 
-    transform(value: string, options?: { html?: boolean }): string | SafeHtml {
-        if (!Helper.IS.string(value) || value === '') return '';
+    transform(value?: string | null, options?: { html?: boolean }): string | SafeHtml {
+        if (value === undefined || value === null || !Helper.IS.string(value) || value === '') return '';
 
         return options?.html
-            ? this.sanitizer.bypassSecurityTrustHtml(value.replace(/(?:\r\n|\r|\n)/g, '<br />'))
+            ? this.domSanitizer.bypassSecurityTrustHtml(value.replace(/(?:\r\n|\r|\n)/g, '<br />'))
             : Helper.STRING.escapeHTML(value).replace(/(?:\r\n|\r|\n)/g, '<br />');
     }
 }

@@ -4,10 +4,12 @@ import { Helper } from '@webilix/helper-library';
 
 @Pipe({ name: 'ngxHelperPrice' })
 export class NgxHelperPricePipe implements PipeTransform {
-    transform(value: number, options?: { currency?: string; short?: boolean; english?: boolean }): string {
-        if (!Helper.IS.number(value) || value < 0) return '';
+    transform(value?: number | null, options?: { currency?: string; short?: boolean; english?: boolean }): string {
+        if (value === undefined || value === null || !Helper.IS.number(value) || value < 0) return '';
 
         const getPrice = (...titles: [string, string][]): string => {
+            if (value === undefined || value === null) return '';
+
             const price: string = Helper.NUMBER.format(+value.toFixed(2), !!options?.english ? 'EN' : 'FA');
             const unit: string = titles[options?.short ? 0 : 1][options?.english ? 0 : 1];
             const currency: string = options?.currency ? ' ' + options?.currency : '';

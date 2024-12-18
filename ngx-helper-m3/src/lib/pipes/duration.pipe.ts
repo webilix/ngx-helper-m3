@@ -2,16 +2,18 @@ import { Pipe, PipeTransform } from '@angular/core';
 
 import { Helper } from '@webilix/helper-library';
 
-type Formats = 'TEXT' | 'FULL' | 'DAY' | 'HOUR' | 'MINUTE' | 'SECOND';
+import { DurationFormats } from '../pipe.types';
 
 @Pipe({ name: 'ngxHelperDuration' })
 export class NgxHelperDurationPipe implements PipeTransform {
-    transform(value: number, options?: { format?: Formats; english?: boolean }): string;
-    transform(value: Date, options?: { format?: Formats; english?: boolean }): string;
-    transform(value: { from: Date }, options?: { format?: Formats; english?: boolean }): string;
-    transform(value: { to: Date }, options?: { format?: Formats; english?: boolean }): string;
-    transform(value: { from: Date; to: Date }, options?: { format?: Formats; english?: boolean }): string;
-    transform(value: any, options?: { format?: Formats; english?: boolean }): string {
+    transform(value?: number | null, options?: { format?: DurationFormats; english?: boolean }): string;
+    transform(value?: Date | null, options?: { format?: DurationFormats; english?: boolean }): string;
+    transform(value?: { from: Date } | null, options?: { format?: DurationFormats; english?: boolean }): string;
+    transform(value?: { to: Date } | null, options?: { format?: DurationFormats; english?: boolean }): string;
+    transform(value?: { from: Date; to: Date } | null, options?: { format?: DurationFormats; english?: boolean }): string;
+    transform(value?: any, options?: { format?: DurationFormats; english?: boolean }): string {
+        if (value === undefined || value === null) return '';
+
         let seconds: number = 0;
         if (Helper.IS.number(value)) seconds = Math.abs(value);
         else if (Helper.IS.date(value)) seconds = Math.floor(Math.abs(new Date().getTime() - value.getTime()) / 1000);

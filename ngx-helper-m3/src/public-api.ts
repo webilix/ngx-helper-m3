@@ -13,6 +13,9 @@ export * from './lib/components/page-group/ngx-helper-page-group.interface';
 export * from './lib/components/section/ngx-helper-section-sticky.directive';
 export * from './lib/components/section/ngx-helper-section.component';
 export * from './lib/components/section/column/ngx-helper-section-column.component';
+export * from './lib/components/value/box/ngx-helper-value-box.component';
+export * from './lib/components/value/ngx-helper-value.interface';
+export * from './lib/components/value/ngx-helper-value.pipe';
 
 // PIPES
 export * from './lib/pipes/bank-card.pipe';

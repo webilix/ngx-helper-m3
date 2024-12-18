@@ -4,8 +4,8 @@ import { Helper } from '@webilix/helper-library';
 
 @Pipe({ name: 'ngxHelperBankCard' })
 export class NgxHelperBankCardPipe implements PipeTransform {
-    transform(value: string, options?: { view?: 'CARD' | 'BANK'; join?: string }): string {
-        if (!Helper.IS.string(value) || value === '') return '';
+    transform(value?: string | null, options?: { view?: 'CARD' | 'BANK'; join?: string }): string {
+        if (value === undefined || value === null || !Helper.IS.string(value) || value === '') return '';
 
         switch (options?.view) {
             case 'BANK':

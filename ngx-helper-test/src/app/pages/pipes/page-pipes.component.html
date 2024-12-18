@@ -1,3 +1,20 @@
+<!-- BANK CARD -->
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperBankCard' }}</div>
+        <div class="value en">{{ bankCard | ngxHelperBankCard }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperBankCard : { join: ' ' }" }}</div>
+        <div class="value en">{{ bankCard | ngxHelperBankCard : { join: ' ' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperBankCard : { view: 'BANK' }" }}</div>
+        <div class="value">{{ bankCard | ngxHelperBankCard : { view: 'BANK' } }}</div>
+    </div>
+</div>
+
+<!-- DATE -->
 <div class="card">
     <div class="pipe">
         <div class="title en">
@@ -53,6 +70,7 @@
     </div>
 </div>
 
+<!-- DURATION -->
 <div class="card">
     <div class="pipe">
         <div class="title en">
@@ -115,6 +133,7 @@
     </div>
 </div>
 
+<!-- FILE SIZE -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperFileSize' }}</div>
@@ -126,6 +145,7 @@
     </div>
 </div>
 
+<!-- MOBILE -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperMobile' }}</div>
@@ -137,6 +157,7 @@
     </div>
 </div>
 
+<!-- MULTI LINE -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperMultiLine' }}</div>
@@ -148,6 +169,7 @@
     </div>
 </div>
 
+<!-- NUMBER -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperNumber' }}</div>
@@ -155,7 +177,7 @@
     </div>
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperNumber : { english: true }' }}</div>
-        <div class="value" [innerHTML]="123456789 | ngxHelperNumber : { english: true }"></div>
+        <div class="value en" [innerHTML]="123456789 | ngxHelperNumber : { english: true }"></div>
     </div>
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperNumber' }}</div>
@@ -167,21 +189,7 @@
     </div>
 </div>
 
-<div class="card">
-    <div class="pipe">
-        <div class="title en">{{ 'ngxHelperBankCard' }}</div>
-        <div class="value en">{{ bankCard | ngxHelperBankCard }}</div>
-    </div>
-    <div class="pipe">
-        <div class="title en">{{ "ngxHelperBankCard : { join: ' ' }" }}</div>
-        <div class="value en">{{ bankCard | ngxHelperBankCard : { join: ' ' } }}</div>
-    </div>
-    <div class="pipe">
-        <div class="title en">{{ "ngxHelperBankCard : { view: 'BANK' }" }}</div>
-        <div class="value">{{ bankCard | ngxHelperBankCard : { view: 'BANK' } }}</div>
-    </div>
-</div>
-
+<!-- PERIOD -->
 <div class="card">
     <div class="pipe">
         <div class="title en">
@@ -217,6 +225,7 @@
     </div>
 </div>
 
+<!-- PRICE -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperPrice' }}</div>
@@ -236,6 +245,7 @@
     </div>
 </div>
 
+<!-- SAFE -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperSafe' }}</div>
@@ -247,6 +257,7 @@
     </div>
 </div>
 
+<!-- VOLUME -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperVolume' }}</div>
@@ -262,6 +273,7 @@
     </div>
 </div>
 
+<!-- WEIGHT -->
 <div class="card">
     <div class="pipe">
         <div class="title en">{{ 'ngxHelperWeight' }}</div>
