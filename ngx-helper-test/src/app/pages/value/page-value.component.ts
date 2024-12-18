@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import {
     INgxHelperValue,
+    NgxHelperBoxComponent,
     NgxHelperCardComponent,
     NgxHelperSectionColumnComponent,
     NgxHelperSectionComponent,
@@ -10,14 +11,16 @@ import {
 } from '@webilix/ngx-helper-m3';
 
 import { AppService } from '../../app.service';
+import { PageValueContentComponent } from './content/page-value-content.component';
 
 @Component({
     host: { selector: 'page-value' },
     imports: [
-        NgxHelperValueBoxComponent,
+        NgxHelperBoxComponent,
         NgxHelperCardComponent,
         NgxHelperSectionComponent,
         NgxHelperSectionColumnComponent,
+        NgxHelperValueBoxComponent,
         NgxHelperValueListComponent,
     ],
     templateUrl: './page-value.component.html',
@@ -49,6 +52,9 @@ export class PageValueComponent implements OnInit {
         { title: 'حجم', value: { type: 'VOLUME', value: 1234567 } },
         { title: 'وزن', value: { type: 'WEIGHT', value: 1234567 } },
     ];
+
+    public component = PageValueContentComponent;
+    public data: { content: string } = { content: 'بدون سایه' };
 
     constructor(private readonly appService: AppService) {}
 

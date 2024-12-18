@@ -5,6 +5,8 @@
 export * from './lib/ngx-helper.config';
 
 // COMPONENTS
+export * from './lib/components/box/ngx-helper-box.component';
+export * from './lib/components/box/ngx-helper-box.interface';
 export * from './lib/components/card/ngx-helper-card.component';
 export * from './lib/components/card/ngx-helper-card.interface';
 export * from './lib/components/loader/ngx-helper-loader.component';

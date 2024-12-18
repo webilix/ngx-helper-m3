@@ -1,3 +1,14 @@
+<ngx-helper-section>
+    <ngx-helper-section-column>
+        <ngx-helper-box [component]="component"></ngx-helper-box>
+    </ngx-helper-section-column>
+    <ngx-helper-section-column>
+        <ngx-helper-box [component]="component" [hideShadow]="true" [data]="data"></ngx-helper-box>
+    </ngx-helper-section-column>
+</ngx-helper-section>
+
+<br />
+
 <ngx-helper-value-box [values]="values" [column]="{ mobile: 2, desktop: 5 }"></ngx-helper-value-box>
 
 <br />
@@ -9,6 +20,8 @@
         </ngx-helper-card>
     </ngx-helper-section-column>
     <ngx-helper-section-column>
-        <ngx-helper-value-list [values]="values"></ngx-helper-value-list>
+        <ngx-helper-box [padding]="'0'">
+            <ngx-helper-value-list [values]="values"></ngx-helper-value-list>
+        </ngx-helper-box>
     </ngx-helper-section-column>
 </ngx-helper-section>
