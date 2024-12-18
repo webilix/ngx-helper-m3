@@ -1,5 +1,3 @@
-<ng-template #emptyTextTemplate>ali</ng-template>
-
 @for (item of data; track $index) {
 <div class="box" [class.clear-box]="clearBox" [class.click]="!!item.action">
     <div class="title" (click)="onClick(item.action)">{{ item.title }}</div>
@@ -11,7 +9,7 @@
         [class.empty]="!item.value"
         (click)="onClick(item.action)"
     >
-        <span> {{ item.value || emptyText }}</span>
+        {{ item.value || emptyText }}
     </div>
     <!-- COPY TO CLIPBOARD -->
     @if (item.copyToClipboard && item.value) {

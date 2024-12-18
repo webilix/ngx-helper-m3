@@ -9,9 +9,9 @@ import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../../ngx-helper.config'
 
 import { ComponentService, IComponentConfig } from '../../component.service';
 
+import { ltrValues } from '../ngx-helper-value.info';
 import { INgxHelperValue } from '../ngx-helper-value.interface';
 import { NgxHelperValuePipe } from '../ngx-helper-value.pipe';
-import { ltrValues } from '../ngx-helper-value.info';
 
 @Component({
     selector: 'ngx-helper-value-box',

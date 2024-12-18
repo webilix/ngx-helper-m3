@@ -297,7 +297,7 @@
     }
 }
 
-/* NGX HELPER VALUE */
+/* NGX HELPER VALUE BOX */
 .ngx-helper-m3-value-box {
     display: grid;
     row-gap: var(--gap-size);
@@ -322,11 +322,6 @@
         }
 
         .value {
-            flex: 1;
-
-            display: flex;
-            align-items: center;
-
             width: 100%;
             font-weight: normal;
             padding: 0 1rem 1rem 1rem;
@@ -334,12 +329,12 @@
             box-sizing: border-box;
         }
 
-        .value .en {
+        .value.en {
             direction: ltr;
             font-family: Roboto, 'Helvetica Neue', sans-serif;
         }
 
-        .value .empty {
+        .value.empty {
             opacity: 0.75;
             font-style: italic;
             font-size: var(--ngx-helper-m3-font-small);
@@ -369,5 +364,73 @@
 
     .box.click {
         cursor: pointer;
+    }
+}
+
+/* NGX HELPER VALUE LIST */
+.ngx-helper-m3-value-list {
+    display: flex;
+    flex-direction: column;
+    direction: rtl;
+
+    .item {
+        display: flex;
+        align-items: flex-start;
+        column-gap: 1rem;
+
+        min-height: 40px;
+
+        .title {
+            font-size: var(--ngx-helper-m3-font-small);
+            font-weight: 500;
+            padding: 0.5rem 1rem 0.5rem 0;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .value {
+            flex: 1;
+
+            display: flex;
+            align-items: center;
+            font-weight: normal;
+
+            min-height: 40px;
+
+            .en {
+                direction: ltr;
+                font-family: Roboto, 'Helvetica Neue', sans-serif;
+            }
+
+            .empty {
+                opacity: 0.75;
+                font-style: italic;
+                font-size: var(--ngx-helper-m3-font-small);
+            }
+
+            .click {
+                cursor: pointer;
+            }
+        }
+
+        button {
+            font-size: 100%;
+            line-height: 1;
+
+            mat-icon {
+                font-size: 100%;
+                line-height: 1;
+            }
+        }
+    }
+
+    .item.odd {
+        background-color: var(--surface-container);
+    }
+
+    .item.even {
+        background-color: var(--background);
     }
 }

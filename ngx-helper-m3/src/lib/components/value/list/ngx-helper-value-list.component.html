@@ -1,0 +1,30 @@
+@for (item of data; track $index) {
+<div class="item" [class.even]="$index % 2 === 0" [class.odd]="$index % 2 === 1">
+    <div class="title" [style.width]="titleWidth">{{ item.title }}:</div>
+    <div class="value">
+        <div
+            [style.display]="'inline-block'"
+            [style.direction]="item.ltr ? 'ltr' : '*'"
+            [class.en]="item.english"
+            [class.empty]="!item.value"
+            [class.click]="!!item.action"
+            (click)="onClick(item.action)"
+        >
+            {{ item.value || emptyText }}
+        </div>
+        <!-- ACTION -->
+        @if (item.action) {
+        <button mat-icon-button type="button" (click)="onClick(item.action)">
+            <mat-icon>open_in_new</mat-icon>
+        </button>
+
+        }
+    </div>
+    <!-- COPY TO CLIPBOARD -->
+    @if (item.copyToClipboard && item.value) {
+    <button mat-icon-button type="button" [cdkCopyToClipboard]="item.value" (click)="onCopy($event, $index)">
+        <mat-icon>{{ copyIndex === $index ? 'done_all' : 'copy' }}</mat-icon>
+    </button>
+    }
+</div>
+}

@@ -1,1 +1,14 @@
 <ngx-helper-value-box [values]="values" [column]="{ mobile: 2, desktop: 5 }"></ngx-helper-value-box>
+
+<br />
+
+<ngx-helper-section>
+    <ngx-helper-section-column>
+        <ngx-helper-card [title]="'نمایش لیست'" [padding]="'0'">
+            <ngx-helper-value-list [values]="values"></ngx-helper-value-list>
+        </ngx-helper-card>
+    </ngx-helper-section-column>
+    <ngx-helper-section-column>
+        <ngx-helper-value-list [values]="values"></ngx-helper-value-list>
+    </ngx-helper-section-column>
+</ngx-helper-section>

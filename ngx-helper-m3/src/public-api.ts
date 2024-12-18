@@ -14,6 +14,7 @@ export * from './lib/components/section/ngx-helper-section-sticky.directive';
 export * from './lib/components/section/ngx-helper-section.component';
 export * from './lib/components/section/column/ngx-helper-section-column.component';
 export * from './lib/components/value/box/ngx-helper-value-box.component';
+export * from './lib/components/value/list/ngx-helper-value-list.component';
 export * from './lib/components/value/ngx-helper-value.interface';
 export * from './lib/components/value/ngx-helper-value.pipe';
 

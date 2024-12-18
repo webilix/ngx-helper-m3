@@ -1,12 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 
-import { INgxHelperValue, NgxHelperValueBoxComponent } from '@webilix/ngx-helper-m3';
+import {
+    INgxHelperValue,
+    NgxHelperCardComponent,
+    NgxHelperSectionColumnComponent,
+    NgxHelperSectionComponent,
+    NgxHelperValueBoxComponent,
+    NgxHelperValueListComponent,
+} from '@webilix/ngx-helper-m3';
 
 import { AppService } from '../../app.service';
 
 @Component({
     host: { selector: 'page-value' },
-    imports: [NgxHelperValueBoxComponent],
+    imports: [
+        NgxHelperValueBoxComponent,
+        NgxHelperCardComponent,
+        NgxHelperSectionComponent,
+        NgxHelperSectionColumnComponent,
+        NgxHelperValueListComponent,
+    ],
     templateUrl: './page-value.component.html',
     styleUrl: './page-value.component.scss',
 })
