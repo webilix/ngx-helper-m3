@@ -334,6 +334,7 @@
     }
 
     .page-group-spacer {
+        z-index: 1;
         height: 1rem;
         width: 100%;
         background-color: var(--background);
