@@ -158,6 +158,7 @@
                 justify-content: center;
                 column-gap: 0.25rem;
 
+                border-radius: 0;
                 padding: 0 0.75rem;
                 min-width: auto;
                 height: 55px;
