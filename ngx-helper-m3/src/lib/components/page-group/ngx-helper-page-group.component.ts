@@ -43,12 +43,13 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     @HostBinding('style.display') display: string = 'none';
 
     @Input({ required: true }) pageGroup!: INgxHelperPageGroup;
-    @Input({ required: false }) pageIndex: number = 0;
+    @Input({ required: false }) pageId!: string;
     @Input({ required: false }) data?: any;
-    @Output() pageIndexChanged: EventEmitter<number> = new EventEmitter<number>();
+    @Output() pageChanged: EventEmitter<INgxHelperPageGroupItem> = new EventEmitter<INgxHelperPageGroupItem>();
     @Output() dataChanged: EventEmitter<any> = new EventEmitter<any>();
 
     public isMobile: boolean = false;
+    public pages: string[] = [];
     public injector!: Injector;
 
     public sidebarWidth!: string;
@@ -62,21 +63,21 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     ) {}
 
     ngOnInit(): void {
-        this.display = this.pageGroup.pages.length === 0 ? 'none' : 'flex';
-        if (this.pageGroup.pages.length === 0) return;
+        this.pages = Object.keys(this.pageGroup.pages);
+        this.display = this.pages.length === 0 ? 'none' : 'flex';
+        if (this.pages.length === 0) return;
 
         this.componentConfig = this.componentService.getComponentConfig(this.config);
         this.sidebarWidth = this.pageGroup.sidebarWidth || this.componentConfig.pageGroupSidebarWidth;
 
-        if (this.pageIndex < 0) this.pageIndex = 0;
-        else if (this.pageIndex > this.pageGroup.pages.length - 1) this.pageIndex = this.pageGroup.pages.length - 1;
+        if (!this.pageGroup.pages[this.pageId]) this.pageId = this.pages[0];
 
         const queryParams: { [key: string]: any } = { ...this.activatedRoute.snapshot.queryParams };
-        if (!!this.pageGroup.route && Helper.IS.number(+queryParams['ngx-helper-page-group'])) {
-            const index: number = +queryParams['ngx-helper-page-group'];
-            if (index >= 0 && index <= this.pageGroup.pages.length - 1) {
-                this.pageIndex = index;
-                this.pageIndexChanged.next(this.pageIndex);
+        if (!!this.pageGroup.route && Helper.IS.string(queryParams['ngx-helper-page-group'])) {
+            const id: string = queryParams['ngx-helper-page-group'];
+            if (this.pageId !== id && this.pages.includes(id)) {
+                this.pageId = id;
+                this.triggerPageChanged();
             }
         }
 
@@ -94,12 +95,13 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     }
 
     setInjector(): void {
-        if (this.pageGroup.pages.length === 0) return;
+        if (this.pages.length === 0) return;
 
         const item: INgxHelperPageGroupItem = {
-            index: this.pageIndex,
-            title: this.pageGroup.pages[this.pageIndex].title,
-            icon: this.pageGroup.pages[this.pageIndex].icon,
+            index: this.pages.findIndex((page) => page === this.pageId),
+            id: this.pageId,
+            title: this.pageGroup.pages[this.pageId].title,
+            icon: this.pageGroup.pages[this.pageId].icon,
         };
 
         this.injector = Injector.create({
@@ -111,18 +113,31 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
         });
     }
 
-    setPage(index: number): void {
-        if (this.pageGroup.pages.length === 0) return;
-        if (this.pageIndex === index || index < 0 || index > this.pageGroup.pages.length - 1) return;
+    setPage(id: string): void {
+        if (this.pages.length === 0 || this.pageId == id) return;
 
-        this.pageIndex = index;
-        this.pageIndexChanged.next(this.pageIndex);
+        const page = this.pageGroup.pages[id];
+        const index: number = this.pages.findIndex((p) => p === id);
+        if (!page || index === -1) return;
+
+        this.pageId = id;
+        this.triggerPageChanged();
         this.setInjector();
 
         if (this.pageGroup.route) {
             const queryParams: { [key: string]: any } = { ...this.activatedRoute.snapshot.queryParams };
-            queryParams['ngx-helper-page-group'] = this.pageIndex.toString();
+            queryParams['ngx-helper-page-group'] = this.pageId;
             this.router.navigate(this.pageGroup.route, { queryParams });
         }
+    }
+
+    triggerPageChanged(): void {
+        const item: INgxHelperPageGroupItem = {
+            index: this.pages.findIndex((page) => page === this.pageId),
+            id: this.pageId,
+            title: this.pageGroup.pages[this.pageId].title,
+            icon: this.pageGroup.pages[this.pageId].icon,
+        };
+        this.pageChanged.next(item);
     }
 }

@@ -1,4 +1,4 @@
-@if (pageGroup.pages.length > 0) {
+@if (pages.length > 0) {
 <!-- DESKTOP VIEW -->
 @if (!isMobile) {
 <div
@@ -7,18 +7,18 @@
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
     [style.top]="componentConfig.stickyView?.top?.desktopView || undefined"
 >
-    @for (item of pageGroup.pages; track $index) {
+    @for (item of pages; track $index) {
     <div
         class="page"
-        [class.active]="pageIndex === $index"
-        [style.cursor]="pageIndex === $index ? 'default' : 'pointer'"
-        (click)="setPage($index)"
+        [class.active]="pageId === item"
+        [style.cursor]="pageId === item ? 'default' : 'pointer'"
+        (click)="setPage(item)"
     >
         <!-- ICON -->
-        <mat-icon>{{ item.icon }}</mat-icon>
-        <div class="title">{{ item.title }}</div>
+        <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
+        <div class="title">{{ pageGroup.pages[item].title }}</div>
         <!-- CURRENT PAGE -->
-        @if (pageIndex === $index) { <mat-icon>keyboard_double_arrow_left</mat-icon> }
+        @if (pageId === item) { <mat-icon>keyboard_double_arrow_left</mat-icon> }
     </div>
     }
 </div>
@@ -31,16 +31,16 @@
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
     [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
 >
-    @for (item of pageGroup.pages; track $index) {
+    @for (item of pages; track $index) {
     <div
         class="page"
-        [class.active]="pageIndex === $index"
-        [style.cursor]="pageIndex === $index ? 'default' : 'pointer'"
-        (click)="setPage($index)"
+        [class.active]="pageId === item"
+        [style.cursor]="pageId === item ? 'default' : 'pointer'"
+        (click)="setPage(item)"
     >
-        <mat-icon>{{ item.icon }}</mat-icon>
-        @if (pageIndex === $index) {
-        <div class="title">{{ item.title }}</div>
+        <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
+        @if (pageId === item) {
+        <div class="title">{{ pageGroup.pages[item].title }}</div>
         }
     </div>
     }
@@ -50,7 +50,9 @@
     class="page-group-spacer"
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
     [style.top]="
-        'calc(' + (componentConfig.stickyView?.top?.mobileView || undefined) + ' + var(--ngx-helper-m3-toolbar-height))'
+        'calc(' +
+        (componentConfig.stickyView?.top?.mobileView || undefined) +
+        ' + var(--ngx-helper-m3-page-group-toolbar-height))'
     "
 ></div>
 }
@@ -58,20 +60,21 @@
 <div class="page-group-content">
     <!-- HEADER -->
     @if (pageGroup.header) {
-    <header
+    <div
+        class="header"
         [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
         [style.top]="
             (isMobile
                 ? 'calc(' +
                   (componentConfig.stickyView?.top?.mobileView || undefined) +
-                  ' + var(--ngx-helper-m3-toolbar-height) + 1rem)'
+                  ' + var(--ngx-helper-m3-page-group-toolbar-height) + 1rem)'
                 : componentConfig.stickyView?.top?.desktopView) || undefined
         "
     >
         <span *ngComponentOutlet="pageGroup.header; injector: injector"></span>
         <div class="spacer"></div>
-    </header>
+    </div>
     }
-    <span *ngComponentOutlet="pageGroup.pages[pageIndex].component; injector: injector"></span>
+    <span *ngComponentOutlet="pageGroup.pages[pageId].component; injector: injector"></span>
 </div>
 }

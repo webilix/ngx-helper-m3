@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { INgxHelperPageGroup, NgxHelperPageGroupComponent } from '@webilix/ngx-helper-m3';
+import { INgxHelperPageGroup, INgxHelperPageGroupItem, NgxHelperPageGroupComponent } from '@webilix/ngx-helper-m3';
 
 import { AppService } from '../../app.service';
 
@@ -22,13 +22,13 @@ export class PagePageGroupComponent implements OnInit {
     public pageGroup: INgxHelperPageGroup = {
         route: ['/page-group'],
         header: PagePageGroupHeaderComponent,
-        pages: [
-            { title: 'عنوان صفحه اول', icon: 'description', component: PagePageGroup1stComponent },
-            { title: 'عنوان صفحه دوم', icon: 'task', component: PagePageGroup2ndComponent },
-            { title: 'عنوان صفحه سوم', icon: 'upload_file', component: PagePageGroup3rdComponent },
-            { title: 'عنوان صفحه چهارم', icon: 'note_add', component: PagePageGroup4thComponent },
-            { title: 'عنوان صفحه پنچم', icon: 'file_open', component: PagePageGroup5thComponent },
-        ],
+        pages: {
+            page1: { title: 'عنوان صفحه اول', icon: 'description', component: PagePageGroup1stComponent },
+            page2: { title: 'عنوان صفحه دوم', icon: 'task', component: PagePageGroup2ndComponent },
+            page3: { title: 'عنوان صفحه سوم', icon: 'upload_file', component: PagePageGroup3rdComponent },
+            page4: { title: 'عنوان صفحه چهارم', icon: 'note_add', component: PagePageGroup4thComponent },
+            page5: { title: 'عنوان صفحه پنچم', icon: 'file_open', component: PagePageGroup5thComponent },
+        },
     };
 
     constructor(private readonly appService: AppService) {}
@@ -39,8 +39,8 @@ export class PagePageGroupComponent implements OnInit {
         setInterval(() => (this.data = { date: new Date(), counter: this.data.counter }), 5 * 1000);
     }
 
-    pageIndexChanged(index: number): void {
-        console.log('pageIndexChanged', index);
+    pageChanged(page: INgxHelperPageGroupItem): void {
+        console.log('pageChanged', page);
     }
 
     dataChanged(change: number): void {

@@ -1,6 +1,6 @@
 /* GLOBAL VALUES */
 :root {
-    --ngx-helper-m3-toolbar-height: 40px;
+    --ngx-helper-m3-page-group-toolbar-height: 40px;
 }
 
 /* NGX HELPER CONFIRM */
@@ -274,7 +274,8 @@
         flex: 1;
         display: block;
 
-        header {
+        .header {
+            z-index: 1;
             background-color: var(--background);
 
             .spacer {
@@ -296,7 +297,7 @@
 
         box-sizing: border-box;
         background-color: var(--surface-container-high);
-        height: calc(var(--ngx-helper-m3-toolbar-height));
+        height: calc(var(--ngx-helper-m3-page-group-toolbar-height));
         overflow: hidden;
         width: 100%;
         z-index: 2;
@@ -307,7 +308,7 @@
             column-gap: 0.25rem;
 
             padding: 0 1rem;
-            height: var(--ngx-helper-m3-toolbar-height);
+            height: var(--ngx-helper-m3-page-group-toolbar-height);
             transition: all 0.3s ease-in-out;
 
             .title {

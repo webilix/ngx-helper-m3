@@ -10,7 +10,7 @@ interface IPage {
 export interface INgxHelperPageGroup {
     readonly route?: string[];
     readonly header?: ComponentType<any>;
-    readonly pages: IPage[];
+    readonly pages: { [key: string]: IPage };
 
     // SETTING
     readonly sidebarWidth?: string;
@@ -18,6 +18,7 @@ export interface INgxHelperPageGroup {
 
 export interface INgxHelperPageGroupItem {
     readonly index: number;
+    readonly id: string;
     readonly title: string;
     readonly icon: string;
 }
