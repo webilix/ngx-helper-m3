@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
-import { NgxHelperConfirmService, NgxHelperContainerService, NgxHelperLoaderComponent } from '@webilix/ngx-helper-m3';
+import {
+    NgxHelperConfirmService,
+    NgxHelperContainerService,
+    NgxHelperHttpService,
+    NgxHelperLoaderComponent,
+} from '@webilix/ngx-helper-m3';
 
 import { AppService } from '../../app.service';
 
@@ -18,6 +23,7 @@ export class PageIndexComponent implements OnInit {
     constructor(
         private readonly ngxHelperConfirmService: NgxHelperConfirmService,
         private readonly ngxHelperContainerService: NgxHelperContainerService,
+        private readonly ngxHelperHttpService: NgxHelperHttpService,
         private readonly appService: AppService,
     ) {}
 
@@ -90,5 +96,22 @@ export class PageIndexComponent implements OnInit {
                 );
                 break;
         }
+    }
+
+    upload(event: Event): void {
+        const element: HTMLInputElement = event.target as HTMLInputElement;
+        const files: FileList | null = element.files;
+        if (!files || files.length === 0) return;
+
+        const file: File | null = files.item(0);
+        if (file === null) return;
+
+        this.ngxHelperHttpService.upload<any, any>(
+            file,
+            'http://localhost:3100/upload/',
+            { method: 'POST', body: { date: new Date() }, header: { Authorization: 'AuthorizationVALUE' } },
+            (response, status) => console.log(`UPLOAD RESPONSE (${status})`, response),
+            (error, status) => console.log(`UPLOAD ERROR (${status})`, error),
+        );
     }
 }
