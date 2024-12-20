@@ -5,6 +5,7 @@
         class="value"
         [style.display]="'inline-block'"
         [style.direction]="item.ltr ? 'ltr' : '*'"
+        [style.color]="item.color"
         [class.en]="item.english"
         [class.empty]="!item.value"
         (click)="onClick(item.action)"

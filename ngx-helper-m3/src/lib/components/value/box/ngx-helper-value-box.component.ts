@@ -7,11 +7,9 @@ import { MatIcon } from '@angular/material/icon';
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../../ngx-helper.config';
 
-import { ComponentService, IComponentConfig } from '../../component.service';
+import { ComponentService, IComponentConfig, IValueComponentData } from '../../component.service';
 
-import { ltrValues } from '../ngx-helper-value.info';
 import { INgxHelperValue } from '../ngx-helper-value.interface';
-import { NgxHelperValuePipe } from '../ngx-helper-value.pipe';
 
 @Component({
     selector: 'ngx-helper-value-box',
@@ -33,20 +31,12 @@ export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
     @Input({ required: false }) gapSize: string = '1rem';
     @Input({ required: false }) hideShadow: boolean = false;
 
-    public data: {
-        title: string;
-        value: string;
-        action?: () => string[] | void;
-        copyToClipboard?: boolean;
-        ltr?: boolean;
-        english?: boolean;
-    }[] = [];
+    public data: IValueComponentData[] = [];
 
     public copyIndex?: number;
     private copyTimeout: any;
 
     private componentConfig!: IComponentConfig;
-    private pipeTransform = new NgxHelperValuePipe().transform;
 
     constructor(
         private readonly router: Router,
@@ -63,21 +53,7 @@ export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
         this.boxGap = this.gapSize;
         this.className = `ngx-helper-m3-value-box${this.hideShadow ? ' hide-shadow' : ''}`;
 
-        this.data = this.values.map((item) => {
-            const value = item.value;
-            return value === undefined
-                ? { title: item.title, value: '' }
-                : typeof value === 'string'
-                ? { title: item.title, value: value.trim() }
-                : {
-                      title: item.title,
-                      value: this.pipeTransform(value),
-                      action: item.action,
-                      copyToClipboard: item.copyToClipboard,
-                      ltr: ltrValues.includes(value.type),
-                      english: 'english' in value && !!value.english,
-                  };
-        });
+        this.data = this.componentService.getValueData(this.values);
     }
 
     onResize(): void {

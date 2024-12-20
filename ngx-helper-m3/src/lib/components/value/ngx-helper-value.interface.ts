@@ -25,6 +25,7 @@ export type NgxHelperValue =
 export interface INgxHelperValue {
     readonly title: string;
     readonly value?: string | NgxHelperValue;
+    readonly color?: string;
     readonly action?: () => string[] | void;
     readonly copyToClipboard?: boolean;
 }

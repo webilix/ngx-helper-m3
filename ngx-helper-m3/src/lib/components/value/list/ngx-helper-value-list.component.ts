@@ -5,13 +5,14 @@ import { Router } from '@angular/router';
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
-import { ltrValues } from '../ngx-helper-value.info';
+import { ComponentService, IValueComponentData } from '../../component.service';
+
 import { INgxHelperValue } from '../ngx-helper-value.interface';
-import { NgxHelperValuePipe } from '../ngx-helper-value.pipe';
 
 @Component({
     selector: 'ngx-helper-value-list',
     imports: [ClipboardModule, MatIcon, MatIconButton],
+    providers: [ComponentService],
     templateUrl: './ngx-helper-value-list.component.html',
     styleUrl: './ngx-helper-value-list.component.scss',
 })
@@ -22,38 +23,15 @@ export class NgxHelperValueListComponent implements OnChanges {
     @Input({ required: false }) titleWidth: string = '20%';
     @Input({ required: false }) emptyText: string = 'نامشخص';
 
-    public data: {
-        title: string;
-        value: string;
-        action?: () => string[] | void;
-        copyToClipboard?: boolean;
-        ltr?: boolean;
-        english?: boolean;
-    }[] = [];
+    public data: IValueComponentData[] = [];
 
     public copyIndex?: number;
     private copyTimeout: any;
 
-    private pipeTransform = new NgxHelperValuePipe().transform;
-
-    constructor(private readonly router: Router) {}
+    constructor(private readonly router: Router, private readonly componentService: ComponentService) {}
 
     ngOnChanges(changes: SimpleChanges): void {
-        this.data = this.values.map((item) => {
-            const value = item.value;
-            return value === undefined
-                ? { title: item.title, value: '' }
-                : typeof value === 'string'
-                ? { title: item.title, value: value.trim() }
-                : {
-                      title: item.title,
-                      value: this.pipeTransform(value),
-                      action: item.action,
-                      copyToClipboard: item.copyToClipboard,
-                      ltr: ltrValues.includes(value.type),
-                      english: 'english' in value && !!value.english,
-                  };
-        });
+        this.data = this.componentService.getValueData(this.values);
     }
 
     onClick(action?: () => string[] | void): void {

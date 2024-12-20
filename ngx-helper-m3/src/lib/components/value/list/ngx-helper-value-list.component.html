@@ -5,6 +5,7 @@
         <div
             [style.display]="'inline-block'"
             [style.direction]="item.ltr ? 'ltr' : '*'"
+            [style.color]="item.color"
             [class.en]="item.english"
             [class.empty]="!item.value"
             [class.click]="!!item.action"
@@ -15,7 +16,7 @@
         <!-- ACTION -->
         @if (item.action) {
         <button mat-icon-button type="button" (click)="onClick(item.action)">
-            <mat-icon>open_in_new</mat-icon>
+            <mat-icon [style.color]="item.color">open_in_new</mat-icon>
         </button>
 
         }

@@ -32,6 +32,7 @@ export class PageValueComponent implements OnInit {
         {
             title: 'شماره کارت بانکی',
             value: { type: 'BANK-CARD', value: '5022291000000008', english: true },
+            color: 'var(--secondary)',
             action: () => console.log('CLICK: BANK-CARD'),
             copyToClipboard: true,
         },
@@ -49,8 +50,8 @@ export class PageValueComponent implements OnInit {
         { title: 'عدد', value: { type: 'NUMBER', value: -1234.567890123456789, english: true, fractionDigits: 5 } },
         { title: 'دوره زمانی', value: { type: 'PERIOD', value: this.period } },
         { title: 'قیمت', value: { type: 'PRICE', value: 1234567, currency: 'تومان' }, copyToClipboard: true },
-        { title: 'حجم', value: { type: 'VOLUME', value: 1234567 } },
-        { title: 'وزن', value: { type: 'WEIGHT', value: 1234567 } },
+        { title: 'حجم', value: { type: 'VOLUME', value: 1234567 }, color: 'var(--error)' },
+        { title: 'وزن', value: { type: 'WEIGHT', value: 1234567 }, color: 'var(--primary)' },
     ];
 
     public component = PageValueContentComponent;

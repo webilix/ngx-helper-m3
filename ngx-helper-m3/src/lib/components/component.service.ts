@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 
 import { INgxHelperConfig } from '../ngx-helper.config';
 
+import { INgxHelperValue, NgxHelperValue } from './value/ngx-helper-value.interface';
+import { NgxHelperValuePipe } from './value/ngx-helper-value.pipe';
+
 export interface IComponentConfig {
     readonly mobileWidth: number;
     readonly pageGroupSidebarWidth: string;
@@ -9,6 +12,16 @@ export interface IComponentConfig {
         readonly top?: { readonly desktopView: string; readonly mobileView: string };
         readonly bottom?: { readonly desktopView: string; readonly mobileView: string };
     };
+}
+
+export interface IValueComponentData {
+    readonly title: string;
+    readonly value: string;
+    readonly color?: string;
+    readonly action?: () => string[] | void;
+    readonly copyToClipboard?: boolean;
+    readonly ltr?: boolean;
+    readonly english?: boolean;
 }
 
 @Injectable()
@@ -33,5 +46,27 @@ export class ComponentService {
                   }
                 : undefined,
         };
+    }
+
+    getValueData(values: INgxHelperValue[]): IValueComponentData[] {
+        const pipeTransform = new NgxHelperValuePipe().transform;
+        const ltrValues: NgxHelperValue['type'][] = ['BANK-CARD', 'MOBILE', 'NUMBER'];
+
+        return values.map((item) => {
+            const value = item.value;
+            return value === undefined
+                ? { title: item.title, value: '' }
+                : typeof value === 'string'
+                ? { title: item.title, value: value.trim() }
+                : {
+                      title: item.title,
+                      value: pipeTransform(value),
+                      color: item.color,
+                      action: item.action,
+                      copyToClipboard: item.copyToClipboard,
+                      ltr: ltrValues.includes(value.type),
+                      english: 'english' in value && !!value.english,
+                  };
+        });
     }
 }
