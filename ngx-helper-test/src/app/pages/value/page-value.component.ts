@@ -28,6 +28,7 @@ import { PageValueContentComponent } from './content/page-value-content.componen
 })
 export class PageValueComponent implements OnInit {
     public period = { from: new Date(new Date().getTime() - 1000000000), to: new Date(new Date().getTime() + 1000010000) };
+    public stringValue: INgxHelperValue[] = [{ title: 'عنوان', value: 'مقدار متنی', color: 'var(--error)' }];
     public values: INgxHelperValue[] = [
         {
             title: 'شماره کارت بانکی',

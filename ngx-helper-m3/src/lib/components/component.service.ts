@@ -57,7 +57,7 @@ export class ComponentService {
             return value === undefined
                 ? { title: item.title, value: '' }
                 : typeof value === 'string'
-                ? { title: item.title, value: value.trim() }
+                ? { title: item.title, value: value.trim(), color: item.color }
                 : {
                       title: item.title,
                       value: pipeTransform(value),
