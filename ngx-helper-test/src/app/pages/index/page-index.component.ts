@@ -3,10 +3,12 @@ import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 
 import {
+    INgxHelperToastConfig,
     NgxHelperConfirmService,
     NgxHelperContainerService,
     NgxHelperHttpService,
     NgxHelperLoaderComponent,
+    NgxHelperToastService,
 } from '@webilix/ngx-helper-m3';
 
 import { AppService } from '../../app.service';
@@ -24,6 +26,7 @@ export class PageIndexComponent implements OnInit {
         private readonly ngxHelperConfirmService: NgxHelperConfirmService,
         private readonly ngxHelperContainerService: NgxHelperContainerService,
         private readonly ngxHelperHttpService: NgxHelperHttpService,
+        private readonly ngxHelperToastService: NgxHelperToastService,
         private readonly appService: AppService,
     ) {}
 
@@ -113,5 +116,26 @@ export class PageIndexComponent implements OnInit {
             (response, status) => console.log(`UPLOAD RESPONSE (${status})`, response),
             (error, status) => console.log(`UPLOAD ERROR (${status})`, error),
         );
+    }
+
+    toast(type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR'): void {
+        const message: string[] = ['نمایش متن نوتیفیکیشن‌ها در سایت', 'نمایش خط دوم در متن نوتیفیکیشن'];
+        const config: Partial<INgxHelperToastConfig> = {};
+        const onClose = () => console.log(`${type} CLOSED`);
+
+        switch (type) {
+            case 'INFO':
+                this.ngxHelperToastService.info(message, config, onClose);
+                break;
+            case 'SUCCESS':
+                this.ngxHelperToastService.success(message, config, onClose);
+                break;
+            case 'WARNING':
+                this.ngxHelperToastService.warning(message, config, onClose);
+                break;
+            case 'ERROR':
+                this.ngxHelperToastService.error(message, config, onClose);
+                break;
+        }
     }
 }

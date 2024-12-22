@@ -56,6 +56,7 @@ export class NgxHelperHttpService {
         componentRef.instance.close = (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => {
             this.applicationRef.detachView(componentRef.hostView);
             document.body.removeChild(htmlElement);
+            componentRef.destroy();
 
             this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
             this.updatePositions();

@@ -6,6 +6,10 @@ export interface INgxHelperConfig {
     // PAGE GROUP
     readonly pageGroupSidebarWidth: string;
 
+    // TOAST
+    readonly toastTimeout: number;
+    readonly toastXPosition: 'LEFT' | 'CENTER' | 'RIGHT';
+
     // STICKY
     readonly stickyView: {
         readonly top?: string | { readonly desktopView: string; readonly mobileView: string };

@@ -1,0 +1,16 @@
+<div class="content">
+    <ul>
+        @for (message of messages; track $index) {
+        <li [innerHTML]="message | ngxHelperMultiLine"></li>
+        }
+    </ul>
+    <mat-icon [style.color]="textColor">{{ icon }}</mat-icon>
+</div>
+
+<div class="progress-container" [style.background-color]="backgroundColor">
+    <div
+        class="progress-value"
+        [style.background-color]="'color-mix(in srgb, ' + backgroundColor + ', black 25%)'"
+        [style.width]="progress + '%'"
+    ></div>
+</div>

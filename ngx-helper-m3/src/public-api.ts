@@ -41,3 +41,5 @@ export * from './lib/container/container.interface';
 export * from './lib/container/container.service';
 export * from './lib/http/ngx-helper-http.interface';
 export * from './lib/http/ngx-helper-http.service';
+export * from './lib/toast/ngx-helper-toast.interface';
+export * from './lib/toast/ngx-helper-toast.service';
