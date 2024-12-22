@@ -1,6 +1,17 @@
-import { ApplicationRef, ComponentRef, createComponent, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import {
+    ApplicationRef,
+    ComponentRef,
+    createComponent,
+    EmbeddedViewRef,
+    Inject,
+    Injectable,
+    Injector,
+    Optional,
+} from '@angular/core';
 
 import { Helper } from '@webilix/helper-library';
+
+import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../ngx-helper.config';
 
 import { ToastComponent } from './toast/toast.component';
 import { INgxHelperToastConfig } from './ngx-helper-toast.interface';
@@ -13,9 +24,13 @@ interface IToast {
 
 @Injectable({ providedIn: 'root' })
 export class NgxHelperToastService {
-    private components: { id: string; componentRef: ComponentRef<ToastComponent> }[] = [];
+    private components: { id: string; componentRef: ComponentRef<ToastComponent>; content: string }[] = [];
 
-    constructor(private readonly applicationRef: ApplicationRef, private readonly injector: Injector) {}
+    constructor(
+        private readonly applicationRef: ApplicationRef,
+        private readonly injector: Injector,
+        @Optional() @Inject(NGX_HELPER_CONFIG) private readonly config?: Partial<INgxHelperConfig>,
+    ) {}
 
     private getId(): string {
         let id: string | undefined = undefined;
@@ -40,6 +55,17 @@ export class NgxHelperToastService {
         const config: Partial<INgxHelperToastConfig> = arg2 ? arg1 : typeof arg1 === 'object' ? arg1 : {};
         const onClose: () => void = arg2 || (typeof arg1 === 'function' ? arg1 : () => {});
 
+        const messages: string[] = typeof message === 'string' ? [message] : message;
+        const content: string = [toast.icon, toast.textColor, toast.backgroundColor, ...messages].join('\n');
+        const duplicate = this.components.find((component) => component.content === content);
+        if (!this.config?.toastAllowDuplicates && duplicate) {
+            if (this.config?.toastResetDuplicates) {
+                duplicate.componentRef.instance.start = new Date().getTime();
+                duplicate.componentRef.instance.progress = 0;
+            }
+            return;
+        }
+
         const componentRef = createComponent<ToastComponent>(ToastComponent, {
             environmentInjector: this.applicationRef.injector,
             elementInjector: this.injector,
@@ -50,8 +76,9 @@ export class NgxHelperToastService {
         componentRef.instance.icon = toast.icon;
         componentRef.instance.textColor = toast.textColor;
         componentRef.instance.backgroundColor = toast.backgroundColor;
-        componentRef.instance.messages = typeof message === 'string' ? [message] : message;
-        componentRef.instance.config = config;
+        componentRef.instance.messages = messages;
+        componentRef.instance.config = { helper: this.config, toast: config };
+        componentRef.instance.init = () => this.updatePositions();
         componentRef.instance.close = () => {
             this.applicationRef.detachView(componentRef.hostView);
             document.body.removeChild(htmlElement);
@@ -66,7 +93,7 @@ export class NgxHelperToastService {
         this.applicationRef.attachView(componentRef.hostView);
         document.body.appendChild(htmlElement);
 
-        this.components.push({ id, componentRef });
+        this.components.push({ id, componentRef, content });
         this.updatePositions();
     }
 

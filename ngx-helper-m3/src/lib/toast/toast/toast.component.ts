@@ -1,10 +1,10 @@
-import { Component, ElementRef, HostBinding, HostListener, Inject, OnDestroy, OnInit, Optional } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 
 import { MatIcon } from '@angular/material/icon';
 
 import { NgxHelperMultiLinePipe } from '../../pipes/multi-line.pipe';
-import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../ngx-helper.config';
+import { INgxHelperConfig } from '../../ngx-helper.config';
 
 import { INgxHelperToastConfig } from '../ngx-helper-toast.interface';
 
@@ -22,7 +22,7 @@ import { INgxHelperToastConfig } from '../ngx-helper-toast.interface';
         ]),
     ],
 })
-export class ToastComponent implements OnInit, OnDestroy {
+export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
     @HostListener('click') private onClick = () => this.close();
 
     @HostBinding('@host') private host: boolean = true;
@@ -35,35 +35,42 @@ export class ToastComponent implements OnInit, OnDestroy {
     public id!: string;
     public icon!: string;
     public messages: string[] = [];
-    public config!: Partial<INgxHelperToastConfig>;
+    public config!: { helper?: Partial<INgxHelperConfig>; toast: Partial<INgxHelperToastConfig> };
+    public init!: () => void;
     public close!: () => void;
 
+    public timeout!: number;
+    public showClose!: boolean;
+    public animation!: 'DECREASE' | 'INCREASE';
+
     public progress: number = 0;
-    private start: number = 0;
+    public start: number = 0;
     private interval?: any;
 
-    constructor(
-        public readonly elementRef: ElementRef,
-        @Optional() @Inject(NGX_HELPER_CONFIG) private readonly ngxHelperconfig?: Partial<INgxHelperConfig>,
-    ) {}
+    constructor(public readonly elementRef: ElementRef) {}
 
     ngOnInit(): void {
         this.borderColor = this.backgroundColor;
 
-        const xPosition: 'LEFT' | 'CENTER' | 'RIGHT' = this.ngxHelperconfig?.toastXPosition || 'CENTER';
+        const xPosition: 'LEFT' | 'CENTER' | 'RIGHT' = this.config.helper?.toastXPosition || 'CENTER';
         this.className = `ngx-helper-m3-toast ${xPosition.toLowerCase()}`;
 
         const toastTimeout =
-            this.ngxHelperconfig?.toastTimeout === undefined || this.ngxHelperconfig?.toastTimeout < 0
+            this.config.helper?.toastTimeout === undefined || this.config.helper?.toastTimeout < 0
                 ? 4000
-                : this.ngxHelperconfig?.toastTimeout;
-        const timeout = this.config.timeout === undefined || this.config.timeout < 0 ? toastTimeout : this.config.timeout;
+                : this.config.helper?.toastTimeout;
+        this.timeout =
+            this.config.toast.timeout === undefined || this.config.toast.timeout < 0
+                ? toastTimeout
+                : this.config.toast.timeout;
+        this.showClose = this.config.toast.showClose || this.timeout === 0;
+        this.animation = this.config.helper?.toastProgressAnimation || 'DECREASE';
 
-        if (timeout) {
+        if (this.timeout) {
             this.start = new Date().getTime();
             this.interval = setInterval(() => {
                 const timer: number = new Date().getTime();
-                this.progress = ((timer - this.start) * 100) / timeout;
+                this.progress = ((timer - this.start) * 100) / this.timeout;
                 this.progress = this.progress < 100 ? +this.progress.toFixed(2) : 100;
                 if (this.progress === 100) this.close();
             }, 25);
@@ -72,5 +79,9 @@ export class ToastComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         if (this.interval) clearInterval(this.interval);
+    }
+
+    ngAfterViewInit(): void {
+        this.init();
     }
 }

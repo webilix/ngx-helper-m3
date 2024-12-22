@@ -9,6 +9,9 @@ export interface INgxHelperConfig {
     // TOAST
     readonly toastTimeout: number;
     readonly toastXPosition: 'LEFT' | 'CENTER' | 'RIGHT';
+    readonly toastAllowDuplicates: boolean;
+    readonly toastResetDuplicates: boolean;
+    readonly toastProgressAnimation: 'DECREASE' | 'INCREASE';
 
     // STICKY
     readonly stickyView: {

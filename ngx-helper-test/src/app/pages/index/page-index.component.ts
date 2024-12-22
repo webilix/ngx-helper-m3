@@ -119,23 +119,28 @@ export class PageIndexComponent implements OnInit {
     }
 
     toast(type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR'): void {
-        const message: string[] = ['نمایش متن نوتیفیکیشن‌ها در سایت', 'نمایش خط دوم در متن نوتیفیکیشن'];
-        const config: Partial<INgxHelperToastConfig> = {};
+        const message: string[] = [
+            'نمایش نوتیفیکیشن‌ها در سایت به این صورت انجام می‌شود.',
+            'نمایش خط دوم در متن نوتیفیکیشن!',
+        ];
+        const config: Partial<INgxHelperToastConfig> = { timeout: 5000, showClose: true };
         const onClose = () => console.log(`${type} CLOSED`);
 
-        switch (type) {
-            case 'INFO':
-                this.ngxHelperToastService.info(message, config, onClose);
-                break;
-            case 'SUCCESS':
-                this.ngxHelperToastService.success(message, config, onClose);
-                break;
-            case 'WARNING':
-                this.ngxHelperToastService.warning(message, config, onClose);
-                break;
-            case 'ERROR':
-                this.ngxHelperToastService.error(message, config, onClose);
-                break;
+        for (let i = 0; i < 3; i++) {
+            switch (type) {
+                case 'INFO':
+                    this.ngxHelperToastService.info(message, config, onClose);
+                    break;
+                case 'SUCCESS':
+                    this.ngxHelperToastService.success(message, config, onClose);
+                    break;
+                case 'WARNING':
+                    this.ngxHelperToastService.warning(message, config, onClose);
+                    break;
+                case 'ERROR':
+                    this.ngxHelperToastService.error(message, config, onClose);
+                    break;
+            }
         }
     }
 }
