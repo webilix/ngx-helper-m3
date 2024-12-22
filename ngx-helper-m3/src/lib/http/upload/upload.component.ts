@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, HostBinding } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 import { MatIcon } from '@angular/material/icon';
 
@@ -21,8 +21,8 @@ import { INgxHelperHttpUploadConfig } from '../ngx-helper-http.interface';
     ],
 })
 export class UploadComponent<R, E> implements AfterViewInit {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-http';
     @HostBinding('@host') private host: boolean = true;
+    @HostBinding('className') private className: string = 'ngx-helper-m3-http';
     @HostBinding('style.bottom') bottom: string = '1rem';
 
     public id!: string;

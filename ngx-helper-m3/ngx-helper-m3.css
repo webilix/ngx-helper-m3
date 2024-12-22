@@ -109,10 +109,21 @@
             flex: 1;
 
             font-size: 90%;
-
             text-align: left;
             direction: ltr;
             font-family: Roboto, 'Helvetica Neue', sans-serif;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .title {
+            flex: 1;
+
+            font-size: 90%;
+            text-align: right;
+            direction: rtl;
 
             white-space: nowrap;
             overflow: hidden;

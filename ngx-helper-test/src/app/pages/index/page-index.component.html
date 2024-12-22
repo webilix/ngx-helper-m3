@@ -30,8 +30,11 @@
         <div class="title">ngxHelperHttpService</div>
     </header>
     <div class="buttons">
-        <input type="file" [style.display]="'none'" (change)="upload($event)" #fileInput />
+        <button mat-flat-button type="button" (click)="print()">Pint PDF</button>
+        <button mat-flat-button type="button" (click)="download('PDF')">Download PDF</button>
+        <button mat-flat-button type="button" (click)="download('ZIP')">Download ZIP</button>
         <button mat-flat-button type="button" (click)="fileInput.value = ''; fileInput.click()">Upload</button>
+        <input type="file" [style.display]="'none'" (change)="upload($event)" #fileInput />
     </div>
 </section>
 
