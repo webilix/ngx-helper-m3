@@ -12,6 +12,7 @@ export * from './lib/components/card/ngx-helper-card.interface';
 export * from './lib/components/loader/ngx-helper-loader.component';
 export * from './lib/components/page-group/ngx-helper-page-group.component';
 export * from './lib/components/page-group/ngx-helper-page-group.interface';
+export * from './lib/components/progress/ngx-helper-progress.component';
 export * from './lib/components/section/ngx-helper-section-sticky.directive';
 export * from './lib/components/section/ngx-helper-section.component';
 export * from './lib/components/section/column/ngx-helper-section-column.component';

@@ -1,0 +1,38 @@
+.buttons {
+    display: flex;
+    align-items: center;
+    row-gap: 1rem;
+    column-gap: 1rem;
+    flex-wrap: wrap;
+
+    button {
+        flex-grow: 1;
+        min-width: auto;
+        padding: 1rem;
+        border-radius: 16px;
+        border: 1px solid var(--outline-variant);
+    }
+}
+
+.columns {
+    display: flex;
+    align-items: flex-start;
+    column-gap: 1rem;
+
+    ngx-helper-progress {
+        flex: 1;
+    }
+}
+
+.date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 2rem 0;
+    font-size: 20px;
+    font-weight: 500;
+    text-shadow: 0 0 10px var(--primary);
+    border: 1px solid var(--outline-variant);
+    color: var(--on-primary);
+}

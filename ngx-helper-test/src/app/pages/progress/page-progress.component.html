@@ -1,0 +1,63 @@
+<div class="buttons">
+    @for (value of [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]; track $index) {
+    <button mat-stroked-button type="button" [disabled]="isRandom || progress === value" (click)="progress = value">
+        {{ value }}
+    </button>
+    }
+
+    <button
+        mat-stroked-button
+        type="button"
+        (click)="isRandom = !isRandom"
+        [style.color]="isRandom ? 'var(--primary)' : 'var(--outline-variant)'"
+    >
+        تصادفی
+    </button>
+</div>
+
+<br /><br />
+
+<ngx-helper-section>
+    <ngx-helper-section-column>
+        <ngx-helper-progress [value]="progress" [align]="'RL'" [borderRadius]="borderRadius">
+            <page-progress-content [height]="'48px'" [borderRadius]="borderRadius">
+                RL : {{ progress }}
+            </page-progress-content>
+        </ngx-helper-progress>
+    </ngx-helper-section-column>
+    <ngx-helper-section-column>
+        <ngx-helper-progress [value]="progress" [align]="'LR'" [borderRadius]="borderRadius">
+            <page-progress-content [height]="'48px'" [borderRadius]="borderRadius">
+                LR : {{ progress }}
+            </page-progress-content>
+        </ngx-helper-progress>
+    </ngx-helper-section-column>
+    <ngx-helper-section-column>
+        <div class="columns">
+            <ngx-helper-progress [value]="progress" [align]="'TB'" [borderRadius]="borderRadius">
+                <page-progress-content [height]="'300px'" [borderRadius]="borderRadius">
+                    TB : {{ progress }}
+                </page-progress-content>
+            </ngx-helper-progress>
+            <ngx-helper-progress [value]="progress" [align]="'BT'" [borderRadius]="borderRadius">
+                <page-progress-content [height]="'300px'" [borderRadius]="borderRadius">
+                    BT : {{ progress }}
+                </page-progress-content>
+            </ngx-helper-progress>
+        </div>
+    </ngx-helper-section-column>
+</ngx-helper-section>
+
+<br />
+
+<ngx-helper-progress
+    [value]="dateProgress"
+    [align]="'LR'"
+    [borderRadius]="borderRadius"
+    [progressColor]="'var(--primary)'"
+    [backgroundColor]="'var(--outline-variant)'"
+>
+    <div class="date" [style.border-radius]="borderRadius">
+        {{ date | ngxHelperDate : { format: 'FULL' } }}
+    </div>
+</ngx-helper-progress>

@@ -1,0 +1,8 @@
+<div
+    class="progress"
+    [style.border-radius]="borderRadius"
+    [style.background-color]="progressColor"
+    [style.width]="direction === 'H' ? size : '100%'"
+    [style.height]="direction === 'V' ? size : '100%'"
+></div>
+<div class="content"><ng-content></ng-content></div>

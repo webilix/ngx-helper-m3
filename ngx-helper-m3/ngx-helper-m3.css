@@ -503,6 +503,63 @@
     }
 }
 
+/* NGX HELPER PROGRESS */
+.ngx-helper-m3-progress {
+    display: block;
+    position: relative;
+    direction: rtl;
+    overflow: hidden;
+
+    .progress {
+        position: absolute;
+        transition: width 0.35s ease-out, height 0.35s ease-out;
+    }
+
+    .content {
+        position: relative;
+    }
+}
+
+.ngx-helper-m3-progress.LR,
+.ngx-helper-m3-progress.RL {
+    .progress {
+        top: 0;
+        bottom: 0;
+    }
+}
+
+.ngx-helper-m3-progress.LR {
+    .progress {
+        left: 0;
+    }
+}
+
+.ngx-helper-m3-progress.RL {
+    .progress {
+        right: 0;
+    }
+}
+
+.ngx-helper-m3-progress.TB,
+.ngx-helper-m3-progress.BT {
+    .progress {
+        right: 0;
+        left: 0;
+    }
+}
+
+.ngx-helper-m3-progress.TB {
+    .progress {
+        top: 0;
+    }
+}
+
+.ngx-helper-m3-progress.BT {
+    .progress {
+        bottom: 0;
+    }
+}
+
 /* NGX HELPER VALUE BOX */
 .ngx-helper-m3-value-box {
     display: grid;

@@ -94,7 +94,6 @@ export class DownloadComponent implements AfterViewInit {
                         break;
 
                     case HttpEventType.Response:
-                        console.log(event);
                         this.progress = 100;
                         this.onSuccess(event.body);
                         this.close();
