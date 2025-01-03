@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+
+    .container {
+        border: 1px solid var(--outline-variant);
+
+        .header {
+            display: flex;
+            align-items: center;
+
+            height: 45px;
+            padding: 0 1rem;
+            font-weight: 500;
+            background-color: var(--surface-container);
+            border-bottom: 1px solid var(--outline-variant);
+        }
+
+        .content {
+            height: 100px;
+            background-color: var(--background);
+        }
+    }
+}

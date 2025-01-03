@@ -7,6 +7,7 @@ import {
     PagePipesComponent,
     PageProgressComponent,
     PageSectionComponent,
+    PageStickyComponent,
     PageValueComponent,
 } from './pages';
 
@@ -18,6 +19,8 @@ export const routes: Routes = [
     { path: 'progress', component: PageProgressComponent },
     { path: 'section', component: PageSectionComponent },
     { path: 'value', component: PageValueComponent },
+
+    { path: 'sticky', component: PageStickyComponent },
 
     { path: 'pipes', component: PagePipesComponent },
 

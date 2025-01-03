@@ -1,0 +1,13 @@
+@for (item of indexes; track $index) {
+<div class="container">
+    <div class="header">{{ item }}</div>
+    <div class="content"></div>
+</div>
+}
+
+<div class="container" [ngxHelperSticky]="'BOTTOM'" [stickyIn]="data.stickyIn || 'ALWAYS'">
+    <div class="header">
+        استیکی {{ data.stickyIn === 'DESKTOP' ? ':: دسکتاپ' : data.stickyIn === 'MOBILE' ? ':: موبایل' : '' }}
+    </div>
+    <div class="content"></div>
+</div>
