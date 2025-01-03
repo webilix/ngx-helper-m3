@@ -1,0 +1,50 @@
+<div
+    id="ngx-helper-m3-coordinates-map"
+    class="map"
+    (dblclick)="setCoordinates($event)"
+    (contextmenu)="setCoordinates($event)"
+></div>
+
+<div class="coordinates">
+    <div class="header">
+        <div class="title">COORDINATES</div>
+        <mat-icon (click)="close()">close</mat-icon>
+    </div>
+    <div class="item">
+        <div class="title">LATITUDE</div>
+        <input
+            type="text"
+            maxlength="15"
+            inputmode="numeric"
+            [value]="coordinate[1] || ''"
+            mask="separator.12"
+            thousandSeparator=""
+            decimalMarker="."
+            [allowNegativeNumbers]="true"
+            [inputTransformFn]="inputTransformFn"
+            (keyup.enter)="checkInputs(latitudeInput.value, longitudeInput.value)"
+            (blur)="checkInputs(latitudeInput.value, longitudeInput.value)"
+            #latitudeInput
+        />
+    </div>
+    <div class="item">
+        <div class="title">LONGITUDE</div>
+        <input
+            type="text"
+            maxlength="15"
+            inputmode="numeric"
+            [value]="coordinate[0] || ''"
+            mask="separator.12"
+            thousandSeparator=""
+            decimalMarker="."
+            [allowNegativeNumbers]="true"
+            [inputTransformFn]="inputTransformFn"
+            (keyup.enter)="checkInputs(latitudeInput.value, longitudeInput.value)"
+            (blur)="checkInputs(latitudeInput.value, longitudeInput.value)"
+            #longitudeInput
+        />
+    </div>
+    <div class="buttons">
+        <mat-icon [class.disabled]="!coordinates" (click)="selectCoordinates()">done_all</mat-icon>
+    </div>
+</div>

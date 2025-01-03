@@ -1,0 +1,22 @@
+<div id="ngx-helper-m3-coordinates-map" class="map"></div>
+
+<div class="coordinates">
+    <div class="header">
+        <div class="title">COORDINATES</div>
+        <mat-icon (click)="close()">close</mat-icon>
+    </div>
+    <div class="item">
+        <div class="title">LATITUDE</div>
+        <div class="value">{{ coordinates.latitude.toFixed(7) }}</div>
+        <mat-icon [cdkCopyToClipboard]="coordinates.latitude.toString()" (click)="setCopy('LATITUDE')">
+            {{ copied === 'LATITUDE' ? 'done_all' : 'copy' }}
+        </mat-icon>
+    </div>
+    <div class="item">
+        <div class="title">LONGITUDE</div>
+        <div class="value">{{ coordinates.longitude.toFixed(7) }}</div>
+        <mat-icon [cdkCopyToClipboard]="coordinates.longitude.toString()" (click)="setCopy('LONGITUDE')">
+            {{ copied === 'LONGITUDE' ? 'done_all' : 'copy' }}
+        </mat-icon>
+    </div>
+</div>

@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 
 import {
+    INgxHelperCoordinates,
     INgxHelperToastConfig,
     NgxHelperConfirmService,
     NgxHelperContainerService,
+    NgxHelperCoordinatesService,
     NgxHelperHttpService,
     NgxHelperLoaderComponent,
     NgxHelperToastService,
@@ -25,6 +27,7 @@ export class PageIndexComponent implements OnInit {
     constructor(
         private readonly ngxHelperConfirmService: NgxHelperConfirmService,
         private readonly ngxHelperContainerService: NgxHelperContainerService,
+        private readonly ngxHelperCoordinatesService: NgxHelperCoordinatesService,
         private readonly ngxHelperHttpService: NgxHelperHttpService,
         private readonly ngxHelperToastService: NgxHelperToastService,
         private readonly appService: AppService,
@@ -99,6 +102,24 @@ export class PageIndexComponent implements OnInit {
                 );
                 break;
         }
+    }
+
+    showCoordinates(config: boolean): void {
+        this.ngxHelperCoordinatesService.show(
+            { latitude: 35.6997382, longitude: 51.3380603 },
+            config ? { zoom: 17, color: 'rgb(255, 0, 0)' } : {},
+        );
+    }
+
+    getCoordinates(config: boolean): void {
+        const get = config
+            ? this.ngxHelperCoordinatesService.get({ zoom: 17, color: 'rgb(255, 0, 0)' })
+            : this.ngxHelperCoordinatesService.get();
+
+        get.then(
+            (coordinates: INgxHelperCoordinates) => console.log('COORDINATES', coordinates),
+            () => {},
+        );
     }
 
     print(): void {

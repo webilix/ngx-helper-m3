@@ -25,6 +25,8 @@ export * from './lib/confirm/confirm.interface';
 export * from './lib/confirm/confirm.service';
 export * from './lib/container/container.interface';
 export * from './lib/container/container.service';
+export * from './lib/coordinates/ngx-helper-coordinates.interface';
+export * from './lib/coordinates/ngx-helper-coordinates.service';
 export * from './lib/http/ngx-helper-http.interface';
 export * from './lib/http/ngx-helper-http.service';
 export * from './lib/toast/ngx-helper-toast.interface';

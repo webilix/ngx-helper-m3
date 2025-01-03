@@ -7,6 +7,9 @@
 @use './theme/material/theme-m3';
 @use './theme/material/override';
 
+// OL
+@use '../../node_modules/ol/ol.css';
+
 // NGX-HELPER-M3
 @use '../../ngx-helper-m3/ngx-helper-m3.css';
 
