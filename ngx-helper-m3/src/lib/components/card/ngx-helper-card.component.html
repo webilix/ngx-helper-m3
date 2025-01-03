@@ -42,7 +42,7 @@
             <mat-icon>{{ item.icon }}</mat-icon>
             }
         </button>
-        <mat-menu #actionMenu="matMenu" class="ngx-helper-card-action-menu">
+        <mat-menu #actionMenu="matMenu" class="ngx-helper-card-action-menu" [xPosition]="'before'">
             @for (menu of item.buttons; track $index) {
             <!-- DIVIDER -->
             @if (menu === 'DIVIDER') { <mat-divider></mat-divider> }

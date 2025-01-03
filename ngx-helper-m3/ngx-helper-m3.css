@@ -308,7 +308,6 @@
             display: flex;
             align-items: center;
             column-gap: 0.5rem;
-            padding-left: 0.5rem;
 
             button {
                 display: flex;
