@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 
 import { Feature, Map, View } from 'ol';
 import { Coordinate } from 'ol/coordinate';
@@ -20,6 +20,8 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
     styleUrl: './show.component.scss',
 })
 export class ShowComponent implements OnInit {
+    @HostBinding('className') private className: string = 'ngx-helper-m3-coordinates';
+
     public coordinates!: INgxHelperCoordinates;
     public config?: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>;
     public close!: () => void;

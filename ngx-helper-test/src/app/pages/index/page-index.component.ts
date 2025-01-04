@@ -113,8 +113,11 @@ export class PageIndexComponent implements OnInit {
 
     getCoordinates(config: boolean): void {
         const get = config
-            ? this.ngxHelperCoordinatesService.get({ zoom: 17, color: 'rgb(255, 0, 0)' })
-            : this.ngxHelperCoordinatesService.get();
+            ? this.ngxHelperCoordinatesService.get(
+                  { latitude: 35.6997382, longitude: 51.3380603 },
+                  { zoom: 17, color: 'rgb(255, 0, 0)' },
+              )
+            : this.ngxHelperCoordinatesService.get({ latitude: 35.6997382, longitude: 51.3380603 });
 
         get.then(
             (coordinates: INgxHelperCoordinates) => console.log('COORDINATES', coordinates),

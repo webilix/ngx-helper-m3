@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
 import { Feature, Map, View } from 'ol';
@@ -19,12 +20,14 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
 
 @Component({
     host: { selector: 'get' },
-    imports: [NgxMaskDirective, MatIcon],
+    imports: [FormsModule, NgxMaskDirective, MatIcon],
     providers: [provideNgxMask()],
     templateUrl: './get.component.html',
     styleUrl: './get.component.scss',
 })
 export class GetComponent implements OnInit {
+    @HostBinding('className') private className: string = 'ngx-helper-m3-coordinates';
+
     public coordinates?: INgxHelperCoordinates;
     public config?: Partial<INgxHelperCoordinatesConfig>;
     public close!: (coordinates?: INgxHelperCoordinates) => void;
