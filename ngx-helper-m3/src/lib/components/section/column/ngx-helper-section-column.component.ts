@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject, Inject, Input, OnChanges, Optional, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, inject, Inject, Input, OnChanges, OnInit, Optional, SimpleChanges } from '@angular/core';
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../../ngx-helper.config';
 
@@ -11,7 +11,7 @@ import { ComponentService, IComponentConfig } from '../../component.service';
     templateUrl: './ngx-helper-section-column.component.html',
     styleUrl: './ngx-helper-section-column.component.scss',
 })
-export class NgxHelperSectionColumnComponent implements OnChanges {
+export class NgxHelperSectionColumnComponent implements OnInit, OnChanges {
     @HostBinding('style.flex') flexStyle: string = '1';
     @HostBinding('style.width') widthStyle: string = '*';
 
@@ -31,6 +31,11 @@ export class NgxHelperSectionColumnComponent implements OnChanges {
         private readonly componentService: ComponentService,
         @Optional() @Inject(NGX_HELPER_CONFIG) private readonly config?: Partial<INgxHelperConfig>,
     ) {}
+
+    ngOnInit(): void {
+        this.componentConfig = this.componentService.getComponentConfig(this.config);
+        this.onResize();
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.flexStyle = this.width ? 'unset' : this.flex?.toString() || '1';
