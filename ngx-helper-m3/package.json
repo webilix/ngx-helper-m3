@@ -1,6 +1,6 @@
 {
     "name": "@webilix/ngx-helper-m3",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "author": "Ali Amirnezhad",
     "description": "Helper library for Angular and Material 3",
     "repository": {
