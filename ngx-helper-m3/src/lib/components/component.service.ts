@@ -48,6 +48,20 @@ export class ComponentService {
         };
     }
 
+    private isRTL(value: NgxHelperValue): boolean {
+        switch (value.type) {
+            case 'BANK-CARD':
+            case 'MOBILE':
+            case 'NUMBER':
+                return true;
+
+            case 'DURATION':
+                return value.format === 'FULL';
+        }
+
+        return false;
+    }
+
     getValueData(values: INgxHelperValue[]): IValueComponentData[] {
         const pipeTransform = new NgxHelperValuePipe().transform;
         const ltrValues: NgxHelperValue['type'][] = ['BANK-CARD', 'MOBILE', 'NUMBER'];
@@ -64,7 +78,7 @@ export class ComponentService {
                       color: item.color,
                       action: item.action,
                       copyToClipboard: item.copyToClipboard,
-                      ltr: ltrValues.includes(value.type),
+                      ltr: this.isRTL(value),
                       english: 'english' in value && !!value.english,
                   };
         });

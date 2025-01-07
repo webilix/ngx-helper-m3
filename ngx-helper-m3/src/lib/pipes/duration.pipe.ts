@@ -43,7 +43,7 @@ export class NgxHelperDurationPipe implements PipeTransform {
                 return (day + join + (!hasDays || hasTime ? time : '')).trim();
 
             case 'FULL':
-                return (hasDays ? Helper.NUMBER.format(days, 'EN') + ':' : '') + time;
+                return (hasDays ? '(' + Helper.NUMBER.format(days, 'EN') + ') ' : '') + time;
 
             case 'DAY':
                 return Helper.NUMBER.format(days + (hours !== 0 || minutes !== 0 ? 1 : 0), !!options?.english ? 'EN' : 'FA');

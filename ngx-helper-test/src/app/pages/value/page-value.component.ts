@@ -45,7 +45,7 @@ export class PageValueComponent implements OnInit {
                 return ['/'];
             },
         },
-        { title: 'مدت زمانی', value: { type: 'DURATION' }, copyToClipboard: true },
+        { title: 'مدت زمانی', value: { type: 'DURATION', value: 1234560, format: 'FULL' }, copyToClipboard: true },
         { title: 'حجم فایل', value: { type: 'FILE-SIZE', value: 1234567, english: true } },
         { title: 'موبایل', value: { type: 'MOBILE', value: '09123456789', join: ' ' }, copyToClipboard: true },
         { title: 'عدد', value: { type: 'NUMBER', value: -1234.567890123456789, english: true, fractionDigits: 5 } },
@@ -53,6 +53,7 @@ export class PageValueComponent implements OnInit {
         { title: 'قیمت', value: { type: 'PRICE', value: 1234567, currency: 'تومان' }, copyToClipboard: true },
         { title: 'حجم', value: { type: 'VOLUME', value: 1234567 }, color: 'var(--error)' },
         { title: 'وزن', value: { type: 'WEIGHT', value: 1234567 }, color: 'var(--primary)' },
+        { title: 'بدون مقدار' },
     ];
 
     public component = PageValueContentComponent;
