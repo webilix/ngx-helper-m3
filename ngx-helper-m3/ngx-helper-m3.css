@@ -67,7 +67,12 @@
 
         .title {
             flex: 1;
+            width: 0;
             padding-right: 0.5rem;
+
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
     }
 

@@ -85,7 +85,9 @@ export class PageIndexComponent implements OnInit {
     }
 
     container(type: 'DIALOG' | 'BOTTOMSHEET', component: '1' | '2'): void {
-        const title: string = `${type === 'DIALOG' ? 'دیالوگ' : 'باتم‌شیت'} ${component}`;
+        const title: string = `${
+            type === 'DIALOG' ? 'دیالوگ' : 'باتم‌شیت'
+        } ${component} :: بررسی نمایش عنوان‌های طولانی در هدر کانتینرها`;
         const container = this.ngxHelperContainerService.init(PageIndexContainerComponent, title, { data: { component } });
 
         switch (type) {
