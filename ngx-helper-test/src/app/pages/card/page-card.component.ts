@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
-    NgxHelperAction,
+    NgxHelperCardAction,
     NgxHelperCardComponent,
     NgxHelperSectionColumnComponent,
     NgxHelperSectionComponent,
@@ -19,12 +19,12 @@ import { PageCardContentComponent } from './content/page-card-content.component'
 })
 export class PageCardComponent implements OnInit {
     public icon: string = 'description';
-    public buttons: NgxHelperAction[] = [
+    public buttons: NgxHelperCardAction[] = [
         { title: 'ثبت', icon: 'add', action: () => console.log('BUTTON: ADD'), showIcon: true },
         { title: 'ویرایش', icon: 'edit', action: () => console.log('BUTTON: UPDATE') },
         { title: 'حذف', icon: 'delete', action: () => console.log('BUTTON: DELETE'), color: 'var(--error)' },
     ];
-    public menu: NgxHelperAction[] = [
+    public menu: NgxHelperCardAction[] = [
         {
             title: 'امکانات',
             icon: 'more_vert',
@@ -37,7 +37,7 @@ export class PageCardComponent implements OnInit {
             ],
         },
     ];
-    public actions: NgxHelperAction[] = [...this.buttons, ...this.menu];
+    public actions: NgxHelperCardAction[] = [...this.buttons, ...this.menu];
 
     constructor(private readonly appService: AppService) {}
 

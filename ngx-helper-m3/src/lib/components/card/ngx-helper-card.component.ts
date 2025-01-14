@@ -10,7 +10,7 @@ import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../ngx-helper.config';
 
 import { ComponentService, IComponentConfig } from '../component.service';
 
-import { NgxHelperAction } from './ngx-helper-card.interface';
+import { NgxHelperCardAction } from './ngx-helper-card.interface';
 
 type Button =
     | { type: 'BUTTON'; title: string; icon: string; action: () => void; color?: string; showIcon?: boolean }
@@ -37,7 +37,7 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     @Input({ required: true }) title!: string;
     @Input({ required: false }) subTitle?: string;
     @Input({ required: false }) icon?: string;
-    @Input({ required: false }) actions: NgxHelperAction[] = [];
+    @Input({ required: false }) actions: NgxHelperCardAction[] = [];
     @Input({ required: false }) padding: string = '1rem';
     @Input({ required: false }) backgroundColor?: string;
     @Input({ required: false }) hasShadow: boolean = false;

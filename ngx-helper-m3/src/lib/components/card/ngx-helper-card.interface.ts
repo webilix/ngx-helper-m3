@@ -14,4 +14,4 @@ interface ICardMenu {
     readonly buttons: ('DIVIDER' | ICardButton)[];
 }
 
-export type NgxHelperAction = ICardButton | ICardMenu;
+export type NgxHelperCardAction = ICardButton | ICardMenu;
