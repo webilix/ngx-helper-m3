@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import {
+    INgxHelperCardOption,
     NgxHelperCardAction,
     NgxHelperCardComponent,
     NgxHelperSectionColumnComponent,
@@ -19,12 +20,12 @@ import { PageCardContentComponent } from './content/page-card-content.component'
 })
 export class PageCardComponent implements OnInit {
     public icon: string = 'description';
-    public buttons: NgxHelperCardAction[] = [
+    public actionButtons: NgxHelperCardAction[] = [
         { title: 'ثبت', icon: 'add', action: () => console.log('BUTTON: ADD'), showIcon: true },
         { title: 'ویرایش', icon: 'edit', action: () => console.log('BUTTON: UPDATE') },
         { title: 'حذف', icon: 'delete', action: () => console.log('BUTTON: DELETE'), color: 'var(--error)' },
     ];
-    public menu: NgxHelperCardAction[] = [
+    public actionMenu: NgxHelperCardAction[] = [
         {
             title: 'امکانات',
             icon: 'more_vert',
@@ -37,7 +38,25 @@ export class PageCardComponent implements OnInit {
             ],
         },
     ];
-    public actions: NgxHelperCardAction[] = [...this.buttons, ...this.menu];
+    public actions: NgxHelperCardAction[] = [...this.actionButtons, ...this.actionMenu];
+
+    public cardOption: INgxHelperCardOption = {
+        id: '2ND',
+        icon: 'checklist_rtl',
+        items: [
+            'DIVIDER',
+            'DIVIDER',
+            { id: '1ST', title: 'گزینه اول' },
+            { id: '2ND', title: 'گزینه دوم' },
+            { id: '3RD', title: 'گزینه سوم' },
+            'DIVIDER',
+            'DIVIDER',
+            { id: 'LAST', title: 'گزینه آخر امکانات' },
+            'DIVIDER',
+            'DIVIDER',
+        ],
+        action: (id: string) => console.log(`CARD MENU :: ${id}`),
+    };
 
     constructor(private readonly appService: AppService) {}
 

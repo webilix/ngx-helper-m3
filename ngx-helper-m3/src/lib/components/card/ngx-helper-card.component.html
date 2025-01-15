@@ -57,6 +57,30 @@
         } } }
     </div>
     }
+
+    <!-- OPTION -->
+    @if (option && optionItems.length > 0) {
+    <div class="option" [ngClass]="isMobile ? 'mobile-view' : ''">
+        <button mat-button type="button" [matMenuTriggerFor]="optionMenu">
+            @if (!isMobile) {
+            <div class="title">{{ optionTitle }}</div>
+            }
+            <mat-icon [class.mobile-view]="isMobile">{{ option.icon }}</mat-icon>
+        </button>
+        <mat-menu #optionMenu="matMenu" class="ngx-helper-card-action-option" [xPosition]="'before'">
+            @for (item of optionItems; track $index) {
+            <!-- DIVIDER -->
+            @if (item === 'DIVIDER') { <mat-divider></mat-divider> }
+            <!-- BUTTON -->
+            @else {
+            <button mat-menu-item type="button" [disabled]="optionId === item.id" (click)="setOption(item.id)">
+                <div class="title">{{ item.title }}</div>
+                <mat-icon [style.opacity]="optionId === item.id ? 1 : 0">done_all</mat-icon>
+            </button>
+            } }
+        </mat-menu>
+    </div>
+    }
 </div>
 
 <div class="card-content" [style.padding]="padding" [style.background-color]="backgroundColor">

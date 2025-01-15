@@ -457,6 +457,36 @@
                 padding: 0 0.5rem;
             }
         }
+
+        .option {
+            margin-right: 0.5rem;
+
+            button {
+                display: flex;
+                justify-content: center;
+                column-gap: 0.25rem;
+
+                border-radius: 0;
+                padding: 0 0.75rem;
+                min-width: auto;
+                height: 55px;
+
+                .title {
+                    font-size: 90%;
+                }
+
+                mat-icon {
+                    padding: 0 0 0 0.5rem;
+                    margin: 0;
+                    font-size: 120%;
+                    line-height: 1;
+                }
+
+                mat-icon.mobile-view {
+                    padding: 0;
+                }
+            }
+        }
     }
 
     .card-header.has-sub-title {

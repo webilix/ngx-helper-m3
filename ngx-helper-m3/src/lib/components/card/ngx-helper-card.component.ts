@@ -10,7 +10,7 @@ import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../ngx-helper.config';
 
 import { ComponentService, IComponentConfig } from '../component.service';
 
-import { NgxHelperCardAction } from './ngx-helper-card.interface';
+import { INgxHelperCardOption, NgxHelperCardAction } from './ngx-helper-card.interface';
 
 type Button =
     | { type: 'BUTTON'; title: string; icon: string; action: () => void; color?: string; showIcon?: boolean }
@@ -38,6 +38,7 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     @Input({ required: false }) subTitle?: string;
     @Input({ required: false }) icon?: string;
     @Input({ required: false }) actions: NgxHelperCardAction[] = [];
+    @Input({ required: false }) option?: INgxHelperCardOption;
     @Input({ required: false }) padding: string = '1rem';
     @Input({ required: false }) backgroundColor?: string;
     @Input({ required: false }) hasShadow: boolean = false;
@@ -45,6 +46,10 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     public isMobile: boolean = false;
     public buttons: Button[] = [];
     private componentConfig!: IComponentConfig;
+
+    public optionId?: string;
+    public optionTitle?: string;
+    public optionItems: ('DIVIDER' | { readonly id: string; readonly title: string })[] = [];
 
     constructor(
         private readonly componentService: ComponentService,
@@ -62,9 +67,37 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
         this.buttons = this.actions.map((action) => {
             return 'buttons' in action ? { type: 'MENU', ...action } : { type: 'BUTTON', ...action };
         });
+
+        this.optionId = undefined;
+        this.optionItems = [];
+
+        if (this.option) {
+            this.option.items.forEach((item) => {
+                if (item === 'DIVIDER') {
+                    if (this.optionItems.length !== 0 && this.optionItems[this.optionItems.length - 1] !== 'DIVIDER')
+                        this.optionItems.push('DIVIDER');
+                } else this.optionItems.push(item);
+            });
+            while (this.optionItems[this.optionItems.length - 1] === 'DIVIDER')
+                this.optionItems.splice(this.optionItems.length - 1);
+
+            this.setOption(this.optionId || '', true);
+        }
     }
 
     onResize(): void {
         this.isMobile = window.innerWidth <= this.componentConfig.mobileWidth;
+    }
+
+    setOption(id: string, firstCheck?: boolean): void {
+        if (!this.option || this.optionItems.length === 0) return;
+
+        const ids: string[] = this.optionItems.filter((item) => item !== 'DIVIDER').map((item) => item.id);
+        this.optionId = id && ids.includes(id) ? id : ids[0];
+        this.optionTitle = this.optionItems
+            .filter((item) => item !== 'DIVIDER')
+            .find((item) => item.id === this.optionId)?.title;
+
+        if (!firstCheck) this.option.action(this.optionId);
     }
 }

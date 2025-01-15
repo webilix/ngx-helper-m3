@@ -15,3 +15,10 @@ interface ICardMenu {
 }
 
 export type NgxHelperCardAction = ICardButton | ICardMenu;
+
+export interface INgxHelperCardOption {
+    readonly id?: string;
+    readonly icon: string;
+    readonly items: ('DIVIDER' | { readonly id: string; readonly title: string })[];
+    readonly action: (id: string) => void;
+}

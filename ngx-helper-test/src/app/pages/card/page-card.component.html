@@ -5,12 +5,17 @@
         </ngx-helper-card>
     </ngx-helper-section-column>
     <ngx-helper-section-column>
-        <ngx-helper-card [title]="'کلید'" [actions]="buttons" [padding]="'3rem'" [hasShadow]="true">
+        <ngx-helper-card [title]="'کلید'" [actions]="actionButtons" [padding]="'3rem'" [hasShadow]="true">
             <page-card-content>کلید</page-card-content>
         </ngx-helper-card>
     </ngx-helper-section-column>
     <ngx-helper-section-column>
-        <ngx-helper-card [title]="'منو'" [actions]="menu" [padding]="'3rem'" [backgroundColor]="'var(--primary-fixed)'">
+        <ngx-helper-card
+            [title]="'منو (کلید)'"
+            [actions]="actionMenu"
+            [padding]="'3rem'"
+            [backgroundColor]="'var(--primary-fixed)'"
+        >
             <page-card-content>منو</page-card-content>
         </ngx-helper-card>
     </ngx-helper-section-column>
@@ -31,4 +36,9 @@
             اما این مقدار برای این گزینه درنظر گرفته نشده است.
         </div>
     </page-card-content>
+</ngx-helper-card>
+
+<br />
+<ngx-helper-card [title]="'منو (امکانات)'" [icon]="icon" [padding]="'3rem'" [option]="cardOption">
+    <page-card-content>آیکون</page-card-content>
 </ngx-helper-card>
