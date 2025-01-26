@@ -81,6 +81,8 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
             while (this.optionItems[this.optionItems.length - 1] === 'DIVIDER')
                 this.optionItems.splice(this.optionItems.length - 1);
 
+            const ids: string[] = this.option.items.map((item) => (item === 'DIVIDER' ? '' : item.id));
+            this.optionId = this.option.id && ids.includes(this.option.id) ? this.option.id : undefined;
             this.setOption(this.optionId || '', true);
         }
     }
