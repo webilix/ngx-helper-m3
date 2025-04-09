@@ -33,6 +33,7 @@ export * from './lib/toast/ngx-helper-toast.interface';
 export * from './lib/toast/ngx-helper-toast.service';
 
 // DIRECTIVES
+export * from './lib/directives/ngx-helper-mobile-view.directive';
 export * from './lib/directives/ngx-helper-sticky.directive';
 
 // PIPES

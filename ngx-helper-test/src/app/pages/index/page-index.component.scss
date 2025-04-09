@@ -55,4 +55,17 @@ section {
             justify-content: center;
         }
     }
+
+    .mobile-view {
+        direction: rtl;
+        margin: 2rem auto;
+        padding: 0 2rem;
+        text-align: justify;
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+    .mobile-view-active {
+        color: var(--error);
+    }
 }

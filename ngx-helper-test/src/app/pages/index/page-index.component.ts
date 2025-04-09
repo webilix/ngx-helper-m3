@@ -10,6 +10,7 @@ import {
     NgxHelperCoordinatesService,
     NgxHelperHttpService,
     NgxHelperLoaderComponent,
+    NgxHelperMobileViewDirective,
     NgxHelperToastService,
 } from '@webilix/ngx-helper-m3';
 
@@ -19,7 +20,7 @@ import { PageIndexContainerComponent } from './container/page-index-container.co
 
 @Component({
     host: { selector: 'page-index' },
-    imports: [MatButton, NgxHelperLoaderComponent],
+    imports: [MatButton, NgxHelperLoaderComponent, NgxHelperMobileViewDirective],
     templateUrl: './page-index.component.html',
     styleUrl: './page-index.component.scss',
 })

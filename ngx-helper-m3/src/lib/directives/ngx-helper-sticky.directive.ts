@@ -1,4 +1,4 @@
-import { Directive, ElementRef, inject, Inject, Input, OnInit, Optional } from '@angular/core';
+import { Directive, ElementRef, Inject, Input, OnInit, Optional } from '@angular/core';
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../ngx-helper.config';
 
@@ -35,11 +35,11 @@ export class NgxHelperStickyDirective implements OnInit {
             };
         };
 
-        (this.mobileWidth = this.config?.mobileWidth || 600),
-            (this.stickyView = {
-                top: this.config?.stickyView?.top ? getStickyView(this.config.stickyView.top) : undefined,
-                bottom: this.config?.stickyView?.bottom ? getStickyView(this.config.stickyView.bottom) : undefined,
-            });
+        this.mobileWidth = this.config?.mobileWidth || 600;
+        this.stickyView = {
+            top: this.config?.stickyView?.top ? getStickyView(this.config.stickyView.top) : undefined,
+            bottom: this.config?.stickyView?.bottom ? getStickyView(this.config.stickyView.bottom) : undefined,
+        };
 
         this.onResize();
     }
