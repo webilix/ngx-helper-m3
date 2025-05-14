@@ -23,8 +23,8 @@
         "@angular/common": ">=19.2.10",
         "@angular/core": ">=19.2.10",
         "@angular/material": ">=19.2.15",
-        "@webilix/helper-library": ">=6.0.2",
-        "@webilix/jalali-date-time": ">=2.0.5",
+        "@webilix/helper-library": ">=6.1.2",
+        "@webilix/jalali-date-time": ">=2.0.6",
         "ngx-mask": ">=19.0.6",
         "ol": ">=10.5.0"
     },
