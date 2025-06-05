@@ -14,7 +14,7 @@ import { MatIcon } from '@angular/material/icon';
 import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helper-coordinates.interface';
 
 @Component({
-    host: { selector: 'show' },
+    host: { selector: 'show', '(window:keydown)': 'checkEscape($event)' },
     imports: [ClipboardModule, MatIcon],
     templateUrl: './show.component.html',
     styleUrl: './show.component.scss',
@@ -61,5 +61,14 @@ export class ShowComponent implements OnInit {
 
         this.copied = type;
         this.copyTimeout = setTimeout(() => (this.copied = undefined), 1000);
+    }
+
+    checkEscape(event: any): void {
+        if (!(event instanceof KeyboardEvent)) return;
+
+        if (event.code === 'Escape') {
+            event.preventDefault();
+            this.close();
+        }
     }
 }

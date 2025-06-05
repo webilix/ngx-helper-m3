@@ -19,7 +19,7 @@ import { Helper } from '@webilix/helper-library';
 import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helper-coordinates.interface';
 
 @Component({
-    host: { selector: 'get' },
+    host: { selector: 'get', '(window:keydown)': 'checkEscape($event)' },
     imports: [FormsModule, NgxMaskDirective, MatIcon],
     providers: [provideNgxMask()],
     templateUrl: './get.component.html',
@@ -116,5 +116,14 @@ export class GetComponent implements OnInit {
         this.coordinate = this.map.getEventCoordinate(event).map((c: number) => +c.toFixed(7));
         this.coordinates = { latitude: this.coordinate[1], longitude: this.coordinate[0] };
         this.addLayer();
+    }
+
+    checkEscape(event: any): void {
+        if (!(event instanceof KeyboardEvent)) return;
+
+        if (event.code === 'Escape') {
+            event.preventDefault();
+            this.close();
+        }
     }
 }
