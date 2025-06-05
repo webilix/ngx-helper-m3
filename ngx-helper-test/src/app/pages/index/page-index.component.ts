@@ -11,6 +11,8 @@ import {
     NgxHelperHttpService,
     NgxHelperLoaderComponent,
     NgxHelperMobileViewDirective,
+    NgxHelperRoute,
+    NgxHelperRouteService,
     NgxHelperToastService,
 } from '@webilix/ngx-helper-m3';
 
@@ -30,6 +32,7 @@ export class PageIndexComponent implements OnInit {
         private readonly ngxHelperContainerService: NgxHelperContainerService,
         private readonly ngxHelperCoordinatesService: NgxHelperCoordinatesService,
         private readonly ngxHelperHttpService: NgxHelperHttpService,
+        private readonly ngxHelperRouteService: NgxHelperRouteService,
         private readonly ngxHelperToastService: NgxHelperToastService,
         private readonly appService: AppService,
     ) {}
@@ -124,6 +127,43 @@ export class PageIndexComponent implements OnInit {
 
         get.then(
             (coordinates: INgxHelperCoordinates) => console.log('COORDINATES', coordinates),
+            () => {},
+        );
+    }
+
+    showRoute(config: boolean): void {
+        const route: NgxHelperRoute = [
+            { latitude: 35.6997865, longitude: 51.3396374 },
+            { latitude: 35.7004409, longitude: 51.339337 },
+            { latitude: 35.7006984, longitude: 51.3385324 },
+            { latitude: 35.700677, longitude: 51.3368479 },
+            { latitude: 35.7003337, longitude: 51.3356892 },
+            { latitude: 35.6998401, longitude: 51.3354317 },
+            { latitude: 35.6991535, longitude: 51.3355605 },
+            { latitude: 35.6988853, longitude: 51.3362042 },
+            { latitude: 35.6987672, longitude: 51.3372342 },
+            { latitude: 35.6987887, longitude: 51.3380388 },
+            { latitude: 35.6989604, longitude: 51.3389079 },
+            { latitude: 35.6991857, longitude: 51.3394336 },
+            { latitude: 35.699647, longitude: 51.339616 },
+        ];
+        this.ngxHelperRouteService.show(
+            route,
+            config ? { zoom: 17, circle: { color: 'rgb(255, 0, 0)' }, disableAnimate: true } : {},
+        );
+    }
+
+    getRoute(config: boolean): void {
+        const get = config
+            ? this.ngxHelperRouteService.get([{ latitude: 35.6997382, longitude: 51.3380603 }], {
+                  zoom: 17,
+                  circle: { color: 'rgb(255, 0, 0)' },
+                  disableAnimate: true,
+              })
+            : this.ngxHelperRouteService.get({ view: { latitude: 35.6997382, longitude: 51.3380603 } });
+
+        get.then(
+            (route: NgxHelperRoute) => console.log('ROUTE', route),
             () => {},
         );
     }

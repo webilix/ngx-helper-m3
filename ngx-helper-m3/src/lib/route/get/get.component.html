@@ -1,0 +1,31 @@
+<div
+    id="ngx-helper-m3-route-map"
+    class="map"
+    (dblclick)="setCoordinates($event)"
+    (contextmenu)="setCoordinates($event)"
+></div>
+
+<div class="route">
+    <div class="header">
+        <div class="title">ROUTE</div>
+        <mat-icon (click)="close()">close</mat-icon>
+    </div>
+
+    <div class="coordinates" cdkDropList (cdkDropListDropped)="drop($event)">
+        @for (item of route; track $index) {
+        <div class="coordinate ngx-helper-m3-route-coordinate" cdkDrag cdkDragLockAxis="y" cdkDragBoundary=".coordinates">
+            <!-- DRAG -->
+            @if (route.length > 1) { <mat-icon cdkDragHandle>drag_indicator</mat-icon> }
+            <div class="index" [style.padding-left]="route.length > 1 ? '0' : '0.5rem'">{{ $index + 1 }}</div>
+            <div class="value" (click)="animate($index)">{{ item.latitude.toFixed(5) }}</div>
+            <div class="value" (click)="animate($index)">{{ item.longitude.toFixed(5) }}</div>
+            <mat-icon class="delete" (click)="delete($index)">delete</mat-icon>
+        </div>
+        }
+    </div>
+
+    <div class="footer">
+        <div class="distance">{{ distance.length | number }} M</div>
+        <mat-icon [class.disabled]="route.length < 2" (click)="selectRoute()">done_all</mat-icon>
+    </div>
+</div>

@@ -185,7 +185,7 @@
 
             mat-icon {
                 cursor: pointer;
-                font-size: 110%;
+                font-size: 130%;
                 color: rgb(0, 0, 0);
             }
 
@@ -263,6 +263,128 @@
             background-color: var(--primary);
             transition: all 0.35s ease-out;
         }
+    }
+}
+
+/* NGX HELPER ROUTE */
+.ngx-helper-m3-route {
+    display: block;
+    z-index: 1000;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    .map {
+        width: 100vw;
+        height: 100vh;
+        background-color: rgb(255, 255, 255);
+    }
+
+    .route {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 250px;
+
+        direction: ltr;
+        background-color: var(--background);
+        box-shadow: 0 0 5px 0px var(--primary);
+
+        display: flex;
+        flex-direction: column;
+
+        .header {
+            display: flex;
+            align-items: center;
+            column-gap: 1rem;
+
+            padding: 0.5rem 1rem;
+            color: var(--on-primary);
+            background-color: var(--primary);
+            margin: 0.5rem 0.5rem 0.75rem 0.5rem;
+
+            .title {
+                flex: 1;
+                font-size: 90%;
+                font-weight: 500;
+                font-family: Roboto, 'Helvetica Neue', sans-serif;
+            }
+
+            mat-icon {
+                cursor: pointer;
+                font-size: 110%;
+                color: var(--on-primary);
+            }
+        }
+
+        .coordinates {
+            flex: 1;
+
+            overflow: auto;
+            max-height: calc(100vh - 1rem - 40px - 48px);
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+
+            position: relative;
+            color: var(--primary);
+            background-color: var(--surface-container);
+            padding: 0.75rem 1rem;
+
+            .distance {
+                flex: 1;
+                font-size: 90%;
+                font-weight: 500;
+                font-family: Roboto, 'Helvetica Neue', sans-serif;
+            }
+
+            mat-icon {
+                cursor: pointer;
+                font-size: 130%;
+            }
+
+            mat-icon.disabled {
+                opacity: 0.4;
+            }
+        }
+    }
+}
+
+.ngx-helper-m3-route-coordinate {
+    display: flex;
+    align-items: center;
+
+    padding: 0.5rem;
+    border-top: 1px solid var(--outline-variant);
+    background-color: var(--background);
+
+    mat-icon {
+        cursor: pointer;
+        font-size: 130%;
+    }
+
+    mat-icon.delete {
+        color: var(--error);
+    }
+
+    .index {
+        width: 30px;
+        font-size: 80%;
+        font-family: Roboto, 'Helvetica Neue', sans-serif;
+    }
+
+    .value {
+        flex: 1;
+        font-size: 90%;
+        cursor: pointer;
+        overflow: hidden;
+        font-family: Roboto, 'Helvetica Neue', sans-serif;
     }
 }
 
