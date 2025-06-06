@@ -18,7 +18,7 @@ import { Helper, IGeoRouteLength } from '@webilix/helper-library';
 import { INgxHelperRouteConfig, NgxHelperRoute } from '../ngx-helper-route.interface';
 
 @Component({
-    host: { selector: 'show', '(window:keydown)': 'checkEscape($event)' },
+    host: { selector: 'show', '(window:keydown)': 'checkKey($event)' },
     imports: [ClipboardModule, MatIcon, DecimalPipe],
     templateUrl: './show.component.html',
     styleUrl: './show.component.scss',
@@ -32,6 +32,8 @@ export class ShowComponent implements OnInit {
 
     public distance!: IGeoRouteLength;
     public copied?: number;
+    public index: number = 0;
+    private layers: VectorLayer[] = [];
 
     private copyTimeout?: any;
     private map!: Map;
@@ -106,10 +108,57 @@ export class ShowComponent implements OnInit {
             });
             this.map.addLayer(layer);
         });
+
+        this.addLayers();
+    }
+
+    addLayers(): void {
+        this.layers.forEach((layer: VectorLayer) => this.map.removeLayer(layer));
+        this.layers = [];
+
+        // ADD CIRCLES
+        this.route.forEach((coordinates, index: number) => {
+            if (index !== this.index) return;
+
+            const circle = {
+                size: this.config?.circle?.size || 10,
+                color: this.config?.circle?.color || 'rgb(42, 101, 126)',
+            };
+
+            const text = {
+                size: this.config?.text?.size || 13,
+                font: this.config?.text?.font || 'Yekan',
+                color: this.config?.text?.color || 'rgb(255, 255, 255)',
+            };
+
+            const point = new Point([coordinates.longitude, coordinates.latitude]);
+            const layer = new VectorLayer({
+                source: new VectorSource({ features: [new Feature(point)] }),
+                style: {
+                    // CIRCLE
+                    'circle-fill-color': circle.color,
+                    'circle-radius': circle.size * 1.4,
+                    'circle-stroke-color': '#FFF',
+                    'circle-stroke-width': 1,
+                    // TEXT
+                    'text-value': (index + 1).toString(),
+                    'text-font': `${text.size * 1.2}px ${text.font}`,
+                    'text-fill-color': text.color,
+                    'text-offset-y': 1,
+                    'text-stroke-color': circle.color,
+                    'text-stroke-width': 2,
+                },
+            });
+            this.map.addLayer(layer);
+            this.layers.push(layer);
+        });
     }
 
     animate(index: number): void {
         if (!this.route[index]) return;
+
+        this.index = index;
+        this.addLayers();
 
         const center: Coordinate = [this.route[index].longitude, this.route[index].latitude];
         this.map.getView().animate({ center, duration: 250 });
@@ -122,12 +171,20 @@ export class ShowComponent implements OnInit {
         this.copyTimeout = setTimeout(() => (this.copied = undefined), 1000);
     }
 
-    checkEscape(event: any): void {
+    checkKey(event: any): void {
         if (!(event instanceof KeyboardEvent)) return;
 
         if (event.code === 'Escape') {
             event.preventDefault();
             this.close();
+        }
+
+        if (this.index !== undefined) {
+            const change: number = event.code === 'ArrowUp' ? -1 : event.code === 'ArrowDown' ? 1 : 0;
+            if (change !== 0) {
+                event.preventDefault();
+                this.animate(this.index + change);
+            }
         }
     }
 }

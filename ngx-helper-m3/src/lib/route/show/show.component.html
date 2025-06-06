@@ -8,12 +8,12 @@
 
     <div class="coordinates">
         @for (item of route; track $index) {
-        <div class="coordinate ngx-helper-m3-route-coordinate">
+        <div class="coordinate ngx-helper-m3-route-coordinate" [class.selected]="index === $index" (click)="animate($index)">
             <div class="index" [style.padding-left]="route.length > 1 ? '0' : '0.5rem'">{{ $index + 1 }}</div>
-            <div class="value" (click)="animate($index)">{{ item.latitude.toFixed(5) }}</div>
-            <div class="value" (click)="animate($index)">{{ item.longitude.toFixed(5) }}</div>
+            <div class="value">{{ item.latitude.toFixed(5) }}</div>
+            <div class="value">{{ item.longitude.toFixed(5) }}</div>
             <mat-icon
-                [cdkCopyToClipboard]="item.latitude.toString() + '|' + item.longitude.toString()"
+                [cdkCopyToClipboard]="item.latitude.toString() + ',' + item.longitude.toString()"
                 (click)="setCopy($index)"
             >
                 {{ copied === $index ? 'done_all' : 'copy' }}

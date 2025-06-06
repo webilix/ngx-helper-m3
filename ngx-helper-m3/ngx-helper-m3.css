@@ -388,6 +388,10 @@
     }
 }
 
+.ngx-helper-m3-route-coordinate.selected {
+    background-color: var(--surface-container-high);
+}
+
 /* NGX HELPER TOAST */
 .ngx-helper-m3-toast {
     position: fixed;
@@ -462,6 +466,7 @@
         }
     }
 }
+
 .ngx-helper-m3-toast.center {
     left: 50%;
     transform: translate(-50%, 0);
