@@ -1,0 +1,18 @@
+<div
+    class="background"
+    [style.background-color]="config?.backgroundColor || 'var(--background)'"
+    [style.opacity]="config?.backgroundOpacity || 0.95"
+></div>
+
+<button class="close" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
+
+<div class="image">
+    <img [src]="image.image" />
+</div>
+
+<!-- DESCRIPTION -->
+@if (image.description) {
+<div class="description">
+    <div class="content" [innerHTML]="image.description | ngxHelperMultiLine"></div>
+</div>
+}

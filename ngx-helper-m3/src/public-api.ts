@@ -29,6 +29,8 @@ export * from './lib/coordinates/ngx-helper-coordinates.interface';
 export * from './lib/coordinates/ngx-helper-coordinates.service';
 export * from './lib/http/ngx-helper-http.interface';
 export * from './lib/http/ngx-helper-http.service';
+export * from './lib/image/ngx-helper-image.interface';
+export * from './lib/image/ngx-helper-image.service';
 export * from './lib/route/ngx-helper-route.interface';
 export * from './lib/route/ngx-helper-route.service';
 export * from './lib/toast/ngx-helper-toast.interface';

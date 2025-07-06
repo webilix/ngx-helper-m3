@@ -1,0 +1,24 @@
+<div
+    class="background"
+    [style.background-color]="config?.backgroundColor || 'var(--background)'"
+    [style.opacity]="config?.backgroundOpacity || 0.95"
+></div>
+
+<button class="close" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
+
+<div class="arrows">
+    <button class="arrow" mat-icon-button (click)="changeIndex(-1)"><mat-icon>chevron_right</mat-icon></button>
+    <div class="count">{{ index + 1 }} از {{ images.length }}</div>
+    <button class="arrow" mat-icon-button (click)="changeIndex(1)"><mat-icon>chevron_left</mat-icon></button>
+</div>
+
+<div class="image">
+    <img [src]="images[index].image" />
+</div>
+
+<!-- DESCRIPTION -->
+@if (images[index].description) {
+<div class="description">
+    <div class="content" [innerHTML]="images[index].description | ngxHelperMultiLine"></div>
+</div>
+}

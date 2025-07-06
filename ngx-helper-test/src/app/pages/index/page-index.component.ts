@@ -4,11 +4,13 @@ import { MatButton } from '@angular/material/button';
 
 import {
     INgxHelperCoordinates,
+    INgxHelperImage,
     INgxHelperToastConfig,
     NgxHelperConfirmService,
     NgxHelperContainerService,
     NgxHelperCoordinatesService,
     NgxHelperHttpService,
+    NgxHelperImageService,
     NgxHelperLoaderComponent,
     NgxHelperMobileViewDirective,
     NgxHelperRoute,
@@ -32,6 +34,7 @@ export class PageIndexComponent implements OnInit {
         private readonly ngxHelperContainerService: NgxHelperContainerService,
         private readonly ngxHelperCoordinatesService: NgxHelperCoordinatesService,
         private readonly ngxHelperHttpService: NgxHelperHttpService,
+        private readonly ngxHelperImageService: NgxHelperImageService,
         private readonly ngxHelperRouteService: NgxHelperRouteService,
         private readonly ngxHelperToastService: NgxHelperToastService,
         private readonly appService: AppService,
@@ -193,6 +196,29 @@ export class PageIndexComponent implements OnInit {
             (response, status) => console.log(`UPLOAD RESPONSE (${status})`, response),
             (error, status) => console.log(`UPLOAD ERROR (${status})`, error),
         );
+    }
+
+    image(gallery: boolean): void {
+        const images: INgxHelperImage[] = [
+            {
+                image: 'https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630',
+                description:
+                    'در قلب این تصویر، درخت کهنسالی ایستاده است؛ تنهی پیچخورده و پرقدرتش گویای سالها مقاومت در برابر باد و باران و تابش خورشید است. شاخههایش مانند بازوانی گسترده به آسمان رسیدهاند، برخی پرپشت و سبز، و برخی دیگر خشکیده و شکسته، اما همه روایتگر زندگی هستند. برگهای سبز تیره و روشن در نور ملایم غروب میدرخشند و گاه زیر وزش نسیم ملایمی به رقص درمیآیند.' +
+                    '\n\n' +
+                    'پشت سر این درخت تنومند، دشتی وسیع و آرام گسترده شده که تا خط افق ادامه دارد. علفزارهای طلاییرنگ، مانند فرشی نرم، زیر پای بیننده موج میزنند و در دوردست، تپههای کم ارتفاعی دیده میشوند که با هالهای از مه پوشیده شدهاند. آسمان به رنگ آبی کمرنگ و صورتی محو در هم آمیخته و ابرهای پراکنده، مانند قلممویی ظریف بر بوم آسمان کشیده شدهاند. خورشید در حال غروب است و پرتوهای نارنجی و طلاییاش بر پهنهی دشت و تنهی درخت سایهروشنهایی گرم و زنده میافکند.' +
+                    '\n\n' +
+                    'این تصویر، نمادی از تنهایی و استواری است؛ درختی که سالهاست در این دشت ایستاده، شاهد تغییر فصلها و گذر زمان بوده، اما هنوز ریشه در خاک دارد و سر به آسمان کشیده. آرامش حاکم بر این منظره، بیننده را به تأمل و گاه حتی به حس غربت و یادآوری خاطراتی دوردست دعوت میکند. گویی این درخت، نگهبان خاموش این سرزمین است و هر بینندهای میتواند داستان خود را در سایهی شاخههایش تصور کند.',
+            },
+            {
+                image: 'https://www.bigfootdigital.co.uk/wp-content/uploads/2020/07/image-optimisation-scaled.jpg',
+                description: 'سلفی؟!',
+            },
+            {
+                image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ718nztPNJfCbDJjZG8fOkejBnBAeQw5eAUA&s',
+            },
+        ];
+
+        this.ngxHelperImageService.showGallery(gallery ? images : [images[0]]);
     }
 
     toast(type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR'): void {
