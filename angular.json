@@ -44,7 +44,10 @@
                         "polyfills": ["zone.js"],
                         "tsConfig": "ngx-helper-test/tsconfig.app.json",
                         "inlineStyleLanguage": "scss",
-                        "assets": [{ "glob": "**/*", "input": "ngx-helper-test/public" }],
+                        "assets": [
+                            { "glob": "**/*", "input": "ngx-helper-test/public" },
+                            { "glob": "**/*", "input": "node_modules/ngx-extended-pdf-viewer/assets", "output": "/assets" }
+                        ],
                         "styles": ["ngx-helper-test/src/styles.scss"],
                         "scripts": []
                     },

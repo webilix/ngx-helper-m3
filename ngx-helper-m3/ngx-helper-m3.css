@@ -489,7 +489,7 @@
         }
     }
 
-    pdf-viewer {
+    ngx-extended-pdf-viewer {
         position: relative;
         display: block;
         width: calc(100% - 2rem);

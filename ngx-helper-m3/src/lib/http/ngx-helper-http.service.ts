@@ -172,20 +172,12 @@ export class NgxHelperHttpService {
     showPDF(blob: Blob, config: Partial<INgxHelperHttpDownloadConfig>): void;
     showPDF(data: string | ArrayBuffer | Blob, config?: Partial<INgxHelperHttpDownloadConfig>): void {
         this.getPDF(data, config).then(async (blob: Blob) => {
-            let uint8Array;
-            try {
-                uint8Array = new Uint8Array(await blob.arrayBuffer());
-            } catch (error) {
-                this.ngxHelperToastService.error('امکان نمایش فایل وجود ندارد.');
-                return;
-            }
-
             const componentRef = createComponent<PdfComponent>(PdfComponent, {
                 environmentInjector: this.applicationRef.injector,
                 elementInjector: this.injector,
             });
 
-            componentRef.instance.uint8Array = uint8Array;
+            componentRef.instance.src = blob;
             componentRef.instance.close = () => {
                 this.applicationRef.detachView(componentRef.hostView);
                 document.body.removeChild(htmlElement);
