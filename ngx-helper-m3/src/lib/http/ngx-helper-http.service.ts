@@ -6,6 +6,7 @@ import { Helper } from '@webilix/helper-library';
 import { NgxHelperToastService } from '../toast/ngx-helper-toast.service';
 
 import { DownloadComponent } from './download/download.component';
+import { PdfComponent } from './pdf/pdf.component';
 import { UploadComponent } from './upload/upload.component';
 import { INgxHelperHttpDownloadConfig, INgxHelperHttpUploadConfig } from './ngx-helper-http.interface';
 
@@ -148,6 +149,57 @@ export class NgxHelperHttpService {
         this.updatePositions();
     }
 
+    //#region PDF
+    getPDF = (data: string | ArrayBuffer | Blob, config?: Partial<INgxHelperHttpDownloadConfig>): Promise<Blob> => {
+        return new Promise<Blob>((resolve, reject) => {
+            if (typeof data !== 'string') {
+                resolve(new Blob([data], { type: 'application/pdf' }));
+                return;
+            }
+
+            this.getBuffer(data, 'دریافت فایل', config || {}).then(
+                (arrayBuffer: ArrayBuffer) => resolve(new Blob([arrayBuffer], { type: 'application/pdf' })),
+                () => reject(),
+            );
+        });
+    };
+
+    showPDF(url: string): void;
+    showPDF(url: string, config: Partial<INgxHelperHttpDownloadConfig>): void;
+    showPDF(buffer: ArrayBuffer): void;
+    showPDF(buffer: ArrayBuffer, config: Partial<INgxHelperHttpDownloadConfig>): void;
+    showPDF(blob: Blob): void;
+    showPDF(blob: Blob, config: Partial<INgxHelperHttpDownloadConfig>): void;
+    showPDF(data: string | ArrayBuffer | Blob, config?: Partial<INgxHelperHttpDownloadConfig>): void {
+        this.getPDF(data, config).then(async (blob: Blob) => {
+            let uint8Array;
+            try {
+                uint8Array = new Uint8Array(await blob.arrayBuffer());
+            } catch (error) {
+                this.ngxHelperToastService.error('امکان نمایش فایل وجود ندارد.');
+                return;
+            }
+
+            const componentRef = createComponent<PdfComponent>(PdfComponent, {
+                environmentInjector: this.applicationRef.injector,
+                elementInjector: this.injector,
+            });
+
+            componentRef.instance.uint8Array = uint8Array;
+            componentRef.instance.close = () => {
+                this.applicationRef.detachView(componentRef.hostView);
+                document.body.removeChild(htmlElement);
+                componentRef.destroy();
+                document.body.style.overflow = 'visible';
+            };
+
+            const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+            this.applicationRef.attachView(componentRef.hostView);
+            document.body.appendChild(htmlElement);
+            document.body.style.overflow = 'hidden';
+        });
+    }
+
     printPDF(url: string): void;
     printPDF(url: string, config: Partial<INgxHelperHttpDownloadConfig>): void;
     printPDF(buffer: ArrayBuffer): void;
@@ -155,21 +207,7 @@ export class NgxHelperHttpService {
     printPDF(blob: Blob): void;
     printPDF(blob: Blob, config: Partial<INgxHelperHttpDownloadConfig>): void;
     printPDF(data: string | ArrayBuffer | Blob, config?: Partial<INgxHelperHttpDownloadConfig>): void {
-        const getPDF = (): Promise<Blob> => {
-            return new Promise<Blob>((resolve, reject) => {
-                if (typeof data !== 'string') {
-                    resolve(new Blob([data], { type: 'application/pdf' }));
-                    return;
-                }
-
-                this.getBuffer(data, 'دریافت فایل', config || {}).then(
-                    (arrayBuffer: ArrayBuffer) => resolve(new Blob([arrayBuffer], { type: 'application/pdf' })),
-                    () => reject(),
-                );
-            });
-        };
-
-        getPDF().then(
+        this.getPDF(data, config).then(
             (blob: Blob) => {
                 try {
                     const prevIframe = document.getElementById('ngx-helper-http-pdf-download-iframe');
@@ -190,4 +228,5 @@ export class NgxHelperHttpService {
             () => this.ngxHelperToastService.error('امکان دانلود فایل وجود ندارد.'),
         );
     }
+    //#endregion
 }

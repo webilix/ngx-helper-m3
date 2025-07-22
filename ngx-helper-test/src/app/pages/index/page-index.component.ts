@@ -175,6 +175,10 @@ export class PageIndexComponent implements OnInit {
         this.ngxHelperHttpService.printPDF('http://localhost:4200/dummy.pdf');
     }
 
+    show(): void {
+        this.ngxHelperHttpService.showPDF('http://localhost:4200/dummy.pdf');
+    }
+
     download(type: 'PDF' | 'ZIP'): void {
         const path: string = `http://localhost:4200/dummy.${type.toLowerCase()}`;
         const title: string = `فایل ${type === 'PDF' ? 'پی‌ای‌اف' : 'زیپ'}`;

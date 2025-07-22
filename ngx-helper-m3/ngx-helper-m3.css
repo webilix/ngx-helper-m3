@@ -375,7 +375,7 @@
     }
 }
 
-/* NGX HELPER HTTP (UPLOAD / DOWNLOAD) */
+/* NGX HELPER HTTP (UPLOAD / DOWNLOAD / PDF) */
 .ngx-helper-m3-http {
     position: fixed;
     left: 1rem;
@@ -442,6 +442,58 @@
             background-color: var(--primary);
             transition: all 0.35s ease-out;
         }
+    }
+}
+
+.ngx-helper-m3-pdf {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    z-index: 1000;
+
+    .background {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+
+        background-color: var(--background);
+        opacity: 0.9;
+    }
+
+    .close {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+
+        background-color: var(--outline-variant);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+        border-radius: 0;
+
+        mat-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 125%;
+        }
+    }
+
+    pdf-viewer {
+        position: relative;
+        display: block;
+        width: calc(100% - 2rem);
+        height: calc(100% - 2rem);
     }
 }
 
