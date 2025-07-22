@@ -14,6 +14,7 @@ export interface INgxHelperPageGroup {
 
     // SETTING
     readonly sidebarWidth?: string;
+    readonly showMenu?: boolean;
 }
 
 export interface INgxHelperPageGroupItem {

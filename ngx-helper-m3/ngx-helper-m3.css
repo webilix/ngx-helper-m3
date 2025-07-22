@@ -675,6 +675,55 @@
     flex-direction: column;
     column-gap: 0;
 
+    .page-group-menu {
+        display: flex;
+        align-items: center;
+
+        box-sizing: border-box;
+        background-color: var(--surface-container-high);
+        height: calc(var(--ngx-helper-m3-page-group-toolbar-height));
+        overflow: hidden;
+        width: 100%;
+        z-index: 2;
+
+        mat-icon.page {
+            margin: 0 0.5rem;
+        }
+
+        .title {
+            flex: 1;
+            font-size: 90%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        button.menu {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0;
+            margin: 0;
+            border-radius: 0;
+            margin-right: 1rem;
+            width: var(--ngx-helper-m3-page-group-toolbar-height);
+            min-width: var(--ngx-helper-m3-page-group-toolbar-height);
+            height: var(--ngx-helper-m3-page-group-toolbar-height);
+
+            mat-icon {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                padding: 0;
+                margin: 0;
+                width: var(--ngx-helper-m3-page-group-toolbar-height);
+                height: var(--ngx-helper-m3-page-group-toolbar-height);
+            }
+        }
+    }
+
     .page-group-nav {
         display: flex;
         align-items: center;

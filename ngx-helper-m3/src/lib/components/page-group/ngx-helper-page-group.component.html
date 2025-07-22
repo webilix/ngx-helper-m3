@@ -26,6 +26,9 @@
 
 <!-- MOBILE VIEW -->
 @if (isMobile) {
+
+<!-- MOBILE LIST VIEW -->
+@if (pageGroup.showMenu === false || (pages.length <= 5 && !pageGroup.showMenu)) {
 <div
     class="page-group-nav"
     [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
@@ -45,6 +48,30 @@
     </div>
     }
 </div>
+}
+
+<!-- MOBILE MENU VIEW -->
+@else {
+<div
+    class="page-group-menu"
+    [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+    [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
+>
+    <mat-icon class="page">{{ pageGroup.pages[pageId].icon }}</mat-icon>
+    <div class="title">{{ pageGroup.pages[pageId].title }}</div>
+    <button mat-button type="button" [matMenuTriggerFor]="pageMenu" class="menu">
+        <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #pageMenu="matMenu" class="ngx-helper-page-group-menu" [xPosition]="'before'">
+        @for (item of pages; track $index) {
+        <button mat-menu-item type="button" (click)="setPage(item)" [disabled]="item === pageId">
+            <div class="title">{{ pageGroup.pages[item].title }}</div>
+            <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
+        </button>
+        }
+    </mat-menu>
+</div>
+}
 
 <div
     class="page-group-spacer"

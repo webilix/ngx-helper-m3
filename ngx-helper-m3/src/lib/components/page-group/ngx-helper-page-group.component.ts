@@ -14,7 +14,9 @@ import {
 import { NgComponentOutlet } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 
+import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 
 import { Helper } from '@webilix/helper-library';
 
@@ -33,7 +35,7 @@ import {
 @Component({
     selector: 'ngx-helper-page-group',
     host: { '(window:resize)': 'onResize($event)' },
-    imports: [NgComponentOutlet, MatIcon],
+    imports: [NgComponentOutlet, MatButton, MatIcon, MatMenuModule],
     providers: [ComponentService],
     templateUrl: './ngx-helper-page-group.component.html',
     styleUrl: './ngx-helper-page-group.component.scss',

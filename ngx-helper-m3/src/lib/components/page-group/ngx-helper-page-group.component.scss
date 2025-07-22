@@ -1,0 +1,21 @@
+::ng-deep .ngx-helper-page-group-menu {
+    button {
+        mat-icon {
+            font-size: 115%;
+            margin: 0 0 0 0.75rem !important;
+        }
+
+        .title {
+            font-size: 90% !important;
+        }
+    }
+
+    .mat-mdc-menu-content {
+        padding: 0;
+    }
+
+    .mat-mdc-menu-item {
+        direction: rtl;
+        text-align: right;
+    }
+}
