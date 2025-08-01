@@ -20,9 +20,9 @@
     },
     "homepage": "https://github.com/webilix/ngx-helper-m3#readme",
     "peerDependencies": {
-        "@angular/common": ">=20.0.0",
-        "@angular/core": ">=20.0.0",
-        "@angular/material": ">=20.0.1",
+        "@angular/common": ">=20.1.4",
+        "@angular/core": ">=20.1.4",
+        "@angular/material": ">=20.1.4",
         "@webilix/helper-library": ">=6.1.5",
         "@webilix/jalali-date-time": ">=2.0.7",
         "ngx-extended-pdf-viewer": ">=24.2.4",
