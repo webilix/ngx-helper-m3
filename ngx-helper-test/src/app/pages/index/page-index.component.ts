@@ -15,6 +15,7 @@ import {
     NgxHelperMobileViewDirective,
     NgxHelperRoute,
     NgxHelperRouteService,
+    NgxHelperShowInDirective,
     NgxHelperToastService,
 } from '@webilix/ngx-helper-m3';
 
@@ -24,7 +25,7 @@ import { PageIndexContainerComponent } from './container/page-index-container.co
 
 @Component({
     host: { selector: 'page-index' },
-    imports: [MatButton, NgxHelperLoaderComponent, NgxHelperMobileViewDirective],
+    imports: [MatButton, NgxHelperLoaderComponent, NgxHelperMobileViewDirective, NgxHelperShowInDirective],
     templateUrl: './page-index.component.html',
     styleUrl: './page-index.component.scss',
 })
