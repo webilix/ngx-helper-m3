@@ -23,9 +23,9 @@
         "@angular/common": ">=20.3.6",
         "@angular/core": ">=20.3.6",
         "@angular/material": ">=20.2.9",
-        "@webilix/helper-library": ">=6.1.6",
-        "@webilix/jalali-date-time": ">=2.0.8",
-        "ngx-extended-pdf-viewer": ">=24.2.5",
+        "@webilix/helper-library": ">=6.1.7",
+        "@webilix/jalali-date-time": ">=2.0.9",
+        "ngx-extended-pdf-viewer": ">=25.5.1",
         "ngx-mask": ">=20.0.3",
         "ol": ">=10.6.1"
     },
