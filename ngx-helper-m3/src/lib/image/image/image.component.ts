@@ -14,7 +14,7 @@ import { INgxHelperImage, INgxHelperImageConfig } from '../ngx-helper-image.inte
     styleUrl: './image.component.scss',
 })
 export class ImageComponent {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-image';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-image';
 
     public image!: INgxHelperImage;
     public config?: INgxHelperImageConfig;

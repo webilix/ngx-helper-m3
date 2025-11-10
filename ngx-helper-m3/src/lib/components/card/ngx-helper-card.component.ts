@@ -25,14 +25,14 @@ type Button =
 
 @Component({
     selector: 'ngx-helper-card',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
     imports: [NgClass, MatButton, MatDivider, MatIcon, MatMenuModule],
     providers: [ComponentService],
     templateUrl: './ngx-helper-card.component.html',
     styleUrl: './ngx-helper-card.component.scss',
 })
 export class NgxHelperCardComponent implements OnInit, OnChanges {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-card';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-card';
 
     @Input({ required: true }) title!: string;
     @Input({ required: false }) subTitle?: string;

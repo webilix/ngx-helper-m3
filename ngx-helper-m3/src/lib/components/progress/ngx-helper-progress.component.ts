@@ -7,9 +7,9 @@ import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angula
     styleUrl: './ngx-helper-progress.component.scss',
 })
 export class NgxHelperProgressComponent implements OnChanges {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-progress';
-    @HostBinding('style.border-radius') borderRadiusCSS!: string;
-    @HostBinding('style.background-color') backgroundColorCSS!: string;
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-progress';
+    @HostBinding('style.border-radius') protected borderRadiusCSS!: string;
+    @HostBinding('style.background-color') protected backgroundColorCSS!: string;
 
     @Input({ required: true }) value!: number | { done: number; total: number };
     @Input({ required: false }) align: 'LR' | 'RL' | 'TB' | 'BT' = 'LR';
@@ -25,7 +25,12 @@ export class NgxHelperProgressComponent implements OnChanges {
         this.borderRadiusCSS = this.borderRadius;
         this.backgroundColorCSS = this.backgroundColor || 'transparent';
 
-        let value: number = typeof this.value === 'number' ? this.value : (this.value.done / this.value.total) * 100;
+        let value: number =
+            this.value === undefined
+                ? 0
+                : typeof this.value === 'number'
+                ? this.value
+                : (this.value.done / this.value.total) * 100;
         if (isNaN(value) || value < 0) value = 0;
         else if (value > 100) value = 100;
         this.size = `${value.toFixed(2)}%`;

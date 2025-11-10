@@ -34,15 +34,15 @@ import {
 
 @Component({
     selector: 'ngx-helper-page-group',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
     imports: [NgComponentOutlet, MatButton, MatIcon, MatMenuModule],
     providers: [ComponentService],
     templateUrl: './ngx-helper-page-group.component.html',
     styleUrl: './ngx-helper-page-group.component.scss',
 })
 export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-page-group';
-    @HostBinding('style.display') display: string = 'none';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-page-group';
+    @HostBinding('style.display') public display: string = 'none';
 
     @Input({ required: true }) pageGroup!: INgxHelperPageGroup;
     @Input({ required: false }) pageId!: string;

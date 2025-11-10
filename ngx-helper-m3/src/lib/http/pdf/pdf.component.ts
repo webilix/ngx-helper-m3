@@ -11,7 +11,7 @@ import { MatIcon } from '@angular/material/icon';
     styleUrl: './pdf.component.scss',
 })
 export class PdfComponent {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-pdf';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-pdf';
 
     public src!: Blob;
     public close!: () => void;

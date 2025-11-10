@@ -14,7 +14,7 @@ import { INgxHelperConfirm } from '../confirm.interface';
     styleUrl: './confirm-dialog.component.scss',
 })
 export class ConfirmDialogComponent {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-confirm';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-confirm';
 
     public confirm: INgxHelperConfirm = inject(MAT_DIALOG_DATA);
 }

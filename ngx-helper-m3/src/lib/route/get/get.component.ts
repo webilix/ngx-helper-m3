@@ -24,7 +24,7 @@ import { INgxHelperRouteConfig, NgxHelperRoute } from '../ngx-helper-route.inter
     styleUrl: './get.component.scss',
 })
 export class GetComponent implements OnInit {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-route';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-route';
 
     public route!: NgxHelperRoute;
     public config?: Partial<INgxHelperRouteConfig>;

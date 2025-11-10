@@ -13,16 +13,16 @@ import { INgxHelperValue } from '../ngx-helper-value.interface';
 
 @Component({
     selector: 'ngx-helper-value-box',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
     imports: [ClipboardModule, MatIcon, MatIconButton],
     providers: [ComponentService],
     templateUrl: './ngx-helper-value-box.component.html',
     styleUrl: './ngx-helper-value-box.component.scss',
 })
 export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-value-box';
-    @HostBinding('style.grid-template-columns') private gridTemplateColumns!: string;
-    @HostBinding('style.--gap-size') private boxGap!: string;
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-value-box';
+    @HostBinding('style.grid-template-columns') protected gridTemplateColumns!: string;
+    @HostBinding('style.--gap-size') protected boxGap!: string;
 
     @Input({ required: true }) values!: INgxHelperValue[];
     @Input({ required: false }) column?: number | { desktop?: number; mobile?: number };

@@ -21,8 +21,8 @@ import { INgxHelperHttpUploadConfig } from '../ngx-helper-http.interface';
     ],
 })
 export class UploadComponent<R, E> implements AfterViewInit {
-    @HostBinding('@host') private host: boolean = true;
-    @HostBinding('className') private className: string = 'ngx-helper-m3-http';
+    @HostBinding('@host') protected host: boolean = true;
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-http';
     @HostBinding('style.bottom') bottom: string = '1rem';
 
     public id!: string;

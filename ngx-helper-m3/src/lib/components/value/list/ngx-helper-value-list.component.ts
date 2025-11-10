@@ -17,7 +17,7 @@ import { INgxHelperValue } from '../ngx-helper-value.interface';
     styleUrl: './ngx-helper-value-list.component.scss',
 })
 export class NgxHelperValueListComponent implements OnChanges {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-value-list';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-value-list';
 
     @Input({ required: true }) values!: INgxHelperValue[];
     @Input({ required: false }) titleWidth: string = '20%';

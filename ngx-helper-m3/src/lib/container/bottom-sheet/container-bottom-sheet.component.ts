@@ -20,7 +20,7 @@ import {
     styleUrl: './container-bottom-sheet.component.scss',
 })
 export class ContainerBottomSheetComponent implements OnInit {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-container';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-container';
 
     public container: {
         component: ComponentType<any>;

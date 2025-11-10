@@ -25,12 +25,12 @@ import { INgxHelperToastConfig } from '../ngx-helper-toast.interface';
 export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
     @HostListener('click') private onClick = () => this.close();
 
-    @HostBinding('@host') private host: boolean = true;
-    @HostBinding('className') private className: string = 'ngx-helper-m3-toast';
-    @HostBinding('style.top') top: string = '1rem';
-    @HostBinding('style.color') textColor!: string;
-    @HostBinding('style.border-color') borderColor!: string;
-    @HostBinding('style.background-color') backgroundColor!: string;
+    @HostBinding('@host') protected host: boolean = true;
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-toast';
+    @HostBinding('style.top') public top: string = '1rem';
+    @HostBinding('style.color') public textColor!: string;
+    @HostBinding('style.border-color') public borderColor!: string;
+    @HostBinding('style.background-color') public backgroundColor!: string;
 
     public id!: string;
     public icon!: string;

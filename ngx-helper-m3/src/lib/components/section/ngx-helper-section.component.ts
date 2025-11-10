@@ -6,14 +6,14 @@ import { ComponentService, IComponentConfig } from '../component.service';
 
 @Component({
     selector: 'ngx-helper-section',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
     imports: [],
     providers: [ComponentService],
     templateUrl: './ngx-helper-section.component.html',
     styleUrl: './ngx-helper-section.component.scss',
 })
 export class NgxHelperSectionComponent implements OnInit {
-    @HostBinding('style.--section-gap') private gap!: string;
+    @HostBinding('style.--section-gap') protected gap!: string;
 
     @Input({ required: false }) gapSize?: string;
 

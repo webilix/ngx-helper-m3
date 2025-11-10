@@ -11,8 +11,8 @@ import { NGX_HELPER_BOX_DATA } from './ngx-helper-box.interface';
     styleUrl: './ngx-helper-box.component.scss',
 })
 export class NgxHelperBoxComponent implements OnInit, OnChanges {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-box';
-    @HostBinding('style.padding') private paddingCSS!: string;
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-box';
+    @HostBinding('style.padding') protected paddingCSS!: string;
 
     @Input({ required: false }) component?: ComponentType<any>;
     @Input({ required: false }) data?: any;

@@ -20,7 +20,7 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
     styleUrl: './show.component.scss',
 })
 export class ShowComponent implements OnInit {
-    @HostBinding('className') private className: string = 'ngx-helper-m3-coordinates';
+    @HostBinding('className') protected className: string = 'ngx-helper-m3-coordinates';
 
     public coordinates!: INgxHelperCoordinates;
     public config?: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>;
