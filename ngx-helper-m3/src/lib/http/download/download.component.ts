@@ -1,10 +1,7 @@
 import { AfterViewInit, Component, HostBinding } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 
 import { MatIcon } from '@angular/material/icon';
-
-import { NgxHelperToastService } from '../../toast/ngx-helper-toast.service';
 
 import { INgxHelperHttpDownloadConfig } from '../ngx-helper-http.interface';
 
@@ -13,19 +10,11 @@ import { INgxHelperHttpDownloadConfig } from '../ngx-helper-http.interface';
     imports: [MatIcon],
     templateUrl: './download.component.html',
     styleUrl: './download.component.scss',
-    animations: [
-        trigger('host', [
-            transition(':enter', [
-                style({ left: 'calc(-250px - 1rem)' }),
-                animate('100ms ease-in-out', style({ left: '1rem' })),
-            ]),
-        ]),
-    ],
 })
 export class DownloadComponent implements AfterViewInit {
-    @HostBinding('@host') protected host: boolean = true;
     @HostBinding('className') protected className: string = 'ngx-helper-m3-http';
-    @HostBinding('style.bottom') bottom: string = '1rem';
+    @HostBinding('style.left') protected left: string = 'calc(-250px - 1rem)';
+    @HostBinding('style.bottom') public bottom: string = '1rem';
 
     public id!: string;
     public path!: string;
@@ -37,9 +26,10 @@ export class DownloadComponent implements AfterViewInit {
 
     public progress: number = 0;
 
-    constructor(private readonly httpClient: HttpClient, private readonly ngxHelperToastService: NgxHelperToastService) {}
+    constructor(private readonly httpClient: HttpClient) {}
 
     ngAfterViewInit(): void {
+        setTimeout(() => (this.left = '1rem'), 0);
         setTimeout(this.download.bind(this), 0);
     }
 

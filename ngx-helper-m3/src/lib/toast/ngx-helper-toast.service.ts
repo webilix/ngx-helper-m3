@@ -81,7 +81,6 @@ export class NgxHelperToastService {
         componentRef.instance.init = () => this.updatePositions();
         componentRef.instance.close = () => {
             this.applicationRef.detachView(componentRef.hostView);
-            document.body.removeChild(htmlElement);
             componentRef.destroy();
 
             this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
@@ -94,7 +93,7 @@ export class NgxHelperToastService {
         document.body.appendChild(htmlElement);
 
         this.components.push({ id, componentRef, content });
-        this.updatePositions();
+        // this.updatePositions();
     }
 
     info(message: string | string[]): void;

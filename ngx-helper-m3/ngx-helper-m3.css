@@ -378,7 +378,6 @@
 /* NGX HELPER HTTP (UPLOAD / DOWNLOAD / PDF) */
 .ngx-helper-m3-http {
     position: fixed;
-    left: 1rem;
 
     direction: ltr;
     display: block;

@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core';
-import { animate, style, transition, trigger } from '@angular/animations';
 
 import { MatIcon } from '@angular/material/icon';
 
@@ -13,21 +12,12 @@ import { INgxHelperToastConfig } from '../ngx-helper-toast.interface';
     imports: [MatIcon, NgxHelperMultiLinePipe],
     templateUrl: './toast.component.html',
     styleUrl: './toast.component.scss',
-    animations: [
-        trigger('host', [
-            transition(':enter', [
-                style({ top: 0, opacity: 0 }),
-                animate('350ms ease-in-out', style({ top: '*', opacity: 1 })),
-            ]),
-        ]),
-    ],
 })
 export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
     @HostListener('click') private onClick = () => this.close();
 
-    @HostBinding('@host') protected host: boolean = true;
     @HostBinding('className') protected className: string = 'ngx-helper-m3-toast';
-    @HostBinding('style.top') public top: string = '1rem';
+    @HostBinding('style.top') public top: string = '0';
     @HostBinding('style.color') public textColor!: string;
     @HostBinding('style.border-color') public borderColor!: string;
     @HostBinding('style.background-color') public backgroundColor!: string;
@@ -82,6 +72,6 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-        this.init();
+        setTimeout(() => this.init(), 0);
     }
 }

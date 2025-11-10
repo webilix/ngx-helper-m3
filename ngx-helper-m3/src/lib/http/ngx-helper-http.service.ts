@@ -54,7 +54,6 @@ export class NgxHelperHttpService {
             componentRef.instance.onError = () => reject();
             componentRef.instance.close = () => {
                 this.applicationRef.detachView(componentRef.hostView);
-                if (htmlElement) document.body.removeChild(htmlElement);
                 componentRef.destroy();
 
                 this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
@@ -125,7 +124,6 @@ export class NgxHelperHttpService {
         componentRef.instance.config = config;
         componentRef.instance.close = (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => {
             this.applicationRef.detachView(componentRef.hostView);
-            if (htmlElement) document.body.removeChild(htmlElement);
             componentRef.destroy();
 
             this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
@@ -180,7 +178,6 @@ export class NgxHelperHttpService {
             componentRef.instance.src = blob;
             componentRef.instance.close = () => {
                 this.applicationRef.detachView(componentRef.hostView);
-                if (htmlElement) document.body.removeChild(htmlElement);
                 componentRef.destroy();
                 document.body.style.overflow = 'visible';
             };
