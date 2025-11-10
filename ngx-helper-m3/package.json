@@ -27,7 +27,7 @@
         "@webilix/jalali-date-time": ">=2.0.9",
         "ngx-extended-pdf-viewer": ">=25.5.1",
         "ngx-mask": ">=20.0.3",
-        "ol": ">=10.6.1"
+        "ol": ">=10.7.0"
     },
     "dependencies": {
         "tslib": "^2.3.0"
