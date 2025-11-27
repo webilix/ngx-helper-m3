@@ -20,12 +20,12 @@
     },
     "homepage": "https://github.com/webilix/ngx-helper-m3#readme",
     "peerDependencies": {
-        "@angular/common": ">=20.3.10",
-        "@angular/core": ">=20.3.10",
-        "@angular/material": ">=20.2.12",
+        "@angular/common": ">=21.0.1",
+        "@angular/core": ">=21.0.1",
+        "@angular/material": ">=21.0.1",
         "@webilix/helper-library": ">=6.1.7",
         "@webilix/jalali-date-time": ">=2.0.9",
-        "ngx-extended-pdf-viewer": ">=25.5.1",
+        "ngx-extended-pdf-viewer": ">=25.6.1",
         "ngx-mask": ">=20.0.3",
         "ol": ">=10.7.0"
     },
