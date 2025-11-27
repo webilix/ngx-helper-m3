@@ -13,7 +13,7 @@ type ColorMode = 'LIGHT' | 'DARK';
 
 @Component({
     selector: 'app-root',
-    host: { '(window:keydown)': 'onKeydown($event)', '(window:resize)': 'onResize($event)' },
+    host: { '(window:keydown)': 'onKeydown($event)', '(window:resize)': 'onResize()' },
     imports: [RouterLink, RouterOutlet, MatDivider, MatIconButton, MatIcon, MatMenuModule],
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss',

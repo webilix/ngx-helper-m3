@@ -6,7 +6,7 @@ import { ComponentService, IComponentConfig } from '../../component.service';
 
 @Component({
     selector: 'ngx-helper-section-column',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
     imports: [],
     templateUrl: './ngx-helper-section-column.component.html',
     styleUrl: './ngx-helper-section-column.component.scss',

@@ -4,7 +4,7 @@ import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../ngx-helper.config';
 
 @Directive({
     selector: '[ngxHelperMobileView]',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
 })
 export class NgxHelperMobileViewDirective implements OnInit {
     @Input({ required: true }) public ngxHelperMobileView!: string;

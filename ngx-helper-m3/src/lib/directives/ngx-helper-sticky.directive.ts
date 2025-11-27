@@ -9,7 +9,7 @@ interface IStickyView {
 
 @Directive({
     selector: '[ngxHelperSticky]',
-    host: { '(window:resize)': 'onResize($event)' },
+    host: { '(window:resize)': 'onResize()' },
 })
 export class NgxHelperStickyDirective implements OnInit {
     @Input({ required: true }) public ngxHelperSticky!: 'TOP' | 'BOTTOM';

@@ -2,7 +2,7 @@ import { Directive, ElementRef, Inject, Input, OnInit, Optional } from '@angular
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../ngx-helper.config';
 
-@Directive({ selector: '[ngxHelperShowIn]', host: { '(window:resize)': 'onResize($event)' } })
+@Directive({ selector: '[ngxHelperShowIn]', host: { '(window:resize)': 'onResize()' } })
 export class NgxHelperShowInDirective implements OnInit {
     @Input({ required: true }) ngxHelperShowIn!: 'DESKTOP' | 'MOBILE';
 
