@@ -1,15 +1,11 @@
 <div class="background"></div>
 <button class="close" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
 
-<ngx-extended-pdf-viewer
+<pdf-viewer
     [src]="src"
-    [textLayer]="true"
-    [showToolbar]="false"
-    [showSidebarButton]="false"
-    [sidebarVisible]="false"
-    [backgroundColor]="'var(--background)'"
-    [contextMenuAllowed]="true"
-    [showBorders]="false"
-    [zoom]="'page-fit'"
-    [handTool]="false"
-></ngx-extended-pdf-viewer>
+    [render-text]="true"
+    [zoom-scale]="'page-fit'"
+    [original-size]="true"
+    [fit-to-page]="true"
+    style="width: calc(100vw - 2rem); height: calc(100vh - 2rem)"
+></pdf-viewer>

@@ -488,11 +488,9 @@
         }
     }
 
-    ngx-extended-pdf-viewer {
+    pdf-viewer {
         position: relative;
         display: block;
-        width: calc(100% - 2rem);
-        height: calc(100% - 2rem);
     }
 }
 

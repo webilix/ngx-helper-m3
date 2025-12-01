@@ -175,7 +175,7 @@ export class NgxHelperHttpService {
                 elementInjector: this.injector,
             });
 
-            componentRef.instance.src = blob;
+            componentRef.instance.src = URL.createObjectURL(blob);
             componentRef.instance.close = () => {
                 this.applicationRef.detachView(componentRef.hostView);
                 componentRef.destroy();
