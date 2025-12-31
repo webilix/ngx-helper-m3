@@ -7,9 +7,9 @@
 <button class="close" mat-icon-button (click)="close()"><mat-icon>close</mat-icon></button>
 
 <div class="arrows">
-    <button class="arrow" mat-icon-button (click)="changeIndex(-1)"><mat-icon>chevron_right</mat-icon></button>
+    <button class="arrow" mat-icon-button (click)="changeIndex(1)"><mat-icon>chevron_right</mat-icon></button>
     <div class="count">{{ index + 1 }} از {{ images.length }}</div>
-    <button class="arrow" mat-icon-button (click)="changeIndex(1)"><mat-icon>chevron_left</mat-icon></button>
+    <button class="arrow" mat-icon-button (click)="changeIndex(-1)"><mat-icon>chevron_left</mat-icon></button>
 </div>
 
 <div class="image">

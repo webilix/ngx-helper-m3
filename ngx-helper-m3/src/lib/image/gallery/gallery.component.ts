@@ -18,9 +18,8 @@ export class GalleryComponent {
 
     public images!: INgxHelperImage[];
     public config?: INgxHelperImageConfig;
-    public close!: () => void;
-
     public index: number = 0;
+    public close!: () => void;
 
     checkKey(event: any): void {
         if (!(event instanceof KeyboardEvent)) return;
@@ -32,12 +31,12 @@ export class GalleryComponent {
 
         if (event.code === 'ArrowRight') {
             event.preventDefault();
-            this.changeIndex(-1);
+            this.changeIndex(1);
         }
 
         if (event.code === 'ArrowLeft') {
             event.preventDefault();
-            this.changeIndex(1);
+            this.changeIndex(-1);
         }
     }
 

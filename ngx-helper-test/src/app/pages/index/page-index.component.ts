@@ -5,6 +5,7 @@ import { MatButton } from '@angular/material/button';
 import {
     INgxHelperCoordinates,
     INgxHelperImage,
+    INgxHelperImageConfig,
     INgxHelperToastConfig,
     NgxHelperConfirmService,
     NgxHelperContainerService,
@@ -203,7 +204,7 @@ export class PageIndexComponent implements OnInit {
         );
     }
 
-    image(gallery: boolean): void {
+    image(gallery: boolean, option?: number | true): void {
         const images: INgxHelperImage[] = [
             {
                 image: 'https://images.ctfassets.net/hrltx12pl8hq/28ECAQiPJZ78hxatLTa7Ts/2f695d869736ae3b0de3e56ceaca3958/free-nature-images.jpg?fit=fill&w=1200&h=630',
@@ -223,7 +224,13 @@ export class PageIndexComponent implements OnInit {
             },
         ];
 
-        this.ngxHelperImageService.showGallery(gallery ? images : [images[0]]);
+        const index: number = !option ? 0 : option === true ? 0 : option;
+        const config: INgxHelperImageConfig = {
+            backgroundColor: option === true ? 'var(--outline)' : undefined,
+            backgroundOpacity: option === true ? 0.5 : undefined,
+        };
+
+        this.ngxHelperImageService.showGallery(gallery ? images : [images[0]], index, config);
     }
 
     toast(type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR'): void {
