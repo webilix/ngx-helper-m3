@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 
 import { Feature, Map, View } from 'ol';
 import { Coordinate } from 'ol/coordinate';
@@ -22,13 +22,14 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
 export class ShowComponent implements OnInit {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-coordinates';
 
-    public coordinates!: INgxHelperCoordinates;
-    public config?: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>;
-    public close!: () => void;
+    @Input({ required: true }) coordinates!: INgxHelperCoordinates;
+    @Input({ required: true }) config?: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>;
+    @Input({ required: true }) close!: () => void;
 
-    private map!: Map;
-    public copied?: 'LATITUDE' | 'LONGITUDE';
+    protected copied?: 'LATITUDE' | 'LONGITUDE';
+
     private copyTimeout: any;
+    private map!: Map;
 
     ngOnInit(): void {
         const coordinate: Coordinate = [this.coordinates.longitude, this.coordinates.latitude];

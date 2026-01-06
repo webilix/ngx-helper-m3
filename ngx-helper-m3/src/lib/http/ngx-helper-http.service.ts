@@ -1,5 +1,7 @@
-import { ApplicationRef, ComponentRef, createComponent, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import { ComponentRef, Injectable } from '@angular/core';
 import { HttpStatusCode } from '@angular/common/http';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 import { Helper } from '@webilix/helper-library';
 
@@ -17,11 +19,7 @@ export class NgxHelperHttpService {
         componentRef: ComponentRef<DownloadComponent> | ComponentRef<UploadComponent<any, any>>;
     }[] = [];
 
-    constructor(
-        private readonly applicationRef: ApplicationRef,
-        private readonly injector: Injector,
-        private readonly ngxHelperToastService: NgxHelperToastService,
-    ) {}
+    constructor(private readonly overlay: Overlay, private readonly ngxHelperToastService: NgxHelperToastService) {}
 
     private getId(): string {
         let id: string | undefined = undefined;
@@ -40,29 +38,21 @@ export class NgxHelperHttpService {
     private getBuffer(path: string, title: string, config: Partial<INgxHelperHttpDownloadConfig>): Promise<ArrayBuffer>;
     private getBuffer(path: string, title: string, config?: Partial<INgxHelperHttpDownloadConfig>): Promise<ArrayBuffer> {
         return new Promise<ArrayBuffer>((resolve, reject) => {
-            const componentRef = createComponent<DownloadComponent>(DownloadComponent, {
-                environmentInjector: this.applicationRef.injector,
-                elementInjector: this.injector,
-            });
+            const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+            const componentRef = overlayRef.attach(new ComponentPortal(DownloadComponent));
 
             const id: string = this.getId();
-            componentRef.instance.id = id;
-            componentRef.instance.path = path;
-            componentRef.instance.title = title;
-            componentRef.instance.config = config || {};
-            componentRef.instance.onSuccess = (arrayBuffer: ArrayBuffer) => resolve(arrayBuffer);
-            componentRef.instance.onError = () => reject();
-            componentRef.instance.close = () => {
-                this.applicationRef.detachView(componentRef.hostView);
-                componentRef.destroy();
-
+            componentRef.setInput('id', id);
+            componentRef.setInput('path', path);
+            componentRef.setInput('title', title);
+            componentRef.setInput('config', config || {});
+            componentRef.setInput('onSuccess', (arrayBuffer: ArrayBuffer) => resolve(arrayBuffer));
+            componentRef.setInput('onError', () => reject());
+            componentRef.setInput('close', () => {
                 this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
                 this.updatePositions();
-            };
-
-            const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-            this.applicationRef.attachView(componentRef.hostView);
-            document.body.appendChild(htmlElement);
+                overlayRef.dispose();
+            });
 
             this.components.push({ id, componentRef });
             this.updatePositions();
@@ -112,23 +102,17 @@ export class NgxHelperHttpService {
         const onSuccess: (response: R, status: HttpStatusCode) => void = typeof arg3 === 'function' ? arg2 : arg1;
         const onError: (error: E, status: HttpStatusCode) => void = typeof arg3 === 'function' ? arg3 : arg2;
 
-        const componentRef = createComponent<UploadComponent<R, E>>(UploadComponent, {
-            environmentInjector: this.applicationRef.injector,
-            elementInjector: this.injector,
-        });
+        const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+        const componentRef = overlayRef.attach(new ComponentPortal(UploadComponent));
 
         const id: string = this.getId();
-        componentRef.instance.id = id;
-        componentRef.instance.file = file;
-        componentRef.instance.url = url;
-        componentRef.instance.config = config;
-        componentRef.instance.close = (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => {
-            this.applicationRef.detachView(componentRef.hostView);
-            componentRef.destroy();
-
+        componentRef.setInput('id', id);
+        componentRef.setInput('file', file);
+        componentRef.setInput('url', url);
+        componentRef.setInput('config', config);
+        componentRef.setInput('close', (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => {
             this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
             this.updatePositions();
-
             switch (type) {
                 case 'RESPONSE':
                     onSuccess(result || undefined, status);
@@ -137,11 +121,8 @@ export class NgxHelperHttpService {
                     onError(result || undefined, status);
                     break;
             }
-        };
-
-        const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild(htmlElement);
+            overlayRef.dispose();
+        });
 
         this.components.push({ id, componentRef });
         this.updatePositions();
@@ -170,21 +151,15 @@ export class NgxHelperHttpService {
     showPDF(blob: Blob, config: Partial<INgxHelperHttpDownloadConfig>): void;
     showPDF(data: string | ArrayBuffer | Blob, config?: Partial<INgxHelperHttpDownloadConfig>): void {
         this.getPDF(data, config).then(async (blob: Blob) => {
-            const componentRef = createComponent<PdfComponent>(PdfComponent, {
-                environmentInjector: this.applicationRef.injector,
-                elementInjector: this.injector,
+            const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+            const componentRef = overlayRef.attach(new ComponentPortal(PdfComponent));
+
+            componentRef.setInput('src', URL.createObjectURL(blob));
+            componentRef.setInput('close', () => {
+                document.body.style.overflow = 'visible';
+                overlayRef.dispose();
             });
 
-            componentRef.instance.src = URL.createObjectURL(blob);
-            componentRef.instance.close = () => {
-                this.applicationRef.detachView(componentRef.hostView);
-                componentRef.destroy();
-                document.body.style.overflow = 'visible';
-            };
-
-            const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-            this.applicationRef.attachView(componentRef.hostView);
-            document.body.appendChild(htmlElement);
             document.body.style.overflow = 'hidden';
         });
     }

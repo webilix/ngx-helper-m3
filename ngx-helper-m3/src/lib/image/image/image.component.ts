@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
@@ -16,9 +16,9 @@ import { INgxHelperImage, INgxHelperImageConfig } from '../ngx-helper-image.inte
 export class ImageComponent {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-image';
 
-    public image!: INgxHelperImage;
-    public config?: INgxHelperImageConfig;
-    public close!: () => void;
+    @Input({ required: true }) image!: INgxHelperImage;
+    @Input({ required: true }) config?: INgxHelperImageConfig;
+    @Input({ required: true }) close!: () => void;
 
     checkEscape(event: any): void {
         if (!(event instanceof KeyboardEvent)) return;

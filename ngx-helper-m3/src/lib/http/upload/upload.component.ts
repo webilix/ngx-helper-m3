@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostBinding } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 import { MatIcon } from '@angular/material/icon';
@@ -16,13 +16,13 @@ export class UploadComponent<R, E> implements AfterViewInit {
     @HostBinding('style.left') protected left: string = 'calc(-250px - 1rem)';
     @HostBinding('style.bottom') bottom: string = '1rem';
 
-    public id!: string;
-    public file!: File;
-    public url!: string;
-    public config!: Partial<INgxHelperHttpUploadConfig>;
-    public close!: (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => void;
+    @Input({ required: true }) id!: string;
+    @Input({ required: true }) file!: File;
+    @Input({ required: true }) url!: string;
+    @Input({ required: true }) config!: Partial<INgxHelperHttpUploadConfig>;
+    @Input({ required: true }) close!: (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => void;
 
-    public progress: number = 0;
+    protected progress: number = 0;
 
     constructor(private readonly httpClient: HttpClient) {}
 

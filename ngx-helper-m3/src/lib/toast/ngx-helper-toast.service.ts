@@ -1,13 +1,6 @@
-import {
-    ApplicationRef,
-    ComponentRef,
-    createComponent,
-    EmbeddedViewRef,
-    Inject,
-    Injectable,
-    Injector,
-    Optional,
-} from '@angular/core';
+import { ComponentRef, Inject, Injectable, Optional } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 import { Helper } from '@webilix/helper-library';
 
@@ -27,8 +20,7 @@ export class NgxHelperToastService {
     private components: { id: string; componentRef: ComponentRef<ToastComponent>; content: string }[] = [];
 
     constructor(
-        private readonly applicationRef: ApplicationRef,
-        private readonly injector: Injector,
+        private readonly overlay: Overlay,
         @Optional() @Inject(NGX_HELPER_CONFIG) private readonly config?: Partial<INgxHelperConfig>,
     ) {}
 
@@ -66,34 +58,26 @@ export class NgxHelperToastService {
             return;
         }
 
-        const componentRef = createComponent<ToastComponent>(ToastComponent, {
-            environmentInjector: this.applicationRef.injector,
-            elementInjector: this.injector,
-        });
+        const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+        const componentRef = overlayRef.attach(new ComponentPortal(ToastComponent));
 
-        const id: string = this.getId();
-        componentRef.instance.id = id;
-        componentRef.instance.icon = toast.icon;
         componentRef.instance.textColor = toast.textColor;
         componentRef.instance.backgroundColor = toast.backgroundColor;
-        componentRef.instance.messages = messages;
-        componentRef.instance.config = { helper: this.config, toast: config };
-        componentRef.instance.init = () => this.updatePositions();
-        componentRef.instance.close = () => {
-            this.applicationRef.detachView(componentRef.hostView);
-            componentRef.destroy();
 
+        const id: string = this.getId();
+        componentRef.setInput('id', id);
+        componentRef.setInput('icon', toast.icon);
+        componentRef.setInput('messages', messages);
+        componentRef.setInput('config', { helper: this.config, toast: config });
+        componentRef.setInput('init', () => this.updatePositions());
+        componentRef.setInput('close', () => {
             this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
             this.updatePositions();
-
             if (onClose) onClose();
-        };
-        const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild(htmlElement);
+            overlayRef.dispose();
+        });
 
         this.components.push({ id, componentRef, content });
-        // this.updatePositions();
     }
 
     info(message: string | string[]): void;

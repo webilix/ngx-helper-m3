@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
@@ -28,13 +28,14 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
 export class GetComponent implements OnInit {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-coordinates';
 
-    public coordinates?: INgxHelperCoordinates;
-    public config?: Partial<INgxHelperCoordinatesConfig>;
-    public close!: (coordinates?: INgxHelperCoordinates) => void;
+    @Input({ required: true }) coordinates?: INgxHelperCoordinates;
+    @Input({ required: true }) config?: Partial<INgxHelperCoordinatesConfig>;
+    @Input({ required: true }) close!: (coordinates?: INgxHelperCoordinates) => void;
+
+    protected coordinate: Coordinate = [];
+    protected inputTransformFn = (value: any): string => Helper.STRING.changeNumbers(value.toString(), 'EN');
 
     private map!: Map;
-    public coordinate: Coordinate = [];
-    public inputTransformFn = (value: any): string => Helper.STRING.changeNumbers(value.toString(), 'EN');
 
     ngOnInit(): void {
         this.coordinate = this.coordinates

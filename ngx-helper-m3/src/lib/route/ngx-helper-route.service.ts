@@ -1,4 +1,6 @@
-import { ApplicationRef, createComponent, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 import { Helper } from '@webilix/helper-library';
 
@@ -9,7 +11,7 @@ import { INgxHelperRouteConfig, NgxHelperRoute } from './ngx-helper-route.interf
 
 @Injectable({ providedIn: 'root' })
 export class NgxHelperRouteService {
-    constructor(private readonly applicationRef: ApplicationRef, private readonly injector: Injector) {}
+    constructor(private readonly overlay: Overlay) {}
 
     get(): Promise<NgxHelperRoute>;
     get(route: NgxHelperRoute): Promise<NgxHelperRoute>;
@@ -21,43 +23,26 @@ export class NgxHelperRouteService {
             arg2 || (arg1 && !Helper.IS.array(arg1) ? arg1 : undefined);
 
         return new Promise<NgxHelperRoute>((resolve, reject) => {
-            const componentRef = createComponent<GetComponent>(GetComponent, {
-                environmentInjector: this.applicationRef.injector,
-                elementInjector: this.injector,
-            });
+            const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+            const componentRef = overlayRef.attach(new ComponentPortal(GetComponent));
 
-            componentRef.instance.route = route;
-            componentRef.instance.config = config;
-            componentRef.instance.close = (route?: NgxHelperRoute) => {
-                this.applicationRef.detachView(componentRef.hostView);
-                componentRef.destroy();
-
+            componentRef.setInput('route', route);
+            componentRef.setInput('config', config);
+            componentRef.setInput('close', (route?: NgxHelperRoute) => {
                 route ? resolve(route) : reject();
-            };
-
-            const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-            this.applicationRef.attachView(componentRef.hostView);
-            document.body.appendChild(htmlElement);
+                overlayRef.dispose();
+            });
         });
     }
 
     show(route: NgxHelperRoute): void;
     show(route: NgxHelperRoute, config: Partial<Omit<INgxHelperRouteConfig, 'view'>>): void;
     show(route: NgxHelperRoute, config?: Partial<Omit<INgxHelperRouteConfig, 'view'>>): void {
-        const componentRef = createComponent<ShowComponent>(ShowComponent, {
-            environmentInjector: this.applicationRef.injector,
-            elementInjector: this.injector,
-        });
+        const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+        const componentRef = overlayRef.attach(new ComponentPortal(ShowComponent));
 
-        componentRef.instance.route = route;
-        componentRef.instance.config = config;
-        componentRef.instance.close = () => {
-            this.applicationRef.detachView(componentRef.hostView);
-            componentRef.destroy();
-        };
-
-        const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild(htmlElement);
+        componentRef.setInput('route', route);
+        componentRef.setInput('config', config);
+        componentRef.setInput('close', () => overlayRef.dispose());
     }
 }

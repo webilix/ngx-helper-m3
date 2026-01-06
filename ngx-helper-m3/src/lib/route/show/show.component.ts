@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -26,15 +26,15 @@ import { INgxHelperRouteConfig, NgxHelperRoute } from '../ngx-helper-route.inter
 export class ShowComponent implements OnInit {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-route';
 
-    public route!: NgxHelperRoute;
-    public config?: Partial<INgxHelperRouteConfig>;
-    public close!: () => void;
+    @Input({ required: true }) route!: NgxHelperRoute;
+    @Input({ required: true }) config?: Partial<INgxHelperRouteConfig>;
+    @Input({ required: true }) close!: () => void;
 
-    public distance!: IGeoRouteLength;
-    public copied?: number;
-    public index: number = 0;
+    protected distance!: IGeoRouteLength;
+    protected copied?: number;
+    protected index: number = 0;
+
     private layers: VectorLayer[] = [];
-
     private copyTimeout?: any;
     private map!: Map;
 

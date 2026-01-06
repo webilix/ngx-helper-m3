@@ -1,4 +1,6 @@
-import { ApplicationRef, createComponent, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 import { GetComponent } from './get/get.component';
 import { ShowComponent } from './show/show.component';
@@ -7,7 +9,7 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from './ngx-helper
 
 @Injectable({ providedIn: 'root' })
 export class NgxHelperCoordinatesService {
-    constructor(private readonly applicationRef: ApplicationRef, private readonly injector: Injector) {}
+    constructor(private readonly overlay: Overlay) {}
 
     get(): Promise<INgxHelperCoordinates>;
     get(coordinates: INgxHelperCoordinates): Promise<INgxHelperCoordinates>;
@@ -18,43 +20,26 @@ export class NgxHelperCoordinatesService {
         const config: Partial<INgxHelperCoordinatesConfig> | undefined = arg2 || (arg1 && !coordinates ? arg1 : undefined);
 
         return new Promise<INgxHelperCoordinates>((resolve, reject) => {
-            const componentRef = createComponent<GetComponent>(GetComponent, {
-                environmentInjector: this.applicationRef.injector,
-                elementInjector: this.injector,
-            });
+            const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+            const componentRef = overlayRef.attach(new ComponentPortal(GetComponent));
 
-            componentRef.instance.coordinates = coordinates;
-            componentRef.instance.config = config;
-            componentRef.instance.close = (coordinates?: INgxHelperCoordinates) => {
-                this.applicationRef.detachView(componentRef.hostView);
-                componentRef.destroy();
-
+            componentRef.setInput('coordinates', coordinates);
+            componentRef.setInput('config', config);
+            componentRef.setInput('close', (coordinates?: INgxHelperCoordinates) => {
                 coordinates ? resolve(coordinates) : reject();
-            };
-
-            const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-            this.applicationRef.attachView(componentRef.hostView);
-            document.body.appendChild(htmlElement);
+                overlayRef.dispose();
+            });
         });
     }
 
     show(coordinates: INgxHelperCoordinates): void;
     show(coordinates: INgxHelperCoordinates, config: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>): void;
     show(coordinates: INgxHelperCoordinates, config?: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>): void {
-        const componentRef = createComponent<ShowComponent>(ShowComponent, {
-            environmentInjector: this.applicationRef.injector,
-            elementInjector: this.injector,
-        });
+        const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+        const componentRef = overlayRef.attach(new ComponentPortal(ShowComponent));
 
-        componentRef.instance.coordinates = coordinates;
-        componentRef.instance.config = config;
-        componentRef.instance.close = () => {
-            this.applicationRef.detachView(componentRef.hostView);
-            componentRef.destroy();
-        };
-
-        const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild(htmlElement);
+        componentRef.setInput('coordinates', coordinates);
+        componentRef.setInput('config', config);
+        componentRef.setInput('close', () => overlayRef.dispose());
     }
 }

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostBinding } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 
 import { MatIcon } from '@angular/material/icon';
@@ -16,21 +16,21 @@ export class DownloadComponent implements AfterViewInit {
     @HostBinding('style.left') protected left: string = 'calc(-250px - 1rem)';
     @HostBinding('style.bottom') public bottom: string = '1rem';
 
-    public id!: string;
-    public path!: string;
-    public title!: string;
-    public config!: Partial<INgxHelperHttpDownloadConfig>;
-    public onSuccess!: (arrayBuffer: ArrayBuffer) => void;
-    public onError!: () => void;
-    public close!: () => void;
+    @Input({ required: true }) id!: string;
+    @Input({ required: true }) path!: string;
+    @Input({ required: true }) title!: string;
+    @Input({ required: true }) config!: Partial<INgxHelperHttpDownloadConfig>;
+    @Input({ required: true }) onSuccess!: (arrayBuffer: ArrayBuffer) => void;
+    @Input({ required: true }) onError!: () => void;
+    @Input({ required: true }) close!: () => void;
 
-    public progress: number = 0;
+    protected progress: number = 0;
 
     constructor(private readonly httpClient: HttpClient) {}
 
     ngAfterViewInit(): void {
         setTimeout(() => (this.left = '1rem'), 0);
-        setTimeout(this.download.bind(this), 0);
+        setTimeout(this.download.bind(this), 1);
     }
 
     download(): void {

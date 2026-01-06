@@ -1,4 +1,4 @@
-import { Component, HostBinding } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
@@ -16,10 +16,10 @@ import { INgxHelperImage, INgxHelperImageConfig } from '../ngx-helper-image.inte
 export class GalleryComponent {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-image';
 
-    public images!: INgxHelperImage[];
-    public config?: INgxHelperImageConfig;
-    public index: number = 0;
-    public close!: () => void;
+    @Input({ required: true }) images!: INgxHelperImage[];
+    @Input({ required: true }) config?: INgxHelperImageConfig;
+    @Input({ required: true }) index: number = 0;
+    @Input({ required: true }) close!: () => void;
 
     checkKey(event: any): void {
         if (!(event instanceof KeyboardEvent)) return;

@@ -1,4 +1,4 @@
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -26,13 +26,13 @@ import { INgxHelperRouteConfig, NgxHelperRoute } from '../ngx-helper-route.inter
 export class GetComponent implements OnInit {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-route';
 
-    public route!: NgxHelperRoute;
-    public config?: Partial<INgxHelperRouteConfig>;
-    public close!: (route?: NgxHelperRoute) => void;
+    @Input({ required: true }) route!: NgxHelperRoute;
+    @Input({ required: true }) config?: Partial<INgxHelperRouteConfig>;
+    @Input({ required: true }) close!: (route?: NgxHelperRoute) => void;
 
-    public distance!: IGeoRouteLength;
+    protected distance!: IGeoRouteLength;
+
     private layers: VectorLayer[] = [];
-
     private map!: Map;
 
     ngOnInit(): void {

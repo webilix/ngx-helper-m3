@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
 
@@ -22,19 +22,20 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
     @HostBinding('style.border-color') public borderColor!: string;
     @HostBinding('style.background-color') public backgroundColor!: string;
 
-    public id!: string;
-    public icon!: string;
-    public messages: string[] = [];
-    public config!: { helper?: Partial<INgxHelperConfig>; toast: Partial<INgxHelperToastConfig> };
-    public init!: () => void;
-    public close!: () => void;
-
-    public timeout!: number;
-    public showClose!: boolean;
-    public animation!: 'DECREASE' | 'INCREASE';
+    @Input({ required: true }) id!: string;
+    @Input({ required: true }) icon!: string;
+    @Input({ required: true }) messages: string[] = [];
+    @Input({ required: true }) config!: { helper?: Partial<INgxHelperConfig>; toast: Partial<INgxHelperToastConfig> };
+    @Input({ required: true }) init!: () => void;
+    @Input({ required: true }) close!: () => void;
 
     public progress: number = 0;
     public start: number = 0;
+
+    protected timeout!: number;
+    protected showClose!: boolean;
+    protected animation!: 'DECREASE' | 'INCREASE';
+
     private interval?: any;
 
     constructor(public readonly elementRef: ElementRef) {}

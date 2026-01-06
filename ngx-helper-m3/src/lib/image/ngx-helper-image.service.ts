@@ -1,4 +1,6 @@
-import { ApplicationRef, createComponent, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { Overlay } from '@angular/cdk/overlay';
+import { ComponentPortal } from '@angular/cdk/portal';
 
 import { Helper } from '@webilix/helper-library';
 
@@ -9,25 +11,19 @@ import { INgxHelperImage, INgxHelperImageConfig } from './ngx-helper-image.inter
 
 @Injectable({ providedIn: 'root' })
 export class NgxHelperImageService {
-    constructor(private readonly applicationRef: ApplicationRef, private readonly injector: Injector) {}
+    constructor(private readonly overlay: Overlay) {}
 
     showImage(image: INgxHelperImage, config?: INgxHelperImageConfig): void {
-        const componentRef = createComponent<ImageComponent>(ImageComponent, {
-            environmentInjector: this.applicationRef.injector,
-            elementInjector: this.injector,
+        const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+        const componentRef = overlayRef.attach(new ComponentPortal(ImageComponent));
+
+        componentRef.setInput('image', image);
+        componentRef.setInput('config', config);
+        componentRef.setInput('close', () => {
+            document.body.style.overflow = 'visible';
+            overlayRef.dispose();
         });
 
-        componentRef.instance.image = image;
-        componentRef.instance.config = config;
-        componentRef.instance.close = () => {
-            this.applicationRef.detachView(componentRef.hostView);
-            componentRef.destroy();
-            document.body.style.overflow = 'visible';
-        };
-
-        const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild(htmlElement);
         document.body.style.overflow = 'hidden';
     }
 
@@ -46,23 +42,17 @@ export class NgxHelperImageService {
             return;
         }
 
-        const componentRef = createComponent<GalleryComponent>(GalleryComponent, {
-            environmentInjector: this.applicationRef.injector,
-            elementInjector: this.injector,
+        const overlayRef = this.overlay.create({ hasBackdrop: false, direction: 'rtl' });
+        const componentRef = overlayRef.attach(new ComponentPortal(GalleryComponent));
+
+        componentRef.setInput('images', images);
+        componentRef.setInput('config', config);
+        componentRef.setInput('index', index);
+        componentRef.setInput('close', () => {
+            document.body.style.overflow = 'visible';
+            overlayRef.dispose();
         });
 
-        componentRef.instance.images = images;
-        componentRef.instance.config = config;
-        componentRef.instance.index = index;
-        componentRef.instance.close = () => {
-            this.applicationRef.detachView(componentRef.hostView);
-            componentRef.destroy();
-            document.body.style.overflow = 'visible';
-        };
-
-        const htmlElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        document.body.appendChild(htmlElement);
         document.body.style.overflow = 'hidden';
     }
 }
