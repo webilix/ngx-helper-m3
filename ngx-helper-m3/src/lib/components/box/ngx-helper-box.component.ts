@@ -1,4 +1,13 @@
-import { Component, HostBinding, Injector, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    Injector,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { ComponentType } from '@angular/cdk/portal';
 
@@ -8,6 +17,7 @@ import { NGX_HELPER_BOX_DATA } from './ngx-helper-box.interface';
     selector: 'ngx-helper-box',
     imports: [NgComponentOutlet],
     templateUrl: './ngx-helper-box.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-box.component.scss',
 })
 export class NgxHelperBoxComponent implements OnInit, OnChanges {

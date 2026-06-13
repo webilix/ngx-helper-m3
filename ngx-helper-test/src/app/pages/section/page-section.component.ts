@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 import { NgxHelperSectionColumnComponent, NgxHelperSectionComponent } from '@webilix/ngx-helper-m3';
 
@@ -10,6 +10,7 @@ import { PageSectionContentComponent } from './content/page-section-content.comp
     host: { selector: 'page-section' },
     imports: [NgxHelperSectionComponent, NgxHelperSectionColumnComponent, PageSectionContentComponent],
     templateUrl: './page-section.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-section.component.scss',
 })
 export class PageSectionComponent {

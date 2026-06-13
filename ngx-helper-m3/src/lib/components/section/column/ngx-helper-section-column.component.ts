@@ -1,4 +1,15 @@
-import { Component, HostBinding, inject, Inject, Input, OnChanges, OnInit, Optional, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    inject,
+    Inject,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    SimpleChanges,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../../ngx-helper.config';
 
@@ -9,6 +20,7 @@ import { ComponentService, IComponentConfig } from '../../component.service';
     host: { '(window:resize)': 'onResize()' },
     imports: [],
     templateUrl: './ngx-helper-section-column.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-section-column.component.scss',
 })
 export class NgxHelperSectionColumnComponent implements OnInit, OnChanges {

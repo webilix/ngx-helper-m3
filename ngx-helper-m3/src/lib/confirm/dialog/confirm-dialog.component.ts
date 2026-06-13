@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, HostBinding, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { MatButtonModule } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { INgxHelperConfirm } from '../confirm.interface';
     host: { selector: 'confirm-dialog' },
     imports: [NgClass, MatButtonModule, MatDialogModule, MatIconModule],
     templateUrl: './confirm-dialog.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './confirm-dialog.component.scss',
 })
 export class ConfirmDialogComponent {

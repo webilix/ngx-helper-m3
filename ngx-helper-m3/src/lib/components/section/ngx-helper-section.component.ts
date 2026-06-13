@@ -1,4 +1,4 @@
-import { Component, HostBinding, Inject, Input, OnInit, Optional } from '@angular/core';
+import { Component, HostBinding, Inject, Input, OnInit, Optional, ChangeDetectionStrategy } from '@angular/core';
 
 import { INgxHelperConfig, NGX_HELPER_CONFIG } from '../../ngx-helper.config';
 
@@ -10,6 +10,7 @@ import { ComponentService, IComponentConfig } from '../component.service';
     imports: [],
     providers: [ComponentService],
     templateUrl: './ngx-helper-section.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-section.component.scss',
 })
 export class NgxHelperSectionComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
 import { MatIconButton } from '@angular/material/button';
@@ -11,6 +11,7 @@ import { INgxHelperImage, INgxHelperImageConfig } from '../ngx-helper-image.inte
     host: { selector: 'image', '(window:keydown)': 'checkEscape($event)' },
     imports: [MatIcon, MatIconButton, NgxHelperMultiLinePipe],
     templateUrl: './image.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './image.component.scss',
 })
 export class ImageComponent {

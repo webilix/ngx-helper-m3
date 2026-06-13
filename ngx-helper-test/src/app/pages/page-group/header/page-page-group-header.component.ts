@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 import {
@@ -13,6 +13,7 @@ import {
     selector: 'page-page-group-header',
     imports: [MatIcon, NgxHelperDatePipe, NgxHelperNumberPipe],
     templateUrl: './page-page-group-header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-page-group-header.component.scss',
 })
 export class PagePageGroupHeaderComponent {

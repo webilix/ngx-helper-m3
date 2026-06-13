@@ -10,6 +10,7 @@ import {
     Optional,
     Output,
     SimpleChanges,
+    ChangeDetectionStrategy,
 } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -38,6 +39,7 @@ import {
     imports: [NgComponentOutlet, MatButton, MatIcon, MatMenuModule],
     providers: [ComponentService],
     templateUrl: './ngx-helper-page-group.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-page-group.component.scss',
 })
 export class NgxHelperPageGroupComponent implements OnInit, OnChanges {

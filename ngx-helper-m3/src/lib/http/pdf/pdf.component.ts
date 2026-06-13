@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 import { MatIconButton } from '@angular/material/button';
@@ -8,6 +8,7 @@ import { MatIcon } from '@angular/material/icon';
     host: { selector: 'pdf', '(window:keydown)': 'checkEscape($event)' },
     imports: [MatIcon, MatIconButton, PdfViewerModule],
     templateUrl: './pdf.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './pdf.component.scss',
 })
 export class PdfComponent {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import {
     NgxHelperBankCardPipe,
@@ -34,6 +34,7 @@ import { AppService } from '../../app.service';
         NgxHelperWeightPipe,
     ],
     templateUrl: './page-pipes.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-pipes.component.scss',
 })
 export class PagePipesComponent implements OnInit {

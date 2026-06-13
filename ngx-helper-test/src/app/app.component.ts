@@ -1,4 +1,12 @@
-import { ChangeDetectorRef, Component, HostBinding, OnDestroy, OnInit, RendererFactory2 } from '@angular/core';
+import {
+    ChangeDetectorRef,
+    Component,
+    HostBinding,
+    OnDestroy,
+    OnInit,
+    RendererFactory2,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { Subscription } from 'rxjs';
 
@@ -16,6 +24,7 @@ type ColorMode = 'LIGHT' | 'DARK';
     host: { '(window:keydown)': 'onKeydown($event)', '(window:resize)': 'onResize()' },
     imports: [RouterLink, RouterOutlet, MatDivider, MatIconButton, MatIcon, MatMenuModule],
     templateUrl: './app.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './app.component.scss',
 })
 export class AppComponent implements OnInit, OnDestroy {

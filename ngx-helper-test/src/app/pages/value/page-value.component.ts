@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import {
     INgxHelperValue,
@@ -24,6 +24,7 @@ import { PageValueContentComponent } from './content/page-value-content.componen
         NgxHelperValueListComponent,
     ],
     templateUrl: './page-value.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-value.component.scss',
 })
 export class PageValueComponent implements OnInit {

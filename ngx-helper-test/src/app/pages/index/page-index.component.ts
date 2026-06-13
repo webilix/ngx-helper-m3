@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
@@ -28,6 +28,7 @@ import { PageIndexContainerComponent } from './container/page-index-container.co
     host: { selector: 'page-index' },
     imports: [MatButton, NgxHelperLoaderComponent, NgxHelperMobileViewDirective, NgxHelperShowInDirective],
     templateUrl: './page-index.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-index.component.scss',
 })
 export class PageIndexComponent implements OnInit {
@@ -52,30 +53,30 @@ export class PageIndexComponent implements OnInit {
             type === 'VERIFY'
                 ? this.ngxHelperConfirmService.verify({ question: 'می‌خواهید از عضویت خودتان خارج شوید؟', icon: 'logout' })
                 : type === 'DELETE'
-                ? this.ngxHelperConfirmService.delete(
-                      { title: 'گزینه', value: 'مقدار' },
-                      {
-                          description: 'در صورت تایید، اطلاعات از سیستم حذف شده و امکان بازیابی آنها وجود نخواهد داشت.',
-                          denyClass: 'secondary',
-                      },
-                  )
-                : type === 'ACTIVE'
-                ? this.ngxHelperConfirmService.status(
-                      true,
-                      { title: 'گزینه', value: 'مقدار' },
-                      {
-                          description:
-                              'در صورت تایید، اطلاعات در سیستم فعال می‌شود و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
-                      },
-                  )
-                : this.ngxHelperConfirmService.status(
-                      false,
-                      { title: 'گزینه', value: 'مقدار' },
-                      {
-                          description:
-                              'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
-                      },
-                  );
+                  ? this.ngxHelperConfirmService.delete(
+                        { title: 'گزینه', value: 'مقدار' },
+                        {
+                            description: 'در صورت تایید، اطلاعات از سیستم حذف شده و امکان بازیابی آنها وجود نخواهد داشت.',
+                            denyClass: 'secondary',
+                        },
+                    )
+                  : type === 'ACTIVE'
+                    ? this.ngxHelperConfirmService.status(
+                          true,
+                          { title: 'گزینه', value: 'مقدار' },
+                          {
+                              description:
+                                  'در صورت تایید، اطلاعات در سیستم فعال می‌شود و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
+                          },
+                      )
+                    : this.ngxHelperConfirmService.status(
+                          false,
+                          { title: 'گزینه', value: 'مقدار' },
+                          {
+                              description:
+                                  'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
+                          },
+                      );
 
         switch (this.confirmType) {
             case 'DIALOG':

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-drop';
 
@@ -21,6 +21,7 @@ import { INgxHelperRouteConfig, NgxHelperRoute } from '../ngx-helper-route.inter
     host: { selector: 'get', '(window:keydown)': 'checkEscape($event)' },
     imports: [DragDropModule, MatIcon, DecimalPipe],
     templateUrl: './get.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './get.component.scss',
 })
 export class GetComponent implements OnInit {
@@ -40,8 +41,8 @@ export class GetComponent implements OnInit {
             this.route.length > 0
                 ? [this.route[0].longitude, this.route[0].latitude]
                 : this.config?.view
-                ? [this.config.view.longitude, this.config.view.latitude]
-                : [51.3380603, 35.6997382];
+                  ? [this.config.view.longitude, this.config.view.latitude]
+                  : [51.3380603, 35.6997382];
 
         const zoom: number = this.config?.zoom || 15;
 

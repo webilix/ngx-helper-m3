@@ -1,4 +1,14 @@
-import { AfterViewInit, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    ElementRef,
+    HostBinding,
+    HostListener,
+    Input,
+    OnDestroy,
+    OnInit,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 
 import { MatIcon } from '@angular/material/icon';
 
@@ -11,6 +21,7 @@ import { INgxHelperToastConfig } from '../ngx-helper-toast.interface';
     host: { selector: 'toast' },
     imports: [MatIcon, NgxHelperMultiLinePipe],
     templateUrl: './toast.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './toast.component.scss',
 })
 export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {

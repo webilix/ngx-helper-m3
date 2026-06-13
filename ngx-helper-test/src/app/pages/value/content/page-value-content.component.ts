@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { NGX_HELPER_BOX_DATA } from '@webilix/ngx-helper-m3';
 
@@ -6,6 +6,7 @@ import { NGX_HELPER_BOX_DATA } from '@webilix/ngx-helper-m3';
     host: { selector: 'page-value-content' },
     imports: [],
     templateUrl: './page-value-content.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-value-content.component.scss',
 })
 export class PageValueContentComponent {

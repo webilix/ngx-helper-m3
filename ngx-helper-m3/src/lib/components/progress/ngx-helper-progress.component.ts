@@ -1,9 +1,10 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'ngx-helper-progress',
     imports: [],
     templateUrl: './ngx-helper-progress.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-progress.component.scss',
 })
 export class NgxHelperProgressComponent implements OnChanges {
@@ -29,8 +30,8 @@ export class NgxHelperProgressComponent implements OnChanges {
             this.value === undefined
                 ? 0
                 : typeof this.value === 'number'
-                ? this.value
-                : (this.value.done / this.value.total) * 100;
+                  ? this.value
+                  : (this.value.done / this.value.total) * 100;
         if (isNaN(value) || value < 0) value = 0;
         else if (value > 100) value = 100;
         this.size = `${value.toFixed(2)}%`;

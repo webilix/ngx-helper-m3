@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
@@ -25,6 +25,7 @@ import { PageProgressContentComponent } from './content/page-progress-content.co
         PageProgressContentComponent,
     ],
     templateUrl: './page-progress.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-progress.component.scss',
 })
 export class PageProgressComponent implements OnInit, OnDestroy {

@@ -1,4 +1,14 @@
-import { Component, HostBinding, Inject, Input, OnChanges, OnInit, Optional, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    Inject,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    SimpleChanges,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { MatButton } from '@angular/material/button';
@@ -29,6 +39,7 @@ type Button =
     imports: [NgClass, MatButton, MatDivider, MatIcon, MatMenuModule],
     providers: [ComponentService],
     templateUrl: './ngx-helper-card.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-card.component.scss',
 })
 export class NgxHelperCardComponent implements OnInit, OnChanges {

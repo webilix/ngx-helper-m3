@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, HostBinding, inject, Injector, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injector, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { MatIconButton } from '@angular/material/button';
@@ -17,6 +17,7 @@ import {
     host: { selector: 'container-dialog' },
     imports: [NgComponentOutlet, MatIconButton, MatIcon],
     templateUrl: './container-dialog.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './container-dialog.component.scss',
 })
 export class ContainerDialogComponent implements OnInit {

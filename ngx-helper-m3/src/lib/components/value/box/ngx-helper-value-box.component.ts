@@ -1,4 +1,14 @@
-import { Component, HostBinding, Inject, Input, OnChanges, OnInit, Optional, SimpleChanges } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    Inject,
+    Input,
+    OnChanges,
+    OnInit,
+    Optional,
+    SimpleChanges,
+    ChangeDetectionStrategy,
+} from '@angular/core';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Router } from '@angular/router';
 
@@ -17,6 +27,7 @@ import { INgxHelperValue } from '../ngx-helper-value.interface';
     imports: [ClipboardModule, MatIcon, MatIconButton],
     providers: [ComponentService],
     templateUrl: './ngx-helper-value-box.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-value-box.component.scss',
 })
 export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
@@ -64,10 +75,10 @@ export class NgxHelperValueBoxComponent implements OnInit, OnChanges {
             this.column === undefined
                 ? this.values.length
                 : typeof this.column === 'number'
-                ? this.column
-                : isMobile
-                ? this.column.mobile || this.values.length
-                : this.column.desktop || this.values.length;
+                  ? this.column
+                  : isMobile
+                    ? this.column.mobile || this.values.length
+                    : this.column.desktop || this.values.length;
 
         const column: number = columnSize <= 0 || columnSize > this.values.length ? this.values.length : columnSize;
         this.gridTemplateColumns = Array(column).fill('1fr').join(' ');

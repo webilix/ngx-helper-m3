@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { NGX_HELPER_PAGE_GROUP_DATA, NgxHelperStickyDirective } from '@webilix/ngx-helper-m3';
 
@@ -6,6 +6,7 @@ import { NGX_HELPER_PAGE_GROUP_DATA, NgxHelperStickyDirective } from '@webilix/n
     host: { selector: 'page-sticky-top' },
     imports: [NgxHelperStickyDirective],
     templateUrl: './page-sticky-top.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-sticky-top.component.scss',
 })
 export class PageStickyTopComponent {

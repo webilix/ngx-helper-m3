@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import {
     INgxHelperCardOption,
@@ -16,6 +16,7 @@ import { PageCardContentComponent } from './content/page-card-content.component'
     host: { selector: 'page-card' },
     imports: [NgxHelperCardComponent, NgxHelperSectionComponent, NgxHelperSectionColumnComponent, PageCardContentComponent],
     templateUrl: './page-card.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-card.component.scss',
 })
 export class PageCardComponent implements OnInit {

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Router } from '@angular/router';
 
@@ -14,6 +14,7 @@ import { INgxHelperValue } from '../ngx-helper-value.interface';
     imports: [ClipboardModule, MatIcon, MatIconButton],
     providers: [ComponentService],
     templateUrl: './ngx-helper-value-list.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-value-list.component.scss',
 })
 export class NgxHelperValueListComponent implements OnChanges {
@@ -28,7 +29,10 @@ export class NgxHelperValueListComponent implements OnChanges {
     public copyIndex?: number;
     private copyTimeout: any;
 
-    constructor(private readonly router: Router, private readonly componentService: ComponentService) {}
+    constructor(
+        private readonly router: Router,
+        private readonly componentService: ComponentService,
+    ) {}
 
     ngOnChanges(changes: SimpleChanges): void {
         this.data = this.componentService.getValueData(this.values);

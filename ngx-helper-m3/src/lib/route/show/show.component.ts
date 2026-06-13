@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -21,6 +21,7 @@ import { INgxHelperRouteConfig, NgxHelperRoute } from '../ngx-helper-route.inter
     host: { selector: 'show', '(window:keydown)': 'checkKey($event)' },
     imports: [ClipboardModule, MatIcon, DecimalPipe],
     templateUrl: './show.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './show.component.scss',
 })
 export class ShowComponent implements OnInit {

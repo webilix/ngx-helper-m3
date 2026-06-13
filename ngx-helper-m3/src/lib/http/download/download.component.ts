@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 
 import { MatIcon } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { INgxHelperHttpDownloadConfig } from '../ngx-helper-http.interface';
     host: { selector: 'download' },
     imports: [MatIcon],
     templateUrl: './download.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './download.component.scss',
 })
 export class DownloadComponent implements AfterViewInit {

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
@@ -13,6 +13,7 @@ import {
     host: { selector: 'page-index-container' },
     imports: [MatButton],
     templateUrl: './page-index-container.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-index-container.component.scss',
 })
 export class PageIndexContainerComponent implements OnInit {

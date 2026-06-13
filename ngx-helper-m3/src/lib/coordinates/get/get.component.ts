@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 
@@ -23,6 +23,7 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
     imports: [FormsModule, NgxMaskDirective, MatIcon],
     providers: [provideNgxMask()],
     templateUrl: './get.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './get.component.scss',
 })
 export class GetComponent implements OnInit {
@@ -41,8 +42,8 @@ export class GetComponent implements OnInit {
         this.coordinate = this.coordinates
             ? [this.coordinates.longitude, this.coordinates.latitude]
             : this.config?.view
-            ? [this.config.view.longitude, this.config.view.latitude]
-            : [51.3380603, 35.6997382];
+              ? [this.config.view.longitude, this.config.view.latitude]
+              : [51.3380603, 35.6997382];
 
         const zoom: number = this.config?.zoom || 15;
 

@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Feature, Map, View } from 'ol';
 import { Coordinate } from 'ol/coordinate';
@@ -17,6 +17,7 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
     host: { selector: 'show', '(window:keydown)': 'checkEscape($event)' },
     imports: [ClipboardModule, MatIcon],
     templateUrl: './show.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './show.component.scss',
 })
 export class ShowComponent implements OnInit {

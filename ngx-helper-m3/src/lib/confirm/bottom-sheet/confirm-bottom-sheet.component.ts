@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject } from '@angular/core';
+import { Component, HostBinding, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
@@ -11,6 +11,7 @@ import { INgxHelperConfirm } from '../confirm.interface';
     host: { selector: 'confirm-bottom-sheet' },
     imports: [NgClass, MatButtonModule, MatIconModule],
     templateUrl: './confirm-bottom-sheet.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './confirm-bottom-sheet.component.scss',
 })
 export class ConfirmBottomSheetComponent {

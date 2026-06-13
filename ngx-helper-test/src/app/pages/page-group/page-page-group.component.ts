@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { INgxHelperPageGroup, INgxHelperPageGroupItem, NgxHelperPageGroupComponent } from '@webilix/ngx-helper-m3';
 
@@ -15,6 +15,7 @@ import { PagePageGroupHeaderComponent } from './header/page-page-group-header.co
     host: { selector: 'page-page-group' },
     imports: [NgxHelperPageGroupComponent],
     templateUrl: './page-page-group.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-page-group.component.scss',
 })
 export class PagePageGroupComponent implements OnInit {

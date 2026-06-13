@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 
 import { MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -13,6 +13,7 @@ import {
     host: { selector: 'page-page-group-5th' },
     imports: [MatIcon, MatIconButton],
     templateUrl: './page-page-group-5th.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-page-group-5th.component.scss',
 })
 export class PagePageGroup5thComponent {

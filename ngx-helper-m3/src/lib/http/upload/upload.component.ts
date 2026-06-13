@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, HostBinding, Input } from '@angular/core';
+import { AfterViewInit, Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpStatusCode } from '@angular/common/http';
 
 import { MatIcon } from '@angular/material/icon';
@@ -9,6 +9,7 @@ import { INgxHelperHttpUploadConfig } from '../ngx-helper-http.interface';
     host: { selector: 'upload' },
     imports: [MatIcon],
     templateUrl: './upload.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './upload.component.scss',
 })
 export class UploadComponent<R, E> implements AfterViewInit {

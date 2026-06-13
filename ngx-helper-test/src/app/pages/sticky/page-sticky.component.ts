@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { INgxHelperPageGroup, INgxHelperPageGroupItem, NgxHelperPageGroupComponent } from '@webilix/ngx-helper-m3';
 
@@ -11,6 +11,7 @@ import { PageStickyTopComponent } from './top/page-sticky-top.component';
     host: { selector: 'page-sticky' },
     imports: [NgxHelperPageGroupComponent],
     templateUrl: './page-sticky.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-sticky.component.scss',
 })
 export class PageStickyComponent implements OnInit {

@@ -1,9 +1,10 @@
-import { Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'ngx-helper-loader',
     imports: [],
     templateUrl: './ngx-helper-loader.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './ngx-helper-loader.component.scss',
 })
 export class NgxHelperLoaderComponent implements OnInit, OnChanges {

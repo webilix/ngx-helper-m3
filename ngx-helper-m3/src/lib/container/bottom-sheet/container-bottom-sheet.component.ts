@@ -1,5 +1,5 @@
 import { NgComponentOutlet } from '@angular/common';
-import { Component, HostBinding, inject, Injector, OnInit } from '@angular/core';
+import { Component, HostBinding, inject, Injector, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ComponentType } from '@angular/cdk/portal';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
@@ -17,6 +17,7 @@ import {
     host: { selector: 'container-bottom-sheet' },
     imports: [NgComponentOutlet, MatIconButton, MatIcon],
     templateUrl: './container-bottom-sheet.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './container-bottom-sheet.component.scss',
 })
 export class ContainerBottomSheetComponent implements OnInit {
