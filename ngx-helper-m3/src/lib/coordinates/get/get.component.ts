@@ -1,6 +1,8 @@
 import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
+import { MaskitoOptions } from '@maskito/core';
+import { MaskitoDirective } from '@maskito/angular';
+import { maskitoNumber } from '@maskito/kit';
 
 import { Feature, Map, View } from 'ol';
 import { Coordinate } from 'ol/coordinate';
@@ -20,8 +22,7 @@ import { INgxHelperCoordinates, INgxHelperCoordinatesConfig } from '../ngx-helpe
 
 @Component({
     host: { selector: 'get', '(window:keydown)': 'checkEscape($event)' },
-    imports: [FormsModule, NgxMaskDirective, MatIcon],
-    providers: [provideNgxMask()],
+    imports: [FormsModule, MatIcon, MaskitoDirective],
     templateUrl: './get.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './get.component.scss',
@@ -33,8 +34,21 @@ export class GetComponent implements OnInit {
     @Input({ required: true }) config?: Partial<INgxHelperCoordinatesConfig>;
     @Input({ required: true }) close!: (coordinates?: INgxHelperCoordinates) => void;
 
+    protected readonly numberOptions = maskitoNumber({
+        decimalSeparator: '.',
+        maximumFractionDigits: 12,
+        thousandSeparator: '',
+        minusSign: '-',
+    });
+    protected readonly maskitoOptions: MaskitoOptions = {
+        ...this.numberOptions,
+        preprocessors: [
+            // CHANGE PERSIAN NUMBERS
+            ({ elementState, data }) => ({ elementState, data: Helper.STRING.changeNumbers(data.toString(), 'EN') }),
+            ...this.numberOptions.preprocessors,
+        ],
+    };
     protected coordinate: Coordinate = [];
-    protected inputTransformFn = (value: any): string => Helper.STRING.changeNumbers(value.toString(), 'EN');
 
     private map!: Map;
 

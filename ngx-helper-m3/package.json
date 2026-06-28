@@ -25,8 +25,10 @@
         "@angular/material": ">=22.0.1",
         "@webilix/helper-library": ">=6.1.7",
         "@webilix/jalali-date-time": ">=2.0.9",
+        "@maskito/core": ">=5.3.1",
+        "@maskito/angular": ">=5.3.1",
+        "@maskito/kit": ">=5.3.1",
         "ng2-pdf-viewer": ">=10.4.0",
-        "ngx-mask": ">=20.0.3",
         "ol": ">=10.7.0"
     },
     "dependencies": {
