@@ -1,6 +1,7 @@
 import { ComponentRef, Inject, Injectable, Optional } from '@angular/core';
 import { Overlay } from '@angular/cdk/overlay';
 import { ComponentPortal } from '@angular/cdk/portal';
+import { timer } from 'rxjs';
 
 import { Helper } from '@webilix/helper-library';
 
@@ -34,7 +35,7 @@ export class NgxHelperToastService {
     private updatePositions(): void {
         let top: number = 0;
         this.components.forEach((c, index) => {
-            c.componentRef.instance.top = `calc(${(index / 1.5).toFixed(1)}rem + calc(${top}px + 1rem))`;
+            c.componentRef.instance.topSignal.update(() => `calc(${(index / 1.5).toFixed(1)}rem + calc(${top}px + 1rem))`);
             top += +c.componentRef.instance.elementRef.nativeElement.offsetHeight;
         });
     }
@@ -52,8 +53,8 @@ export class NgxHelperToastService {
         const duplicate = this.components.find((component) => component.content === content);
         if (!this.config?.toastAllowDuplicates && duplicate) {
             if (this.config?.toastResetDuplicates) {
-                duplicate.componentRef.instance.start = new Date().getTime();
-                duplicate.componentRef.instance.progress = 0;
+                duplicate.componentRef.instance.start.update(() => new Date().getTime());
+                duplicate.componentRef.instance.progress.update(() => 0);
             }
             return;
         }
@@ -72,7 +73,8 @@ export class NgxHelperToastService {
         componentRef.setInput('init', () => this.updatePositions());
         componentRef.setInput('close', () => {
             this.components = this.components.filter((c) => c.id !== componentRef.instance.id);
-            this.updatePositions();
+            timer(0).subscribe(() => this.updatePositions());
+
             if (onClose) onClose();
             overlayRef.dispose();
         });

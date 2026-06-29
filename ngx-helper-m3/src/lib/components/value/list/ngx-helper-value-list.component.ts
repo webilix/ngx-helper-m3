@@ -1,4 +1,13 @@
-import { Component, HostBinding, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import {
+    Component,
+    HostBinding,
+    Input,
+    OnChanges,
+    SimpleChanges,
+    ChangeDetectionStrategy,
+    signal,
+    WritableSignal,
+} from '@angular/core';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { Router } from '@angular/router';
 
@@ -26,7 +35,7 @@ export class NgxHelperValueListComponent implements OnChanges {
 
     public data: IValueComponentData[] = [];
 
-    public copyIndex?: number;
+    public copyIndex: WritableSignal<number | null> = signal(null);
     private copyTimeout: any;
 
     constructor(
@@ -49,9 +58,9 @@ export class NgxHelperValueListComponent implements OnChanges {
         event.preventDefault();
 
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
-        this.copyIndex = index;
+        this.copyIndex.update(() => index);
         this.copyTimeout = setTimeout(() => {
-            this.copyIndex = undefined;
+            this.copyIndex.update(() => null);
             this.copyTimeout = undefined;
         }, 2000);
     }

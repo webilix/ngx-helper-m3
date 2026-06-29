@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy, WritableSignal, signal } from '@angular/core';
 
 import { Feature, Map, View } from 'ol';
 import { Coordinate } from 'ol/coordinate';
@@ -27,7 +27,7 @@ export class ShowComponent implements OnInit {
     @Input({ required: true }) config?: Partial<Omit<INgxHelperCoordinatesConfig, 'view'>>;
     @Input({ required: true }) close!: () => void;
 
-    protected copied?: 'LATITUDE' | 'LONGITUDE';
+    protected copied: WritableSignal<'LATITUDE' | 'LONGITUDE' | null> = signal(null);
 
     private copyTimeout: any;
     private map!: Map;
@@ -61,8 +61,8 @@ export class ShowComponent implements OnInit {
     setCopy(type: 'LATITUDE' | 'LONGITUDE'): void {
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
 
-        this.copied = type;
-        this.copyTimeout = setTimeout(() => (this.copied = undefined), 1000);
+        this.copied.update(() => type);
+        this.copyTimeout = setTimeout(() => this.copied.update(() => null), 1000);
     }
 
     checkEscape(event: any): void {

@@ -1,5 +1,15 @@
-import { AfterViewInit, Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    HostBinding,
+    Input,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    WritableSignal,
+    signal,
+} from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpEventType, HttpHeaders, HttpStatusCode } from '@angular/common/http';
+import { timer } from 'rxjs';
 
 import { MatIcon } from '@angular/material/icon';
 
@@ -23,13 +33,19 @@ export class UploadComponent<R, E> implements AfterViewInit {
     @Input({ required: true }) config!: Partial<INgxHelperHttpUploadConfig>;
     @Input({ required: true }) close!: (type: 'RESPONSE' | 'ERROR', result: any, status: HttpStatusCode) => void;
 
-    protected progress: number = 0;
+    protected progress: WritableSignal<number> = signal(0);
 
-    constructor(private readonly httpClient: HttpClient) {}
+    constructor(
+        private readonly httpClient: HttpClient,
+        private readonly changeDetectorRef: ChangeDetectorRef,
+    ) {}
 
     ngAfterViewInit(): void {
-        setTimeout(() => (this.left = '1rem'), 0);
-        setTimeout(this.upload.bind(this), 0);
+        timer(0).subscribe(() => {
+            this.left = '1rem';
+            this.changeDetectorRef.markForCheck();
+        });
+        setTimeout(this.upload.bind(this), 100000);
     }
 
     upload(): void {
@@ -62,11 +78,11 @@ export class UploadComponent<R, E> implements AfterViewInit {
                     case HttpEventType.UploadProgress:
                         if (!event.loaded || !event.total) return;
                         const progress: number = (event.loaded / event.total) * 100;
-                        this.progress = progress > 100 ? 100 : +progress.toFixed(2);
+                        this.progress.update(() => (progress > 100 ? 100 : +progress.toFixed(2)));
                         break;
 
                     case HttpEventType.Response:
-                        this.progress = 100;
+                        this.progress.update(() => 100);
                         this.close('RESPONSE', event.body, event.status);
                         break;
                 }

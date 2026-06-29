@@ -1,5 +1,15 @@
-import { AfterViewInit, Component, HostBinding, Input, ChangeDetectionStrategy } from '@angular/core';
+import {
+    AfterViewInit,
+    Component,
+    HostBinding,
+    Input,
+    ChangeDetectionStrategy,
+    ChangeDetectorRef,
+    WritableSignal,
+    signal,
+} from '@angular/core';
 import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { timer } from 'rxjs';
 
 import { MatIcon } from '@angular/material/icon';
 
@@ -25,12 +35,18 @@ export class DownloadComponent implements AfterViewInit {
     @Input({ required: true }) onError!: () => void;
     @Input({ required: true }) close!: () => void;
 
-    protected progress: number = 0;
+    protected progress: WritableSignal<number> = signal(0);
 
-    constructor(private readonly httpClient: HttpClient) {}
+    constructor(
+        private readonly httpClient: HttpClient,
+        private readonly changeDetectorRef: ChangeDetectorRef,
+    ) {}
 
     ngAfterViewInit(): void {
-        setTimeout(() => (this.left = '1rem'), 0);
+        timer(0).subscribe(() => {
+            this.left = '1rem';
+            this.changeDetectorRef.markForCheck();
+        });
         setTimeout(this.download.bind(this), 1);
     }
 
@@ -81,11 +97,11 @@ export class DownloadComponent implements AfterViewInit {
                     case HttpEventType.DownloadProgress:
                         const progress: number =
                             event.loaded && event.total ? Math.ceil((event.loaded / event.total) * 1000) / 10 : 0;
-                        this.progress = progress <= 100 ? progress : 100;
+                        this.progress.update(() => (progress <= 100 ? progress : 100));
                         break;
 
                     case HttpEventType.Response:
-                        this.progress = 100;
+                        this.progress.update(() => 100);
                         this.onSuccess(event.body);
                         this.close();
                         break;

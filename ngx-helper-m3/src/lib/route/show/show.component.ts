@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, Input, OnInit, ChangeDetectionStrategy, WritableSignal, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -32,7 +32,7 @@ export class ShowComponent implements OnInit {
     @Input({ required: true }) close!: () => void;
 
     protected distance!: IGeoRouteLength;
-    protected copied?: number;
+    protected copied: WritableSignal<number | null> = signal(null);
     protected index: number = 0;
 
     private layers: VectorLayer[] = [];
@@ -168,8 +168,8 @@ export class ShowComponent implements OnInit {
     setCopy(index: number): void {
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
 
-        this.copied = index;
-        this.copyTimeout = setTimeout(() => (this.copied = undefined), 1000);
+        this.copied.update(() => index);
+        this.copyTimeout = setTimeout(() => this.copied.update(() => null), 1000);
     }
 
     checkKey(event: any): void {

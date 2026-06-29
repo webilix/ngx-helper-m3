@@ -3,22 +3,22 @@
         <mat-icon [style.color]="textColor" class="icon">{{ icon }}</mat-icon>
         <ul>
             @for (message of messages; track $index) {
-            <li [innerHTML]="message | ngxHelperMultiLine"></li>
+                <li [innerHTML]="message | ngxHelperMultiLine"></li>
             }
         </ul>
     </div>
     <!-- CLOSE ICON -->
     @if (showClose) {
-    <mat-icon [style.color]="textColor" class="close">close</mat-icon>
+        <mat-icon [style.color]="textColor" class="close">close</mat-icon>
     }
 </div>
 
 <div class="progress-container" [style.background-color]="backgroundColor">
     @if (timeout !== 0) {
-    <div
-        class="progress-value"
-        [style.background-color]="'color-mix(in srgb, ' + backgroundColor + ', black 25%)'"
-        [style.width]="(animation === 'DECREASE' ? 100 - progress : progress) + '%'"
-    ></div>
+        <div
+            class="progress-value"
+            [style.background-color]="'color-mix(in srgb, ' + backgroundColor + ', black 25%)'"
+            [style.width]="(animation === 'DECREASE' ? 100 - progress() : progress()) + '%'"
+        ></div>
     }
 </div>

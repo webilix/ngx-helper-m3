@@ -59,18 +59,15 @@ export class PagePipesComponent implements OnInit {
     public safeHTML: string = '<a href="/" >LINK</a>';
     public safeStyle: string = 'font-size: 15px; color: red; padding: 0 1rem; text-shadow: 0 1px 0 #000;';
 
+    public randomDate: Date = new Date(new Date().getTime() - Math.ceil(Math.random() * 7 * 24 * 3600 * 1000));
+    public randomFileSize: number = Math.ceil(Math.random() * 123456789);
+    public randomPrice: number = Math.ceil(Math.random() * 123456789);
+    public randomVolume: number = Math.ceil(Math.random() * 123456789);
+    public randomWeight: number = Math.ceil(Math.random() * 123456789);
+
     constructor(private readonly appService: AppService) {}
 
     ngOnInit(): void {
         this.appService.setHeader('PIPES');
-    }
-
-    getRandomDate(): Date {
-        const random: number = Math.ceil(Math.random() * 7 * 24 * 3600 * 1000);
-        return new Date(new Date().getTime() - random);
-    }
-
-    getRandomNumber(): number {
-        return Math.ceil(Math.random() * 123456789);
     }
 }

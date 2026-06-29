@@ -42,7 +42,7 @@ export class PageProgressComponent implements OnInit, OnDestroy {
     constructor(private readonly appService: AppService) {}
 
     ngOnInit(): void {
-        this.appService.setHeader('PROGESS');
+        this.appService.setHeader('PROGRESS');
 
         this.updateDate();
         this.randomInterval = setInterval(() => {

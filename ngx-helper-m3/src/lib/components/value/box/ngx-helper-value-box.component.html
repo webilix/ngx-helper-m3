@@ -1,22 +1,22 @@
 @for (item of data; track $index) {
-<div class="value-box" [class.clear]="clearBox" [class.click]="!!item.action">
-    <div class="title" (click)="onClick(item.action)">{{ item.title }}</div>
-    <div
-        class="value"
-        [style.display]="'inline-block'"
-        [style.direction]="item.ltr ? 'ltr' : '*'"
-        [style.color]="item.color"
-        [class.en]="item.english"
-        [class.empty]="!item.value"
-        (click)="onClick(item.action)"
-    >
-        {{ item.value || emptyText }}
+    <div class="value-box" [class.clear]="clearBox" [class.click]="!!item.action">
+        <div class="title" (click)="onClick(item.action)">{{ item.title }}</div>
+        <div
+            class="value"
+            [style.display]="'inline-block'"
+            [style.direction]="item.ltr ? 'ltr' : '*'"
+            [style.color]="item.color"
+            [class.en]="item.english"
+            [class.empty]="!item.value"
+            (click)="onClick(item.action)"
+        >
+            {{ item.value || emptyText }}
+        </div>
+        <!-- COPY TO CLIPBOARD -->
+        @if (item.copyToClipboard && item.value) {
+            <button mat-icon-button type="button" [cdkCopyToClipboard]="item.value" (click)="onCopy($event, $index)">
+                <mat-icon>{{ copyIndex() === $index ? 'done_all' : 'copy' }}</mat-icon>
+            </button>
+        }
     </div>
-    <!-- COPY TO CLIPBOARD -->
-    @if (item.copyToClipboard && item.value) {
-    <button mat-icon-button type="button" [cdkCopyToClipboard]="item.value" (click)="onCopy($event, $index)">
-        <mat-icon>{{ copyIndex === $index ? 'done_all' : 'copy' }}</mat-icon>
-    </button>
-    }
-</div>
 }
