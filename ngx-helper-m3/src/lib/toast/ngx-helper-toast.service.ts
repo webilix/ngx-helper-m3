@@ -35,7 +35,7 @@ export class NgxHelperToastService {
     private updatePositions(): void {
         let top: number = 0;
         this.components.forEach((c, index) => {
-            c.componentRef.instance.topSignal.update(() => `calc(${(index / 1.5).toFixed(1)}rem + calc(${top}px + 1rem))`);
+            c.componentRef.instance.topSignal.set(`calc(${(index / 1.5).toFixed(1)}rem + calc(${top}px + 1rem))`);
             top += +c.componentRef.instance.elementRef.nativeElement.offsetHeight;
         });
     }
@@ -53,8 +53,8 @@ export class NgxHelperToastService {
         const duplicate = this.components.find((component) => component.content === content);
         if (!this.config?.toastAllowDuplicates && duplicate) {
             if (this.config?.toastResetDuplicates) {
-                duplicate.componentRef.instance.start.update(() => new Date().getTime());
-                duplicate.componentRef.instance.progress.update(() => 0);
+                duplicate.componentRef.instance.start.set(new Date().getTime());
+                duplicate.componentRef.instance.progress.set(0);
             }
             return;
         }

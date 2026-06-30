@@ -97,11 +97,11 @@ export class DownloadComponent implements AfterViewInit {
                     case HttpEventType.DownloadProgress:
                         const progress: number =
                             event.loaded && event.total ? Math.ceil((event.loaded / event.total) * 1000) / 10 : 0;
-                        this.progress.update(() => (progress <= 100 ? progress : 100));
+                        this.progress.set(progress <= 100 ? progress : 100);
                         break;
 
                     case HttpEventType.Response:
-                        this.progress.update(() => 100);
+                        this.progress.set(100);
                         this.onSuccess(event.body);
                         this.close();
                         break;

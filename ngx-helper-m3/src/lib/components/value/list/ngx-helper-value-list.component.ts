@@ -58,9 +58,9 @@ export class NgxHelperValueListComponent implements OnChanges {
         event.preventDefault();
 
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
-        this.copyIndex.update(() => index);
+        this.copyIndex.set(index);
         this.copyTimeout = setTimeout(() => {
-            this.copyIndex.update(() => null);
+            this.copyIndex.set(null);
             this.copyTimeout = undefined;
         }, 2000);
     }

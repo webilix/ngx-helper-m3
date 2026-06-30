@@ -83,13 +83,13 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
         this.animation = this.config.helper?.toastProgressAnimation || 'DECREASE';
 
         if (this.timeout) {
-            this.start.update(() => new Date().getTime());
+            this.start.set(new Date().getTime());
             this.interval = setInterval(() => {
                 const timer: number = new Date().getTime();
                 let progress: number = ((timer - this.start()) * 100) / this.timeout;
                 progress = progress < 100 ? +progress.toFixed(2) : 100;
 
-                this.progress.update(() => progress);
+                this.progress.set(progress);
                 if (this.progress() === 100) this.close();
             }, 25);
         }

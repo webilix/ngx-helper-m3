@@ -78,11 +78,11 @@ export class UploadComponent<R, E> implements AfterViewInit {
                     case HttpEventType.UploadProgress:
                         if (!event.loaded || !event.total) return;
                         const progress: number = (event.loaded / event.total) * 100;
-                        this.progress.update(() => (progress > 100 ? 100 : +progress.toFixed(2)));
+                        this.progress.set(progress > 100 ? 100 : +progress.toFixed(2));
                         break;
 
                     case HttpEventType.Response:
-                        this.progress.update(() => 100);
+                        this.progress.set(100);
                         this.close('RESPONSE', event.body, event.status);
                         break;
                 }

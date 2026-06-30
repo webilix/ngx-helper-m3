@@ -61,8 +61,8 @@ export class ShowComponent implements OnInit {
     setCopy(type: 'LATITUDE' | 'LONGITUDE'): void {
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
 
-        this.copied.update(() => type);
-        this.copyTimeout = setTimeout(() => this.copied.update(() => null), 1000);
+        this.copied.set(type);
+        this.copyTimeout = setTimeout(() => this.copied.set(null), 1000);
     }
 
     checkEscape(event: any): void {
