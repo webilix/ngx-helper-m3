@@ -1,35 +1,57 @@
-<div class="content" [class.has-shadow]="hasShadow">
-    <div class="counts">
-        <div class="title">صفحه {{ page.current | number }} از {{ page.total | number }}</div>
-        <div class="total">{{ item | number }} {{ title }}</div>
+@if (pagination) {
+    <div class="content" [class.has-shadow]="hasShadow">
+        <div class="counts">
+            <div class="title">صفحه {{ pagination.page.current | number }} از {{ pagination.page.total | number }}</div>
+            <!-- ITEMS -->
+            @if (pagination.item) {
+                <div class="total">{{ pagination.item.total | number }} {{ pagination.item.title }}</div>
+            }
+        </div>
+
+        <button
+            mat-icon-button
+            type="button"
+            [disabled]="pagination.page.current === pagination.page.total"
+            (click)="setPage(pagination.page.total)"
+        >
+            <mat-icon>keyboard_double_arrow_right</mat-icon>
+        </button>
+        <button
+            mat-icon-button
+            type="button"
+            [disabled]="pagination.page.current === pagination.page.total"
+            (click)="setPage(pagination.page.current + 1)"
+        >
+            <mat-icon>chevron_right</mat-icon>
+        </button>
+
+        <button mat-icon-button type="button" [matMenuTriggerFor]="pageMenu" [disabled]="pagination.page.total < 5">
+            <mat-icon>tag</mat-icon>
+        </button>
+        <mat-menu #pageMenu="matMenu" class="ngx-helper-m3-pagination-menu">
+            @for (item of pages; track $index) {
+                <button
+                    mat-menu-item
+                    type="button"
+                    [disabled]="item === pagination.page.current"
+                    class="ngx-helper-m3-pagination-item"
+                    (click)="setPage(item)"
+                >
+                    {{ item | number }}
+                </button>
+            }
+        </mat-menu>
+
+        <button
+            mat-icon-button
+            type="button"
+            [disabled]="pagination.page.current === 1"
+            (click)="setPage(pagination.page.current - 1)"
+        >
+            <mat-icon>chevron_left</mat-icon>
+        </button>
+        <button mat-icon-button type="button" [disabled]="pagination.page.current === 1" (click)="setPage(1)">
+            <mat-icon>keyboard_double_arrow_left</mat-icon>
+        </button>
     </div>
-
-    <button mat-icon-button type="button" [disabled]="page.current === page.total" (click)="setPage(page.total)">
-        <mat-icon>keyboard_double_arrow_right</mat-icon>
-    </button>
-    <button mat-icon-button type="button" [disabled]="page.current === page.total" (click)="setPage(page.current + 1)">
-        <mat-icon>chevron_right</mat-icon>
-    </button>
-
-    <button mat-icon-button [matMenuTriggerFor]="pageMenu"><mat-icon>tag</mat-icon></button>
-    <mat-menu #pageMenu="matMenu" class="ngx-helper-m3-pagination-menu">
-        @for (item of pages; track $index) {
-            <button
-                mat-menu-item
-                type="button"
-                [disabled]="item === page.current"
-                class="ngx-helper-m3-pagination-item"
-                (click)="setPage(item)"
-            >
-                {{ item | number }}
-            </button>
-        }
-    </mat-menu>
-
-    <button mat-icon-button type="button" [disabled]="page.current === 1" (click)="setPage(page.current - 1)">
-        <mat-icon>chevron_left</mat-icon>
-    </button>
-    <button mat-icon-button type="button" [disabled]="page.current === 1" (click)="setPage(1)">
-        <mat-icon>keyboard_double_arrow_left</mat-icon>
-    </button>
-</div>
+}

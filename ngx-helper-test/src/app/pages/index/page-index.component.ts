@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, WritableSignal, signal } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, WritableSignal, signal, inject } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
@@ -6,6 +6,7 @@ import {
     INgxHelperCoordinates,
     INgxHelperImage,
     INgxHelperImageConfig,
+    INgxHelperPagination,
     INgxHelperToastConfig,
     NgxHelperConfirmService,
     NgxHelperContainerService,
@@ -15,6 +16,7 @@ import {
     NgxHelperLoaderComponent,
     NgxHelperMobileViewDirective,
     NgxHelperPaginationComponent,
+    NgxHelperPaginationService,
     NgxHelperRoute,
     NgxHelperRouteService,
     NgxHelperShowInDirective,
@@ -39,6 +41,8 @@ import { PageIndexContainerComponent } from './container/page-index-container.co
     styleUrl: './page-index.component.scss',
 })
 export class PageIndexComponent implements OnInit {
+    private readonly ngxHelperPaginationService: NgxHelperPaginationService = inject(NgxHelperPaginationService);
+
     constructor(
         private readonly ngxHelperConfirmService: NgxHelperConfirmService,
         private readonly ngxHelperContainerService: NgxHelperContainerService,
@@ -267,8 +271,13 @@ export class PageIndexComponent implements OnInit {
         }
     }
 
-    protected currentPage: WritableSignal<number> = signal(1);
+    protected pagination: WritableSignal<INgxHelperPagination> = signal({
+        route: ['/'],
+        item: { title: 'داده', total: 1993 },
+        page: { current: this.ngxHelperPaginationService.getPage(), total: 50 },
+    });
     pageChanged(page: number): void {
-        this.currentPage.set(page);
+        this.pagination.update((value) => this.ngxHelperPaginationService.setPage(value, page));
+        console.log('PAGE CHANGED: ' + this.pagination().page.current.toLocaleString());
     }
 }

@@ -1,9 +1,13 @@
 ::ng-deep .ngx-helper-m3-pagination-menu {
+    min-width: auto;
+
     .mat-mdc-menu-content {
         padding: 0;
     }
 }
 
 ::ng-deep .ngx-helper-m3-pagination-item {
+    min-height: auto;
+    padding: 0.5rem 0.75rem !important;
     text-align: center !important;
 }

@@ -1,11 +1,3 @@
-<ngx-helper-pagination
-    [route]="['/']"
-    [title]="'داده'"
-    [page]="{ current: currentPage(), total: 23000 }"
-    [item]="226"
-    (pageChanged)="pageChanged($event)"
-></ngx-helper-pagination>
-
 <section>
     <header class="en">
         <div class="title">NgxHelperConfirmService</div>
@@ -125,3 +117,5 @@
     <div class="show-in" [ngxHelperShowIn]="'DESKTOP'">این متن باید در حالت دسکتاپ نمایش داده شود.</div>
     <div class="show-in" [ngxHelperShowIn]="'MOBILE'">این متن باید در حالت موبایل نمایش داده شود.</div>
 </section>
+
+<ngx-helper-pagination [pagination]="pagination()" (pageChanged)="pageChanged($event)"></ngx-helper-pagination>
