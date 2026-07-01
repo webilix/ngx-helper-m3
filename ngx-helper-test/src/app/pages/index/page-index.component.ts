@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, WritableSignal, signal } from '@angular/core';
 
 import { MatButton } from '@angular/material/button';
 
@@ -14,6 +14,7 @@ import {
     NgxHelperImageService,
     NgxHelperLoaderComponent,
     NgxHelperMobileViewDirective,
+    NgxHelperPaginationComponent,
     NgxHelperRoute,
     NgxHelperRouteService,
     NgxHelperShowInDirective,
@@ -26,7 +27,13 @@ import { PageIndexContainerComponent } from './container/page-index-container.co
 
 @Component({
     host: { selector: 'page-index' },
-    imports: [MatButton, NgxHelperLoaderComponent, NgxHelperMobileViewDirective, NgxHelperShowInDirective],
+    imports: [
+        MatButton,
+        NgxHelperLoaderComponent,
+        NgxHelperMobileViewDirective,
+        NgxHelperPaginationComponent,
+        NgxHelperShowInDirective,
+    ],
     templateUrl: './page-index.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './page-index.component.scss',
@@ -258,5 +265,10 @@ export class PageIndexComponent implements OnInit {
                     break;
             }
         }
+    }
+
+    protected currentPage: WritableSignal<number> = signal(1);
+    pageChanged(page: number): void {
+        this.currentPage.set(page);
     }
 }

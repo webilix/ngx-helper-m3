@@ -16,6 +16,8 @@ export const appConfig: ApplicationConfig = {
         provideNgxHelperConfig({
             mobileWidth: 900,
             pageGroupSidebarWidth: '250px',
+            paginationHasShadow: true,
+            paginationMargin: '0 0 1rem 0',
             toastXPosition: 'RIGHT',
             toastResetDuplicates: true,
             toastProgressAnimation: 'DECREASE',

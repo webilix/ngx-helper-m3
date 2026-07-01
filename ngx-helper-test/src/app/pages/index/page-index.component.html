@@ -1,3 +1,11 @@
+<ngx-helper-pagination
+    [route]="['/']"
+    [title]="'داده'"
+    [page]="{ current: currentPage(), total: 23000 }"
+    [item]="226"
+    (pageChanged)="pageChanged($event)"
+></ngx-helper-pagination>
+
 <section>
     <header class="en">
         <div class="title">NgxHelperConfirmService</div>

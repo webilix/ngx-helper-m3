@@ -6,6 +6,10 @@ export interface INgxHelperConfig {
     // PAGE GROUP
     readonly pageGroupSidebarWidth: string;
 
+    // PAGINATION
+    readonly paginationMargin: string;
+    readonly paginationHasShadow: boolean;
+
     // TOAST
     readonly toastTimeout: number;
     readonly toastXPosition: 'LEFT' | 'CENTER' | 'RIGHT';

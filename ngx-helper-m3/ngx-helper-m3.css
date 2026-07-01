@@ -775,6 +775,51 @@
     }
 }
 
+/* NGX HELPER PAGINATION */
+.ngx-helper-m3-pagination {
+    display: flex;
+    align-items: center;
+    direction: rtl;
+
+    .content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        width: fit-content;
+        max-width: 500px;
+
+        margin: 0 auto;
+        padding: 0.5rem 0;
+        background-color: var(--background);
+        border-radius: 8px;
+        border: 1px solid var(--surface-container-highest);
+
+        .counts {
+            flex: 1;
+            display: block;
+            padding-right: 0.75rem;
+
+            .title {
+                font-weight: 500;
+                line-height: 1;
+            }
+
+            .total {
+                font-size: 80%;
+                opacity: 0.75;
+                line-height: 1;
+                margin-top: 0.25rem;
+            }
+        }
+    }
+
+    .content.has-shadow {
+        border: 1px solid var(--outline-variant);
+        box-shadow: 0 0 10px 0 var(--outline-variant);
+    }
+}
+
 /* NGX HELPER PROGRESS */
 .ngx-helper-m3-progress {
     display: block;
@@ -784,7 +829,9 @@
 
     .progress {
         position: absolute;
-        transition: width 0.35s ease-out, height 0.35s ease-out;
+        transition:
+            width 0.35s ease-out,
+            height 0.35s ease-out;
     }
 
     .content {
