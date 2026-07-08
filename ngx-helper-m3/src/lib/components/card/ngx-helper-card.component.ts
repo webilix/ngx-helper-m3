@@ -48,6 +48,7 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     @Input({ required: true }) title!: string;
     @Input({ required: false }) subTitle?: string;
     @Input({ required: false }) icon?: string;
+    @Input({ required: false }) color?: string;
     @Input({ required: false }) actions: NgxHelperCardAction[] = [];
     @Input({ required: false }) option?: INgxHelperCardOption;
     @Input({ required: false }) padding: string = '1rem';

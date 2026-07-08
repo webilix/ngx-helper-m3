@@ -39,6 +39,26 @@
 </ngx-helper-card>
 
 <br />
-<ngx-helper-card [title]="'منو (امکانات)'" [icon]="icon" [padding]="'3rem'" [option]="cardOption">
-    <page-card-content>آیکون</page-card-content>
-</ngx-helper-card>
+<ngx-helper-section>
+    <ngx-helper-section-column>
+        <ngx-helper-card [title]="'منو (امکانات)'" [icon]="icon" [padding]="'3rem'" [option]="cardOption">
+            <page-card-content>آیکون</page-card-content>
+        </ngx-helper-card>
+    </ngx-helper-section-column>
+    <ngx-helper-section-column>
+        <ngx-helper-card [title]="'رنگ هدر'" [icon]="'color_lens'" [padding]="'3rem'" [color]="'var(--error)'">
+            <page-card-content>رنگ هدر</page-card-content>
+        </ngx-helper-card>
+    </ngx-helper-section-column>
+    <ngx-helper-section-column>
+        <ngx-helper-card
+            [title]="'رنگ هدر'"
+            [subTitle]="'رنگ هدر باید برای هر دو مورد نمایش داده شود.'"
+            [icon]="'color_lens'"
+            [padding]="'3rem'"
+            [color]="'var(--primary)'"
+        >
+            <page-card-content>رنگ هدر</page-card-content>
+        </ngx-helper-card>
+    </ngx-helper-section-column>
+</ngx-helper-section>

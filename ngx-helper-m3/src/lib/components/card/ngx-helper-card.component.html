@@ -1,85 +1,94 @@
 <div class="card-header" [class.has-sub-title]="subTitle">
     <!-- ICON -->
-    @if (icon) { <mat-icon>{{ icon }}</mat-icon> }
+    @if (icon) {
+        <mat-icon [style.color]="color ?? 'inherit'">{{ icon }}</mat-icon>
+    }
 
     <!-- TITLE -->
-    <div class="content">
+    <div class="content" [style.color]="color ?? 'inherit'">
         <div class="title">{{ title }}</div>
         <!-- SUB TITLE -->
         @if (subTitle) {
-        <div class="sub-title">{{ subTitle }}</div>
+            <div class="sub-title">{{ subTitle }}</div>
         }
     </div>
 
     <!-- BUTTONS -->
     @if (buttons.length > 0) {
-    <div class="buttons" [ngClass]="isMobile ? 'mobile-view' : ''">
-        @for (item of buttons; track $index) {
-        <!-- TYPE -->
-        @switch (item.type) {
+        <div class="buttons" [ngClass]="isMobile ? 'mobile-view' : ''">
+            @for (item of buttons; track $index) {
+                <!-- TYPE -->
+                @switch (item.type) {
+                    <!-- BUTTON -->
+                    @case ('BUTTON') {
+                        <button mat-button type="button" [style.color]="item.color" (click)="item.action()">
+                            @if (!isMobile) {
+                                <div class="title">{{ item.title }}</div>
+                            }
+                            <!-- ICON -->
+                            @if (isMobile || item.showIcon) {
+                                <mat-icon>{{ item.icon }}</mat-icon>
+                            }
+                        </button>
+                    }
 
-        <!-- BUTTON -->
-        @case('BUTTON') {
-        <button mat-button type="button" [style.color]="item.color" (click)="item.action()">
-            @if (!isMobile) {
-            <div class="title">{{ item.title }}</div>
+                    <!-- MENU -->
+                    @case ('MENU') {
+                        <button mat-button type="button" [style.color]="item.color" [matMenuTriggerFor]="actionMenu">
+                            @if (!isMobile) {
+                                <div class="title">{{ item.title }}</div>
+                            }
+                            <!-- ICON -->
+                            @if (isMobile || item.showIcon) {
+                                <mat-icon>{{ item.icon }}</mat-icon>
+                            }
+                        </button>
+                        <mat-menu #actionMenu="matMenu" class="ngx-helper-card-action-menu" [xPosition]="'before'">
+                            @for (menu of item.buttons; track $index) {
+                                <!-- DIVIDER -->
+                                @if (menu === 'DIVIDER') {
+                                    <mat-divider></mat-divider>
+                                }
+                                <!-- BUTTON -->
+                                @else {
+                                    <button mat-menu-item type="button" (click)="menu.action()" [style.color]="menu.color">
+                                        <div class="title">{{ menu.title }}</div>
+                                        <mat-icon [style.color]="menu.color">{{ menu.icon }}</mat-icon>
+                                    </button>
+                                }
+                            }
+                        </mat-menu>
+                    }
+                }
             }
-            <!-- ICON -->
-            @if (isMobile || item.showIcon) {
-            <mat-icon>{{ item.icon }}</mat-icon>
-            }
-        </button>
-        }
-
-        <!-- MENU -->
-        @case('MENU') {
-        <button mat-button type="button" [style.color]="item.color" [matMenuTriggerFor]="actionMenu">
-            @if (!isMobile) {
-            <div class="title">{{ item.title }}</div>
-            }
-            <!-- ICON -->
-            @if (isMobile || item.showIcon) {
-            <mat-icon>{{ item.icon }}</mat-icon>
-            }
-        </button>
-        <mat-menu #actionMenu="matMenu" class="ngx-helper-card-action-menu" [xPosition]="'before'">
-            @for (menu of item.buttons; track $index) {
-            <!-- DIVIDER -->
-            @if (menu === 'DIVIDER') { <mat-divider></mat-divider> }
-            <!-- BUTTON -->
-            @else {
-            <button mat-menu-item type="button" (click)="menu.action()" [style.color]="menu.color">
-                <div class="title">{{ menu.title }}</div>
-                <mat-icon [style.color]="menu.color">{{ menu.icon }}</mat-icon>
-            </button>
-            } }
-        </mat-menu>
-        } } }
-    </div>
+        </div>
     }
 
     <!-- OPTION -->
     @if (option && optionItems.length > 0) {
-    <div class="option" [ngClass]="isMobile ? 'mobile-view' : ''">
-        <button mat-button type="button" [matMenuTriggerFor]="optionMenu">
-            @if (!isMobile) {
-            <div class="title">{{ optionTitle }}</div>
-            }
-            <mat-icon [class.mobile-view]="isMobile">{{ option.icon }}</mat-icon>
-        </button>
-        <mat-menu #optionMenu="matMenu" class="ngx-helper-card-action-option" [xPosition]="'before'">
-            @for (item of optionItems; track $index) {
-            <!-- DIVIDER -->
-            @if (item === 'DIVIDER') { <mat-divider></mat-divider> }
-            <!-- BUTTON -->
-            @else {
-            <button mat-menu-item type="button" [disabled]="optionId === item.id" (click)="setOption(item.id)">
-                <div class="title">{{ item.title }}</div>
-                <mat-icon [style.opacity]="optionId === item.id ? 1 : 0">done_all</mat-icon>
+        <div class="option" [ngClass]="isMobile ? 'mobile-view' : ''">
+            <button mat-button type="button" [matMenuTriggerFor]="optionMenu">
+                @if (!isMobile) {
+                    <div class="title">{{ optionTitle }}</div>
+                }
+                <mat-icon [class.mobile-view]="isMobile">{{ option.icon }}</mat-icon>
             </button>
-            } }
-        </mat-menu>
-    </div>
+            <mat-menu #optionMenu="matMenu" class="ngx-helper-card-action-option" [xPosition]="'before'">
+                @for (item of optionItems; track $index) {
+                    <!-- DIVIDER -->
+                    @if (item === 'DIVIDER') {
+                        <mat-divider></mat-divider>
+                    }
+                    <!-- BUTTON -->
+                    @else {
+                        <button mat-menu-item type="button" [disabled]="optionId === item.id" (click)="setOption(item.id)">
+                            <div class="title">{{ item.title }}</div>
+                            <mat-icon [style.opacity]="optionId === item.id ? 1 : 0">done_all</mat-icon>
+                        </button>
+                    }
+                }
+            </mat-menu>
+        </div>
     }
 </div>
 
