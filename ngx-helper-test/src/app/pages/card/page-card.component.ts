@@ -22,6 +22,18 @@ import { PageCardContentComponent } from './content/page-card-content.component'
 export class PageCardComponent implements OnInit {
     public icon: string = 'description';
     public actionButtons: NgxHelperCardAction[] = [
+        {
+            title: 'غیرفعال',
+            icon: 'close',
+            action: () => console.log('BUTTON: DISABLED'),
+            disableOn: () => true,
+        },
+        {
+            title: 'عدم نمایش',
+            icon: 'disabled_visible',
+            action: () => console.log('BUTTON: HIDDEN'),
+            hideOn: () => true,
+        },
         { title: 'ثبت', icon: 'add', action: () => console.log('BUTTON: ADD'), showIcon: true },
         { title: 'ویرایش', icon: 'edit', action: () => console.log('BUTTON: UPDATE') },
         { title: 'حذف', icon: 'delete', action: () => console.log('BUTTON: DELETE'), color: 'var(--error)' },
@@ -32,14 +44,60 @@ export class PageCardComponent implements OnInit {
             icon: 'more_vert',
             showIcon: true,
             buttons: [
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
+                {
+                    title: 'غیرفعال',
+                    icon: 'close',
+                    action: () => console.log('BUTTON: DISABLED'),
+                    hideIcon: true,
+                    disableOn: () => true,
+                },
+                {
+                    title: 'عدم نمایش',
+                    icon: 'disabled_visible',
+                    action: () => console.log('BUTTON: HIDDEN'),
+                    hideOn: () => true,
+                },
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
                 { title: 'ثبت', icon: 'add', action: () => console.log('MENU: ADD') },
                 { title: 'ویرایش', icon: 'edit', action: () => console.log('MENU: UPDATE') },
                 'DIVIDER',
                 { title: 'حذف', icon: 'delete', action: () => console.log('MENU: DELETE'), color: 'var(--error)' },
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
             ],
         },
     ];
-    public actions: NgxHelperCardAction[] = [...this.actionButtons, ...this.actionMenu];
+    public actionMenuHidden: NgxHelperCardAction[] = [
+        {
+            title: 'امکانات',
+            icon: 'more_vert',
+            showIcon: true,
+            buttons: [
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
+                {
+                    title: 'عدم نمایش',
+                    icon: 'disabled_visible',
+                    action: () => console.log('BUTTON: HIDDEN'),
+                    hideOn: () => true,
+                },
+                'DIVIDER',
+                'DIVIDER',
+                'DIVIDER',
+            ],
+        },
+    ];
+    public actions: NgxHelperCardAction[] = [...this.actionButtons, ...this.actionMenu, ...this.actionMenuHidden];
 
     public cardOption: INgxHelperCardOption = {
         id: '2ND',

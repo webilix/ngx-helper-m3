@@ -22,15 +22,35 @@ import { ComponentService, IComponentConfig } from '../component.service';
 
 import { INgxHelperCardOption, NgxHelperCardAction } from './ngx-helper-card.interface';
 
+type MenuButton =
+    | 'DIVIDER'
+    | {
+          title: string;
+          icon: string;
+          action: () => void;
+          color?: string;
+          hideIcon?: boolean;
+          disabled: boolean;
+      };
+
 type Button =
-    | { type: 'BUTTON'; title: string; icon: string; action: () => void; color?: string; showIcon?: boolean }
+    | {
+          type: 'BUTTON';
+          title: string;
+          icon: string;
+          action: () => void;
+          color?: string;
+          showIcon?: boolean;
+          disabled: boolean;
+      }
     | {
           type: 'MENU';
           title: string;
           icon: string;
           color?: string;
           showIcon?: boolean;
-          buttons: ('DIVIDER' | { title: string; icon: string; action: () => void; color?: string })[];
+          buttons: MenuButton[];
+          disabled: boolean;
       };
 
 @Component({
@@ -76,8 +96,40 @@ export class NgxHelperCardComponent implements OnInit, OnChanges {
     ngOnChanges(changes: SimpleChanges): void {
         this.className = `ngx-helper-m3-card${this.hasShadow ? ' has-shadow' : ''}`;
 
-        this.buttons = this.actions.map((action) => {
-            return 'buttons' in action ? { type: 'MENU', ...action } : { type: 'BUTTON', ...action };
+        this.buttons = [];
+        this.actions.forEach((action) => {
+            if (!!action.hideOn && action.hideOn()) return;
+            const disabled: boolean = !!action.disableOn && action.disableOn();
+
+            // BUTTON
+            if ('action' in action) this.buttons.push({ type: 'BUTTON', ...action, disabled });
+
+            // MENU
+            if ('buttons' in action) {
+                const menuButtons: MenuButton[] = [];
+
+                action.buttons.forEach((button) => {
+                    if (button === 'DIVIDER') {
+                        if (menuButtons[menuButtons.length - 1] !== 'DIVIDER') menuButtons.push('DIVIDER');
+                        return;
+                    }
+
+                    if (!!button.hideOn && button.hideOn()) return;
+                    const disabled: boolean = !!button.disableOn && button.disableOn();
+                    menuButtons.push({
+                        title: button.title,
+                        icon: button.icon,
+                        action: button.action,
+                        color: button.color,
+                        hideIcon: button.hideIcon,
+                        disabled,
+                    });
+                });
+
+                while (menuButtons[0] === 'DIVIDER') menuButtons.splice(0, 1);
+                while (menuButtons[menuButtons.length - 1] === 'DIVIDER') menuButtons.splice(menuButtons.length - 1);
+                if (menuButtons.length > 0) this.buttons.push({ type: 'MENU', ...action, buttons: menuButtons, disabled });
+            }
         });
 
         this.optionId = undefined;

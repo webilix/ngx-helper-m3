@@ -21,26 +21,26 @@
                 @switch (item.type) {
                     <!-- BUTTON -->
                     @case ('BUTTON') {
-                        <button mat-button type="button" [style.color]="item.color" (click)="item.action()">
+                        <button mat-button type="button" (click)="item.action()" [disabled]="item.disabled">
                             @if (!isMobile) {
-                                <div class="title">{{ item.title }}</div>
+                                <div class="title" [style.color]="item.color">{{ item.title }}</div>
                             }
                             <!-- ICON -->
                             @if (isMobile || item.showIcon) {
-                                <mat-icon>{{ item.icon }}</mat-icon>
+                                <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
                             }
                         </button>
                     }
 
                     <!-- MENU -->
                     @case ('MENU') {
-                        <button mat-button type="button" [style.color]="item.color" [matMenuTriggerFor]="actionMenu">
+                        <button mat-button type="button" [matMenuTriggerFor]="actionMenu" [disabled]="item.disabled">
                             @if (!isMobile) {
-                                <div class="title">{{ item.title }}</div>
+                                <div class="title" [style.color]="item.color">{{ item.title }}</div>
                             }
                             <!-- ICON -->
                             @if (isMobile || item.showIcon) {
-                                <mat-icon>{{ item.icon }}</mat-icon>
+                                <mat-icon [style.color]="item.color">{{ item.icon }}</mat-icon>
                             }
                         </button>
                         <mat-menu #actionMenu="matMenu" class="ngx-helper-card-action-menu" [xPosition]="'before'">
@@ -51,9 +51,11 @@
                                 }
                                 <!-- BUTTON -->
                                 @else {
-                                    <button mat-menu-item type="button" (click)="menu.action()" [style.color]="menu.color">
-                                        <div class="title">{{ menu.title }}</div>
-                                        <mat-icon [style.color]="menu.color">{{ menu.icon }}</mat-icon>
+                                    <button mat-menu-item type="button" (click)="menu.action()" [disabled]="menu.disabled">
+                                        <div class="title" [style.color]="menu.color">{{ menu.title }}</div>
+                                        @if (!menu.hideIcon) {
+                                            <mat-icon [style.color]="menu.color">{{ menu.icon }}</mat-icon>
+                                        }
                                     </button>
                                 }
                             }
