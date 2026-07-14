@@ -1016,7 +1016,6 @@
     transition: top 0.35s ease-out;
     z-index: 5000;
     border-radius: 8px;
-    cursor: pointer;
     box-sizing: border-box;
     overflow: hidden;
     border: 1px solid transparent;
@@ -1030,7 +1029,7 @@
             flex: 1;
 
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             column-gap: 1rem;
 
             padding-right: 1rem;
@@ -1056,11 +1055,39 @@
 
             mat-icon.icon {
                 font-size: 26px;
+                padding-top: 1.25rem;
             }
         }
 
         mat-icon.close {
             padding: 1rem 0 0 1rem;
+        }
+    }
+
+    .buttons {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+
+        margin: 0.5rem 1px 1px 1px;
+        background-color: rgba(0, 0, 0, 0.15);
+        border-radius: 0 0 8px 8px;
+        overflow: hidden;
+
+        button {
+            flex: 1;
+
+            min-width: auto;
+            padding: 0 1rem;
+            border-radius: 0 0;
+
+            mat-icon {
+                font-size: 95%;
+            }
+
+            span {
+                font-size: 90%;
+            }
         }
     }
 

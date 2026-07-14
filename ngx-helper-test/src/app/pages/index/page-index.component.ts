@@ -245,7 +245,7 @@ export class PageIndexComponent implements OnInit {
         this.ngxHelperImageService.showGallery(gallery ? images : [images[0]], index, config);
     }
 
-    toast(type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR'): void {
+    toast(type: 'INFO' | 'SUCCESS' | 'WARNING' | 'ERROR', button?: boolean): void {
         const message: string[] = [
             'نمایش نوتیفیکیشن‌ها در سایت به این صورت انجام می‌شود.',
             'نمایش خط دوم در متن نوتیفیکیشن!',
@@ -256,7 +256,19 @@ export class PageIndexComponent implements OnInit {
         for (let i = 0; i < 3; i++) {
             switch (type) {
                 case 'INFO':
-                    this.ngxHelperToastService.info(message, config, onClose);
+                    this.ngxHelperToastService.info(
+                        [...message, button ? 'این نوتیفیکیشن دارای کلید است و به صورت خودکار لغو نمی‌شود.' : ''],
+                        {
+                            ...config,
+                            buttons: button
+                                ? [
+                                      { icon: 'add', title: 'ثبت', action: () => console.log('TOAST BUTTON :: CREATE') },
+                                      { icon: 'edit', title: 'ویرایش', action: () => console.log('TOAST BUTTON :: UPDATE') },
+                                  ]
+                                : undefined,
+                        },
+                        onClose,
+                    );
                     break;
                 case 'SUCCESS':
                     this.ngxHelperToastService.success(message, config, onClose);

@@ -8,17 +8,32 @@
         </ul>
     </div>
     <!-- CLOSE ICON -->
-    @if (showClose) {
+    @if (showClose && buttons.length === 0) {
         <mat-icon [style.color]="textColor" class="close">close</mat-icon>
     }
 </div>
 
-<div class="progress-container" [style.background-color]="backgroundColor">
-    @if (timeout !== 0) {
-        <div
-            class="progress-value"
-            [style.background-color]="'color-mix(in srgb, ' + backgroundColor + ', black 25%)'"
-            [style.width]="(animation === 'DECREASE' ? 100 - progress() : progress()) + '%'"
-        ></div>
-    }
-</div>
+<!-- BUTTONS -->
+@if (buttons.length > 0) {
+    <div class="buttons">
+        @for (button of buttons; track $index) {
+            <button mat-button type="button" (click)="buttonClick(button)">
+                <mat-icon [style.color]="textColor">{{ button.icon }}</mat-icon>
+                <span [style.color]="textColor">{{ button.title }}</span>
+            </button>
+        }
+    </div>
+}
+
+<!-- TIMEPUT -->
+@if (buttons.length === 0) {
+    <div class="progress-container" [style.background-color]="backgroundColor">
+        @if (timeout !== 0) {
+            <div
+                class="progress-value"
+                [style.background-color]="'color-mix(in srgb, ' + backgroundColor + ', black 25%)'"
+                [style.width]="(animation === 'DECREASE' ? 100 - progress() : progress()) + '%'"
+            ></div>
+        }
+    </div>
+}

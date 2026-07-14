@@ -12,9 +12,12 @@ import {
     WritableSignal,
     signal,
     effect,
+    inject,
 } from '@angular/core';
+import { Router } from '@angular/router';
 import { timer } from 'rxjs';
 
+import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 
 import { NgxHelperMultiLinePipe } from '../../pipes/multi-line.pipe';
@@ -22,15 +25,22 @@ import { INgxHelperConfig } from '../../ngx-helper.config';
 
 import { INgxHelperToastConfig } from '../ngx-helper-toast.interface';
 
+interface IButton {
+    readonly icon: string;
+    readonly title: string;
+    readonly action: string[] | (() => void) | (() => string[]);
+}
+
 @Component({
     host: { selector: 'toast' },
-    imports: [MatIcon, NgxHelperMultiLinePipe],
+    imports: [MatButton, MatIcon, NgxHelperMultiLinePipe],
     templateUrl: './toast.component.html',
     changeDetection: ChangeDetectionStrategy.Eager,
     styleUrl: './toast.component.scss',
 })
 export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
-    @HostListener('click') private onClick = () => this.close();
+    @HostBinding('style.cursor') protected cursor = 'pointer';
+    @HostListener('click') private onClick = () => this.buttons.length === 0 && this.close();
 
     @HostBinding('className') protected className: string = 'ngx-helper-m3-toast';
     @HostBinding('style.top') protected top: string = '0';
@@ -46,8 +56,12 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input({ required: true }) init!: () => void;
     @Input({ required: true }) close!: () => void;
 
+    private readonly router: Router = inject(Router);
+
     public progress: WritableSignal<number> = signal(0);
     public start: WritableSignal<number> = signal(0);
+
+    protected buttons: IButton[] = [];
 
     protected timeout!: number;
     protected showClose!: boolean;
@@ -71,6 +85,9 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
         const xPosition: 'LEFT' | 'CENTER' | 'RIGHT' = this.config.helper?.toastXPosition || 'CENTER';
         this.className = `ngx-helper-m3-toast ${xPosition.toLowerCase()}`;
 
+        this.buttons = this.config?.toast?.buttons || [];
+        this.cursor = this.buttons.length === 0 ? 'pointer' : 'default';
+
         const toastTimeout =
             this.config.helper?.toastTimeout === undefined || this.config.helper?.toastTimeout < 0
                 ? 4000
@@ -82,7 +99,7 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
         this.showClose = this.config.toast.showClose || this.timeout === 0;
         this.animation = this.config.helper?.toastProgressAnimation || 'DECREASE';
 
-        if (this.timeout) {
+        if (this.timeout && this.buttons.length === 0) {
             this.start.set(new Date().getTime());
             this.interval = setInterval(() => {
                 const timer: number = new Date().getTime();
@@ -104,5 +121,22 @@ export class ToastComponent implements OnInit, OnDestroy, AfterViewInit {
             this.init();
             this.changeDetectorRef.markForCheck();
         });
+    }
+
+    buttonClick(button: IButton): void {
+        // ROUTE
+        if (typeof button.action !== 'function') {
+            this.router.navigate(button.action);
+            this.close();
+        }
+
+        // FUNCTION
+        if (typeof button.action === 'function') {
+            const response = button.action();
+            if (!!response) {
+                this.router.navigate(response);
+                this.close();
+            } else this.close();
+        }
     }
 }
