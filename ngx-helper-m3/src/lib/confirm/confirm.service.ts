@@ -77,7 +77,10 @@ class NgxHelperConfirmCalss {
 
 @Injectable({ providedIn: 'root' })
 export class NgxHelperConfirmService {
-    constructor(private readonly matBottomSheet: MatBottomSheet, private readonly matDialog: MatDialog) {}
+    constructor(
+        private readonly matBottomSheet: MatBottomSheet,
+        private readonly matDialog: MatDialog,
+    ) {}
 
     verify(confirm: INgxHelperConfirm): NgxHelperConfirmCalss {
         return new NgxHelperConfirmCalss(this.matBottomSheet, this.matDialog, confirm);
@@ -88,9 +91,10 @@ export class NgxHelperConfirmService {
     active(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را فعال کنید؟`,
-            description: config?.description,
-            data: data.value ? { title: data.title, value: data.value } : undefined,
             icon: 'check_box',
+            data: data.value ? { title: data.title, value: data.value } : undefined,
+            // GENERAL
+            description: config?.description,
             confirmClass: config?.confirmClass,
             denyClass: config?.denyClass,
         });
@@ -101,9 +105,10 @@ export class NgxHelperConfirmService {
     deactive(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را غیرفعال کنید؟`,
-            description: config?.description,
-            data: data.value ? { title: data.title, value: data.value } : undefined,
             icon: 'disabled_by_default',
+            data: data.value ? { title: data.title, value: data.value } : undefined,
+            // GENERAL
+            description: config?.description,
             confirmClass: config?.confirmClass || 'error',
             denyClass: config?.denyClass,
         });
@@ -115,14 +120,43 @@ export class NgxHelperConfirmService {
         return active ? this.active(data, config || {}) : this.deactive(data, config || {});
     }
 
+    archive(data: IConfirmData): NgxHelperConfirmCalss;
+    archive(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
+    archive(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
+        return this.verify({
+            question: `آیا می‌خواهید ${data.title} انتخاب شده را آرشیو کنید؟`,
+            icon: 'inventory_2',
+            data: data.value ? { title: data.title, value: data.value } : undefined,
+            // GENERAL
+            description: config?.description,
+            confirmClass: config?.confirmClass || 'error',
+            denyClass: config?.denyClass,
+        });
+    }
+
+    restore(data: IConfirmData): NgxHelperConfirmCalss;
+    restore(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
+    restore(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
+        return this.verify({
+            question: `آیا می‌خواهید ${data.title} انتخاب شده را بازیابی کنید؟`,
+            icon: 'restart_alt',
+            data: data.value ? { title: data.title, value: data.value } : undefined,
+            // GENERAL
+            description: config?.description,
+            confirmClass: config?.confirmClass,
+            denyClass: config?.denyClass,
+        });
+    }
+
     delete(data: IConfirmData): NgxHelperConfirmCalss;
     delete(data: IConfirmData, config: Partial<IConfirmConfig>): NgxHelperConfirmCalss;
     delete(data: IConfirmData, config?: Partial<IConfirmConfig>): NgxHelperConfirmCalss {
         return this.verify({
             question: `آیا می‌خواهید ${data.title} انتخاب شده را حذف کنید؟`,
-            description: config?.description,
-            data: data.value ? { title: data.title, value: data.value } : undefined,
             icon: 'delete',
+            data: data.value ? { title: data.title, value: data.value } : undefined,
+            // GENERAL
+            description: config?.description,
             confirmClass: config?.confirmClass || 'error',
             denyClass: config?.denyClass,
         });

@@ -1,11 +1,13 @@
 export interface INgxHelperConfirm {
     readonly question: string;
-    readonly description?: string;
+    readonly icon?: string;
     readonly data?: {
         readonly title: string;
         readonly value: string;
     };
-    readonly icon?: string;
+
+    // GENERAL
+    readonly description?: string;
     readonly confirmClass?: string;
     readonly denyClass?: string;
 }

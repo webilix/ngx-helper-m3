@@ -59,7 +59,7 @@ export class PageIndexComponent implements OnInit {
     }
 
     public confirmType: 'DIALOG' | 'BOTTOMSHEET' = 'DIALOG';
-    confirm(type: 'VERIFY' | 'DELETE' | 'ACTIVE' | 'DEACTIVE'): void {
+    confirm(type: 'VERIFY' | 'DELETE' | 'ACTIVE' | 'DEACTIVE' | 'ARCHIVE' | 'RESTORE'): void {
         const confirm =
             type === 'VERIFY'
                 ? this.ngxHelperConfirmService.verify({ question: 'می‌خواهید از عضویت خودتان خارج شوید؟', icon: 'logout' })
@@ -80,14 +80,30 @@ export class PageIndexComponent implements OnInit {
                                   'در صورت تایید، اطلاعات در سیستم فعال می‌شود و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
                           },
                       )
-                    : this.ngxHelperConfirmService.status(
-                          false,
-                          { title: 'گزینه', value: 'مقدار' },
-                          {
-                              description:
-                                  'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
-                          },
-                      );
+                    : type === 'DEACTIVE'
+                      ? this.ngxHelperConfirmService.status(
+                            false,
+                            { title: 'گزینه', value: 'مقدار' },
+                            {
+                                description:
+                                    'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
+                            },
+                        )
+                      : type === 'ARCHIVE'
+                        ? this.ngxHelperConfirmService.archive(
+                              { title: 'گزینه', value: 'مقدار' },
+                              {
+                                  description:
+                                      'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
+                              },
+                          )
+                        : this.ngxHelperConfirmService.restore(
+                              { title: 'گزینه', value: 'مقدار' },
+                              {
+                                  description:
+                                      'در صورت تایید، اطلاعات در سیستم بازیابی شده و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
+                              },
+                          );
 
         switch (this.confirmType) {
             case 'DIALOG':
