@@ -10,4 +10,7 @@ export interface INgxHelperConfirm {
     readonly description?: string;
     readonly confirmClass?: string;
     readonly denyClass?: string;
+
+    // GET DESCRIPTION
+    readonly getDescription?: boolean | 'REQUIRED';
 }

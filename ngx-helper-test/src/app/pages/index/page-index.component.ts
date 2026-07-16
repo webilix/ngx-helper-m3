@@ -62,7 +62,10 @@ export class PageIndexComponent implements OnInit {
     confirm(type: 'VERIFY' | 'DELETE' | 'ACTIVE' | 'DEACTIVE' | 'ARCHIVE' | 'RESTORE'): void {
         const confirm =
             type === 'VERIFY'
-                ? this.ngxHelperConfirmService.verify({ question: 'می‌خواهید از عضویت خودتان خارج شوید؟', icon: 'logout' })
+                ? this.ngxHelperConfirmService.verify({
+                      question: 'می‌خواهید از عضویت خودتان خارج شوید؟',
+                      icon: 'logout',
+                  })
                 : type === 'DELETE'
                   ? this.ngxHelperConfirmService.delete(
                         { title: 'گزینه', value: 'مقدار' },
@@ -78,6 +81,7 @@ export class PageIndexComponent implements OnInit {
                           {
                               description:
                                   'در صورت تایید، اطلاعات در سیستم فعال می‌شود و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
+                              getDescription: true,
                           },
                       )
                     : type === 'DEACTIVE'
@@ -87,6 +91,7 @@ export class PageIndexComponent implements OnInit {
                             {
                                 description:
                                     'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
+                                getDescription: 'REQUIRED',
                             },
                         )
                       : type === 'ARCHIVE'
@@ -95,6 +100,7 @@ export class PageIndexComponent implements OnInit {
                               {
                                   description:
                                       'در صورت تایید، اطلاعات در سیستم باقی می‌ماند اما امکان استفاده از آنها در سایر بخش‌های سیستم وجود نخواهد داشت.',
+                                  getDescription: 'REQUIRED',
                               },
                           )
                         : this.ngxHelperConfirmService.restore(
@@ -102,19 +108,20 @@ export class PageIndexComponent implements OnInit {
                               {
                                   description:
                                       'در صورت تایید، اطلاعات در سیستم بازیابی شده و امکان استفاده از آنها در سایر بخش‌های سیستم وجود خواهد داشت.',
+                                  getDescription: true,
                               },
                           );
 
         switch (this.confirmType) {
             case 'DIALOG':
                 confirm.dialog(
-                    () => console.log('CONFIRMED'),
+                    (description: string | null) => console.log('CONFIRMED : ' + description),
                     () => console.log('DENIED'),
                 );
                 break;
             case 'BOTTOMSHEET':
                 confirm.bottomSheet(
-                    () => console.log('CONFIRMED'),
+                    (description: string | null) => console.log('CONFIRMED : ' + description),
                     () => console.log('DENIED'),
                 );
                 break;

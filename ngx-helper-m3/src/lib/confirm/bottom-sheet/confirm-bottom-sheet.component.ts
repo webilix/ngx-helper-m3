@@ -1,4 +1,4 @@
-import { Component, HostBinding, inject, ChangeDetectionStrategy } from '@angular/core';
+import { Component, HostBinding, inject, ChangeDetectionStrategy, WritableSignal, signal } from '@angular/core';
 import { NgClass } from '@angular/common';
 
 import { MAT_BOTTOM_SHEET_DATA, MatBottomSheetRef } from '@angular/material/bottom-sheet';
@@ -17,11 +17,25 @@ import { INgxHelperConfirm } from '../confirm.interface';
 export class ConfirmBottomSheetComponent {
     @HostBinding('className') protected className: string = 'ngx-helper-m3-confirm';
 
-    public confirm: INgxHelperConfirm = inject(MAT_BOTTOM_SHEET_DATA);
+    private readonly matBottomSheetRef: MatBottomSheetRef<ConfirmBottomSheetComponent> = inject(
+        MatBottomSheetRef<ConfirmBottomSheetComponent>,
+    );
 
-    constructor(private readonly matBottomSheetRef: MatBottomSheetRef<ConfirmBottomSheetComponent>) {}
+    protected ngxHelperconfirm: INgxHelperConfirm = inject(MAT_BOTTOM_SHEET_DATA);
+    protected descriptionError: WritableSignal<boolean> = signal(false);
+    protected descriptionValue: string | null = null;
 
-    close(confirmed?: boolean) {
-        this.matBottomSheetRef.dismiss(confirmed);
+    setDescription(value: string): void {
+        this.descriptionValue = !!value.trim() ? value.trim() : null;
+        this.descriptionError.set(this.ngxHelperconfirm.getDescription === 'REQUIRED' && !this.descriptionValue);
+    }
+
+    deny() {
+        this.matBottomSheetRef.dismiss(null);
+    }
+
+    confirm() {
+        if (this.descriptionError()) return;
+        this.matBottomSheetRef.dismiss({ description: this.descriptionValue });
     }
 }

@@ -1,27 +1,45 @@
 <div class="confirm-content">
     <!-- ICON -->
-    @if (confirm.icon) {
-    <mat-icon>{{ confirm.icon }}</mat-icon>
+    @if (ngxHelperconfirm.icon) {
+        <mat-icon>{{ ngxHelperconfirm.icon }}</mat-icon>
     }
 
     <!-- CONTENT -->
     <div class="confirm">
-        <div class="question">{{ confirm.question }}</div>
+        <div class="question">{{ ngxHelperconfirm.question }}</div>
         <!-- DESCRIPTION -->
-        @if (confirm.description) {
-        <div class="description">{{ confirm.description }}</div>
+        @if (ngxHelperconfirm.description) {
+            <div class="description">{{ ngxHelperconfirm.description }}</div>
         }
         <!-- DATA -->
-        @if (confirm.data) {
-        <div class="data">
-            <div class="title">{{ confirm.data.title }}:</div>
-            <div class="value">{{ confirm.data.value }}</div>
-        </div>
+        @if (ngxHelperconfirm.data) {
+            <div class="data">
+                <div class="title">{{ ngxHelperconfirm.data.title }}:</div>
+                <div class="value">{{ ngxHelperconfirm.data.value }}</div>
+            </div>
         }
     </div>
 </div>
 
+<!-- GET DESCRIPTION -->
+@if (!!ngxHelperconfirm.getDescription) {
+    <textarea
+        [class.error]="descriptionError()"
+        [placeholder]="'توضیحات' + (ngxHelperconfirm.getDescription === 'REQUIRED' ? ' *' : '')"
+        (keyup)="setDescription(descriptionInput.value)"
+        #descriptionInput
+    ></textarea>
+}
+
 <div class="confirm-footer">
-    <button mat-button type="button" (click)="close()" [ngClass]="confirm.denyClass">خیر</button>
-    <button mat-button type="button" (click)="close(true)" [ngClass]="confirm.confirmClass">بلی</button>
+    <button mat-button type="button" (click)="deny()" [ngClass]="ngxHelperconfirm.denyClass">خیر</button>
+    <button
+        mat-button
+        type="button"
+        (click)="confirm()"
+        [ngClass]="ngxHelperconfirm.confirmClass"
+        [disabled]="this.ngxHelperconfirm.getDescription === 'REQUIRED' && !this.descriptionValue"
+    >
+        بلی
+    </button>
 </div>

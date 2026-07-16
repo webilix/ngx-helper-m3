@@ -218,6 +218,34 @@
         }
     }
 
+    textarea {
+        position: relative;
+        top: 0.75rem;
+
+        padding: 0.5rem;
+        margin-right: 2.5rem;
+        height: 70px;
+        width: calc(100% - 3.5rem);
+        outline: none;
+        background-color: transparent;
+        border-radius: 8px;
+        border: 1px solid var(--outline-variant);
+        color: var(--on-surface);
+        font-size: 90%;
+    }
+
+    textarea::placeholder {
+        font-size: 80%;
+    }
+
+    textarea.error {
+        border-color: var(--error);
+    }
+
+    textarea.error::placeholder {
+        color: var(--error);
+    }
+
     .confirm-footer {
         display: flex;
         align-items: center;

@@ -14,9 +14,12 @@ interface IConfirmData {
 }
 
 interface IConfirmConfig {
+    // GENERAL
     readonly description: string;
     readonly confirmClass: string;
     readonly denyClass: string;
+    // GET DESCRIPTION
+    readonly getDescription?: boolean | 'REQUIRED';
 }
 
 class NgxHelperConfirmCalss {
@@ -26,16 +29,16 @@ class NgxHelperConfirmCalss {
         private readonly confirm: INgxHelperConfirm,
     ) {}
 
-    dialog(onConfirmed: () => void): void;
-    dialog(onConfirmed: () => void, onDenied: () => void): void;
-    dialog(onConfirmed: () => void, config: MatDialogConfig): void;
-    dialog(onConfirmed: () => void, onDenied: () => void, config: MatDialogConfig): void;
-    dialog(onConfirmed: () => void, arg1?: any, arg2?: any): void {
+    dialog(onConfirmed: (description: string | null) => void): void;
+    dialog(onConfirmed: (description: string | null) => void, onDenied: () => void): void;
+    dialog(onConfirmed: (description: string | null) => void, config: MatDialogConfig): void;
+    dialog(onConfirmed: (description: string | null) => void, onDenied: () => void, config: MatDialogConfig): void;
+    dialog(onConfirmed: (description: string | null) => void, arg1?: any, arg2?: any): void {
         const onDenied: (() => void) | undefined = typeof arg1 === 'function' ? arg1 : undefined;
         const config: MatDialogConfig = arg2 || (typeof arg1 !== 'function' ? arg1 : {});
 
         this.matDialog
-            .open<any, any, boolean>(ConfirmDialogComponent, {
+            .open<any, any, { description: string | null } | null>(ConfirmDialogComponent, {
                 // DEFAULT CONFIG
                 width: 'calc(100vw - 4rem)',
                 direction: 'rtl',
@@ -48,19 +51,24 @@ class NgxHelperConfirmCalss {
                 data: this.confirm,
             })
             .afterClosed()
-            .subscribe({ next: (confirmed?: boolean) => (!!confirmed ? onConfirmed() : onDenied ? onDenied() : undefined) });
+            .subscribe({
+                next: (result?: { description: string | null } | null) => {
+                    if (!!result) onConfirmed(result.description);
+                    else onDenied && onDenied();
+                },
+            });
     }
 
-    bottomSheet(onConfirmed: () => void): void;
-    bottomSheet(onConfirmed: () => void, onDenied: () => void): void;
-    bottomSheet(onConfirmed: () => void, config: MatBottomSheetConfig): void;
-    bottomSheet(onConfirmed: () => void, onDenied: () => void, config: MatBottomSheetConfig): void;
-    bottomSheet(onConfirmed: () => void, arg1?: any, arg2?: any): void {
+    bottomSheet(onConfirmed: (description: string | null) => void): void;
+    bottomSheet(onConfirmed: (description: string | null) => void, onDenied: () => void): void;
+    bottomSheet(onConfirmed: (description: string | null) => void, config: MatBottomSheetConfig): void;
+    bottomSheet(onConfirmed: (description: string | null) => void, onDenied: () => void, config: MatBottomSheetConfig): void;
+    bottomSheet(onConfirmed: (description: string | null) => void, arg1?: any, arg2?: any): void {
         const onDenied: (() => void) | undefined = typeof arg1 === 'function' ? arg1 : undefined;
         const config: MatBottomSheetConfig = arg2 || (typeof arg1 !== 'function' ? arg1 : {});
 
         this.matBottomSheet
-            .open<any, any, boolean>(ConfirmBottomSheetComponent, {
+            .open<any, any, { description: string | null } | null>(ConfirmBottomSheetComponent, {
                 // DEFAULT CONFIG
                 direction: 'rtl',
                 panelClass: 'ngx-helper-bottom-sheet',
@@ -71,7 +79,12 @@ class NgxHelperConfirmCalss {
                 data: this.confirm,
             })
             .afterDismissed()
-            .subscribe({ next: (confirmed?: boolean) => (!!confirmed ? onConfirmed() : onDenied ? onDenied() : undefined) });
+            .subscribe({
+                next: (result?: { description: string | null } | null) => {
+                    if (!!result) onConfirmed(result.description);
+                    else onDenied && onDenied();
+                },
+            });
     }
 }
 
@@ -97,6 +110,8 @@ export class NgxHelperConfirmService {
             description: config?.description,
             confirmClass: config?.confirmClass,
             denyClass: config?.denyClass,
+            // GET DESCRIPTION
+            getDescription: config?.getDescription,
         });
     }
 
@@ -111,6 +126,8 @@ export class NgxHelperConfirmService {
             description: config?.description,
             confirmClass: config?.confirmClass || 'error',
             denyClass: config?.denyClass,
+            // GET DESCRIPTION
+            getDescription: config?.getDescription,
         });
     }
 
@@ -131,6 +148,8 @@ export class NgxHelperConfirmService {
             description: config?.description,
             confirmClass: config?.confirmClass || 'error',
             denyClass: config?.denyClass,
+            // GET DESCRIPTION
+            getDescription: config?.getDescription,
         });
     }
 
@@ -145,6 +164,8 @@ export class NgxHelperConfirmService {
             description: config?.description,
             confirmClass: config?.confirmClass,
             denyClass: config?.denyClass,
+            // GET DESCRIPTION
+            getDescription: config?.getDescription,
         });
     }
 
@@ -159,6 +180,8 @@ export class NgxHelperConfirmService {
             description: config?.description,
             confirmClass: config?.confirmClass || 'error',
             denyClass: config?.denyClass,
+            // GET DESCRIPTION
+            getDescription: config?.getDescription,
         });
     }
 }
