@@ -49,6 +49,7 @@ export class NgxHelperPageGroupComponent implements OnInit, OnChanges {
     @Input({ required: true }) pageGroup!: INgxHelperPageGroup;
     @Input({ required: false }) pageId!: string;
     @Input({ required: false }) data?: any;
+    @Input({ required: false }) asideHeight?: string;
     @Output() pageChanged: EventEmitter<INgxHelperPageGroupItem> = new EventEmitter<INgxHelperPageGroupItem>();
     @Output() dataChanged: EventEmitter<any> = new EventEmitter<any>();
 

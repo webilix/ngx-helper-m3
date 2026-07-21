@@ -1,107 +1,109 @@
 @if (pages.length > 0) {
-<!-- DESKTOP VIEW -->
-@if (!isMobile) {
-<div
-    class="page-group-aside"
-    [style.width]="sidebarWidth"
-    [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
-    [style.top]="componentConfig.stickyView?.top?.desktopView || undefined"
->
-    @for (item of pages; track $index) {
-    <div
-        class="page"
-        [class.active]="pageId === item"
-        [style.cursor]="pageId === item ? 'default' : 'pointer'"
-        (click)="setPage(item)"
-    >
-        <!-- ICON -->
-        <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
-        <div class="title">{{ pageGroup.pages[item].title }}</div>
-        <!-- CURRENT PAGE -->
-        @if (pageId === item) { <mat-icon>keyboard_double_arrow_left</mat-icon> }
-    </div>
+    <!-- DESKTOP VIEW -->
+    @if (!isMobile) {
+        <div
+            class="page-group-aside"
+            [style.width]="sidebarWidth"
+            [style.height]="asideHeight ?? 'auto'"
+            [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+            [style.top]="componentConfig.stickyView?.top?.desktopView || undefined"
+        >
+            @for (item of pages; track $index) {
+                <div
+                    class="page"
+                    [class.active]="pageId === item"
+                    [style.cursor]="pageId === item ? 'default' : 'pointer'"
+                    (click)="setPage(item)"
+                >
+                    <!-- ICON -->
+                    <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
+                    <div class="title">{{ pageGroup.pages[item].title }}</div>
+                    <!-- CURRENT PAGE -->
+                    @if (pageId === item) {
+                        <mat-icon>keyboard_double_arrow_left</mat-icon>
+                    }
+                </div>
+            }
+        </div>
     }
-</div>
-}
 
-<!-- MOBILE VIEW -->
-@if (isMobile) {
-
-<!-- MOBILE LIST VIEW -->
-@if (pageGroup.showMenu === false || (pages.length <= 5 && !pageGroup.showMenu)) {
-<div
-    class="page-group-nav"
-    [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
-    [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
->
-    @for (item of pages; track $index) {
-    <div
-        class="page"
-        [class.active]="pageId === item"
-        [style.cursor]="pageId === item ? 'default' : 'pointer'"
-        (click)="setPage(item)"
-    >
-        <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
-        @if (pageId === item) {
-        <div class="title">{{ pageGroup.pages[item].title }}</div>
+    <!-- MOBILE VIEW -->
+    @if (isMobile) {
+        <!-- MOBILE LIST VIEW -->
+        @if (pageGroup.showMenu === false || (pages.length <= 5 && !pageGroup.showMenu)) {
+            <div
+                class="page-group-nav"
+                [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+                [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
+            >
+                @for (item of pages; track $index) {
+                    <div
+                        class="page"
+                        [class.active]="pageId === item"
+                        [style.cursor]="pageId === item ? 'default' : 'pointer'"
+                        (click)="setPage(item)"
+                    >
+                        <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
+                        @if (pageId === item) {
+                            <div class="title">{{ pageGroup.pages[item].title }}</div>
+                        }
+                    </div>
+                }
+            </div>
         }
-    </div>
-    }
-</div>
-}
 
-<!-- MOBILE MENU VIEW -->
-@else {
-<div
-    class="page-group-menu"
-    [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
-    [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
->
-    <mat-icon class="page">{{ pageGroup.pages[pageId].icon }}</mat-icon>
-    <div class="title">{{ pageGroup.pages[pageId].title }}</div>
-    <button mat-button type="button" [matMenuTriggerFor]="pageMenu" class="menu">
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #pageMenu="matMenu" class="ngx-helper-page-group-menu" [xPosition]="'before'">
-        @for (item of pages; track $index) {
-        <button mat-menu-item type="button" (click)="setPage(item)" [disabled]="item === pageId">
-            <div class="title">{{ pageGroup.pages[item].title }}</div>
-            <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
-        </button>
+        <!-- MOBILE MENU VIEW -->
+        @else {
+            <div
+                class="page-group-menu"
+                [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+                [style.top]="componentConfig.stickyView?.top?.mobileView || undefined"
+            >
+                <mat-icon class="page">{{ pageGroup.pages[pageId].icon }}</mat-icon>
+                <div class="title">{{ pageGroup.pages[pageId].title }}</div>
+                <button mat-button type="button" [matMenuTriggerFor]="pageMenu" class="menu">
+                    <mat-icon>more_vert</mat-icon>
+                </button>
+                <mat-menu #pageMenu="matMenu" class="ngx-helper-page-group-menu" [xPosition]="'before'">
+                    @for (item of pages; track $index) {
+                        <button mat-menu-item type="button" (click)="setPage(item)" [disabled]="item === pageId">
+                            <div class="title">{{ pageGroup.pages[item].title }}</div>
+                            <mat-icon>{{ pageGroup.pages[item].icon }}</mat-icon>
+                        </button>
+                    }
+                </mat-menu>
+            </div>
         }
-    </mat-menu>
-</div>
-}
 
-<div
-    class="page-group-spacer"
-    [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
-    [style.top]="
-        'calc(' +
-        (componentConfig.stickyView?.top?.mobileView || undefined) +
-        ' + var(--ngx-helper-m3-page-group-toolbar-height))'
-    "
-></div>
-}
-
-<div class="page-group-content">
-    <!-- HEADER -->
-    @if (pageGroup.header) {
-    <div
-        class="header"
-        [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
-        [style.top]="
-            (isMobile
-                ? 'calc(' +
-                  (componentConfig.stickyView?.top?.mobileView || undefined) +
-                  ' + var(--ngx-helper-m3-page-group-toolbar-height) + 1rem)'
-                : componentConfig.stickyView?.top?.desktopView) || undefined
-        "
-    >
-        <span *ngComponentOutlet="pageGroup.header; injector: injector"></span>
-        <div class="spacer"></div>
-    </div>
+        <div
+            class="page-group-spacer"
+            [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+            [style.top]="
+                'calc(' +
+                (componentConfig.stickyView?.top?.mobileView || undefined) +
+                ' + var(--ngx-helper-m3-page-group-toolbar-height))'
+            "
+        ></div>
     }
-    <span *ngComponentOutlet="pageGroup.pages[pageId].component; injector: injector"></span>
-</div>
+
+    <div class="page-group-content">
+        <!-- HEADER -->
+        @if (pageGroup.header) {
+            <div
+                class="header"
+                [style.position]="componentConfig.stickyView?.top ? 'sticky' : 'static'"
+                [style.top]="
+                    (isMobile
+                        ? 'calc(' +
+                          (componentConfig.stickyView?.top?.mobileView || undefined) +
+                          ' + var(--ngx-helper-m3-page-group-toolbar-height) + 1rem)'
+                        : componentConfig.stickyView?.top?.desktopView) || undefined
+                "
+            >
+                <span *ngComponentOutlet="pageGroup.header; injector: injector"></span>
+                <div class="spacer"></div>
+            </div>
+        }
+        <span *ngComponentOutlet="pageGroup.pages[pageId].component; injector: injector"></span>
+    </div>
 }
