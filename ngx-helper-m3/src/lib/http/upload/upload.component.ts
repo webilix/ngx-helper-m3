@@ -62,13 +62,28 @@ export class UploadComponent<R, E> implements AfterViewInit {
         let request;
         switch (this.config.method || 'POST') {
             case 'POST':
-                request = this.httpClient.post<R>(this.url, formData, { headers, reportProgress: true, observe: 'events' });
+                request = this.httpClient.post<R>(this.url, formData, {
+                    headers,
+                    reportProgress: true,
+                    observe: 'events',
+                    withCredentials: this.config.withCredentials,
+                });
                 break;
             case 'PUT':
-                request = this.httpClient.put<R>(this.url, formData, { headers, reportProgress: true, observe: 'events' });
+                request = this.httpClient.put<R>(this.url, formData, {
+                    headers,
+                    reportProgress: true,
+                    observe: 'events',
+                    withCredentials: this.config.withCredentials,
+                });
                 break;
             case 'PATCH':
-                request = this.httpClient.patch<R>(this.url, formData, { headers, reportProgress: true, observe: 'events' });
+                request = this.httpClient.patch<R>(this.url, formData, {
+                    headers,
+                    reportProgress: true,
+                    observe: 'events',
+                    withCredentials: this.config.withCredentials,
+                });
                 break;
         }
 
