@@ -133,6 +133,22 @@
     </div>
 </div>
 
+<!-- FILE EXTENSION -->
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperFileExtension' }}</div>
+        <div class="value">{{ 'file.name.tXt' | ngxHelperFileExtension }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperFileExtension: { case: LOWER }' }}</div>
+        <div class="value en">{{ 'file.name.tXt' | ngxHelperFileExtension: { case: 'LOWER' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperFileExtension: { case: UPPER }' }}</div>
+        <div class="value en">{{ 'file.name.tXt' | ngxHelperFileExtension: { case: 'UPPER' } }}</div>
+    </div>
+</div>
+
 <!-- FILE SIZE -->
 <div class="card">
     <div class="pipe">

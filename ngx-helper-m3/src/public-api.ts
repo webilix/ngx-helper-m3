@@ -48,6 +48,7 @@ export * from './lib/directives/ngx-helper-sticky.directive';
 export * from './lib/pipes/bank-card.pipe';
 export * from './lib/pipes/date.pipe';
 export * from './lib/pipes/duration.pipe';
+export * from './lib/pipes/file-extension.pipe';
 export * from './lib/pipes/file-size.pipe';
 export * from './lib/pipes/mobile.pipe';
 export * from './lib/pipes/multi-line.pipe';
