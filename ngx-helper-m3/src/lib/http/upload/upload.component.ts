@@ -45,7 +45,7 @@ export class UploadComponent<R, E> implements AfterViewInit {
             this.left = '1rem';
             this.changeDetectorRef.markForCheck();
         });
-        setTimeout(this.upload.bind(this), 100000);
+        setTimeout(this.upload.bind(this), 1);
     }
 
     upload(): void {

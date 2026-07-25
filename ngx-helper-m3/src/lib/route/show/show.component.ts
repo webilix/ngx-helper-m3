@@ -169,7 +169,7 @@ export class ShowComponent implements OnInit {
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
 
         this.copied.set(index);
-        this.copyTimeout = setTimeout(() => this.copied.set(null), 1000);
+        this.copyTimeout = setTimeout(() => this.copied.set(null), 2000);
     }
 
     checkKey(event: any): void {

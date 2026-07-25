@@ -62,7 +62,7 @@ export class ShowComponent implements OnInit {
         if (this.copyTimeout) clearTimeout(this.copyTimeout);
 
         this.copied.set(type);
-        this.copyTimeout = setTimeout(() => this.copied.set(null), 1000);
+        this.copyTimeout = setTimeout(() => this.copied.set(null), 2000);
     }
 
     checkEscape(event: any): void {

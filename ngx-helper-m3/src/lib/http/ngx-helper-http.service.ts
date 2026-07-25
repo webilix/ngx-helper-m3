@@ -19,7 +19,10 @@ export class NgxHelperHttpService {
         componentRef: ComponentRef<DownloadComponent> | ComponentRef<UploadComponent<any, any>>;
     }[] = [];
 
-    constructor(private readonly overlay: Overlay, private readonly ngxHelperToastService: NgxHelperToastService) {}
+    constructor(
+        private readonly overlay: Overlay,
+        private readonly ngxHelperToastService: NgxHelperToastService,
+    ) {}
 
     private getId(): string {
         let id: string | undefined = undefined;
