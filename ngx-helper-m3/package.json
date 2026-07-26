@@ -29,7 +29,8 @@
         "@maskito/angular": ">=5.3.1",
         "@maskito/kit": ">=5.3.1",
         "ng2-pdf-viewer": ">=10.4.0",
-        "ol": ">=10.7.0"
+        "ol": ">=10.7.0",
+        "tldts": ">=7.4.9"
     },
     "dependencies": {
         "tslib": "^2.3.0"

@@ -70,6 +70,26 @@
     </div>
 </div>
 
+<!-- DOMAIN -->
+<div class="card">
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperDomain' }}</div>
+        <div class="value en">{{ 'https://subdomain.domain.com/' | ngxHelperDomain }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperDomain { format: DOMAIN }' }}</div>
+        <div class="value en">{{ 'https://subdomain.domain.com/' | ngxHelperDomain: { format: 'DOMAIN' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperDomain { format: SUB }' }}</div>
+        <div class="value en">{{ 'https://subdomain.domain.com/' | ngxHelperDomain: { format: 'SUB' } }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ 'ngxHelperDomain { format: SUBDOMAIN }' }}</div>
+        <div class="value en">{{ 'https://subdomain.domain.com/' | ngxHelperDomain: { format: 'SUBDOMAIN' } }}</div>
+    </div>
+</div>
+
 <!-- DURATION -->
 <div class="card">
     <div class="pipe">
