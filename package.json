@@ -7,7 +7,7 @@
         "build": "rimraf dist && ng build ngx-helper-m3",
         "watch": "ng build --watch --configuration development",
         "test": "ng test",
-        "publish": "npm run build && cd dist/ngx-helper-m3/ && npm stage publish"
+        "publish": "npm run build && cd dist/ngx-helper-m3/ && npm stage publish --tag latest"
     },
     "private": true,
     "dependencies": {
