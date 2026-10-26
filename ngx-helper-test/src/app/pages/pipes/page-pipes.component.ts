@@ -3,6 +3,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import {
     NgxHelperBankCardPipe,
     NgxHelperDatePipe,
+    NgxHelperDayPipe,
     NgxHelperDomainPipe,
     NgxHelperDurationPipe,
     NgxHelperFileExtensionPipe,
@@ -24,6 +25,7 @@ import { AppService } from '../../app.service';
     imports: [
         NgxHelperBankCardPipe,
         NgxHelperDatePipe,
+        NgxHelperDayPipe,
         NgxHelperDomainPipe,
         NgxHelperDurationPipe,
         NgxHelperFileExtensionPipe,

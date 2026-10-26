@@ -14,6 +14,30 @@
     </div>
 </div>
 
+<!-- DAY -->
+<div class="card">
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDay' }}
+            <div class="type en">{{ 'string' }}</div>
+        </div>
+        <div class="value">{{ '03-13' | ngxHelperDay }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">
+            {{ 'ngxHelperDay' }}
+            <div class="type en">{{ 'Date' }}</div>
+        </div>
+        <div class="value">{{ date | ngxHelperDay }}</div>
+    </div>
+    <div class="pipe">
+        <div class="title en">{{ "ngxHelperDay : { timezone: 'America/Araguaina' }" }}</div>
+        <div class="value">
+            {{ date | ngxHelperDay: { timezone: 'America/Araguaina' } }}
+        </div>
+    </div>
+</div>
+
 <!-- DATE -->
 <div class="card">
     <div class="pipe">
